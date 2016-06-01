@@ -6,8 +6,8 @@ import mongoose from 'mongoose'
 
 import 'sinon-mongoose'
 
-import routes from '../../../src/api/routes'
-import Posts, { PostModel, publicFields } from '../../../src/api/posts'
+import routes from '../../src/api/routes'
+import Posts, { PostModel, publicFields } from '../../src/api/posts'
 
 const users = [{
   id: mongoose.Types.ObjectId(),
@@ -98,16 +98,16 @@ describe('api/posts.js', () => {
           }).
         chain('select').
           withArgs(publicFields.join(' ')).
-        chai('limit').
+        chain('limit').
           withArgs(5).
         chain('skip').
           withArgs((1 - 1) * 5).
-        chain('sort')
+        chain('sort').
           withArgs({
             publishedAt: 'desc'
           }).
         chain('exec').
-        yeild(null, posts)
+        yields(null, posts)
 
       agent.
         get('/api/v1/posts').
@@ -152,6 +152,8 @@ describe('api/posts.js', () => {
               email: users[0].email
             }
           })
+
+          done()
         })
     })
   })
