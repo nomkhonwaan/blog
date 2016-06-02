@@ -50,7 +50,38 @@ export default {
         }
       }
 
-      
+      Promise.all([
+        new Promise((resolve, reject) => {
+          Model.
+            count(conditions, (err, totalItems) => {
+              if (err) {
+                return reject(err)
+              }
+              return resolve(totalItems)
+            })
+        }),
+        new Promise((resolve, reject) => {
+          Model.
+            find(conditions).
+            select(publicFields.join(' ')).
+            limit(page.size).
+            skip((page.number - 1) * page.size).
+            sort({
+              publishedAt: 'desc'
+            }).
+            exec((err, items) => {
+              if (err) {
+                return reject(err)
+              }
+              return resolve(items)
+            })
+        }).
+        then(
+          ([ totalItems, items ]) => {
+
+          }
+        )
+      ])
     } catch (err) {
 
     }
