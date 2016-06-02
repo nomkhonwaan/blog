@@ -9,7 +9,7 @@ export const publicFields = [
   'users'
 ]
 
-export const PostModel = (mongoose.models.Post
+export const Model = (mongoose.models.Post
   ? mongoose.model('Post')
   : mongoose.model('Post', new mongoose.Schema({
     createdAt: {
@@ -40,7 +40,17 @@ export default {
 
   getIndex: (req, res, next) => {
     try {
+      const page = req.query.page || {}
+      page.number = parseInt(page.number) || 1
+      page.size = parseInt(page.size) || 5
 
+      const conditions = {
+        publishedAt: {
+          '$exists': true
+        }
+      }
+
+      
     } catch (err) {
 
     }
