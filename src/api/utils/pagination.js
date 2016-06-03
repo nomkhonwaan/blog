@@ -23,9 +23,9 @@ export default (page, itemsPerPage, totalItems, baseUrl = '/') => {
 
   if (totalItems > itemsPerPage) {
     if (page < Math.ceil(totalItems / itemsPerPage)) {
-      const nextObject = Object.assign({}, baseUrlOBject, {
+      const nextObject = Object.assign({}, baseUrlObject, {
         query: {
-          ...baseUrlObject,
+          ...baseUrlObject.query,
           ['page[number]']: page + 1
         }
       })
