@@ -41,4 +41,17 @@ describe('api/utils/pagination.js', () => {
     expect(next).to.be.undefined
     expect(previous).to.match(/(?=.*page\[number\]\=2)(?=.*page\[size\]\=5).*$/)
   })
+  
+  it('should create self, next and previous links', () => {
+    const page = 2 
+    const itemsPerPage = 5
+    const totalItems = 15
+    
+    const { self, next, previous } = pagination(page, itemsPerPage, totalItems,
+      `/api/v1/posts?page[number]=${page}`)
+      
+    expect(self).to.match(/(?=.*page\[number\]\=2)(?=.*page\[size\]\=5).*$/)
+    expect(next).to.match(/(?=.*page\[number\]\=3)(?=.*page\[size\]\=5).*$/)
+    expect(previous).t.match(/(?=.*page\[number\]\=1)(?=.*page\[size\]\=5).*$/)
+  })
 })
