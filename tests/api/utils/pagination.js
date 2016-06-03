@@ -52,6 +52,6 @@ describe('api/utils/pagination.js', () => {
       
     expect(self).to.match(/(?=.*page\[number\]\=2)(?=.*page\[size\]\=5).*$/)
     expect(next).to.match(/(?=.*page\[number\]\=3)(?=.*page\[size\]\=5).*$/)
-    expect(previous).t.match(/(?=.*page\[number\]\=1)(?=.*page\[size\]\=5).*$/)
+    expect(previous).to.match(/(?=.*page\[number\]\=1)(?=.*page\[size\]\=5).*$/)
   })
 })
