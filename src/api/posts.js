@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import pagination from './utils/pagination'
 
 export const publicFields = [
   'title',
@@ -78,12 +79,20 @@ export default {
         }).
         then(
           ([ totalItems, items ]) => {
-
+            res.
+              json({
+                meta: {
+                  totalItems
+                },
+              })
+          },
+          (err) => {
+            throw err
           }
         )
       ])
     } catch (err) {
-
+      return next(err)
     }
   }
 

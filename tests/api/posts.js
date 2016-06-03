@@ -53,7 +53,7 @@ const posts = [{
   users
 }]
 
-describe('api/posts.js', () => {
+xdescribe('api/posts.js', () => {
   let agent
   let PostModelMock
 
