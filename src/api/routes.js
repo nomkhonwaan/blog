@@ -3,15 +3,6 @@ import Posts from './posts'
 
 const router = Express.Router()
 
-router.use((req, res, next) => {
-  res.
-    set({
-      'Content-Type': 'application/vnd.api+json'
-    })
-
-  return next()
-})
-
 // -- PLACE YOUR ROUTES HERE --
 
 router.get('/posts', Posts.getIndex)
