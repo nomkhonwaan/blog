@@ -1,4 +1,4 @@
-import constanst from 'flux-constants'
+import constants from 'flux-constants'
 
 export default constants([
   
