@@ -2,7 +2,6 @@ import { expect } from 'chai'
 import pagination from '../../../src/api/utils/pagination'
 
 describe('api/utils/pagination.js', () => {
-
   it('should create only self link', () => {
     const page = 1
     const itemsPerPage = 5
