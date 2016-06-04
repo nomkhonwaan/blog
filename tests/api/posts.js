@@ -1,4 +1,4 @@
-import chai from 'chai'
+import { expect } from 'chai'
 import sinon from 'sinon'
 import Express from 'express'
 import request from 'supertest'
@@ -53,7 +53,7 @@ const posts = [{
   users
 }]
 
-xdescribe('api/posts.js', () => {
+describe('api/posts.js', () => {
   let agent
   let PostModelMock
 
@@ -142,12 +142,12 @@ xdescribe('api/posts.js', () => {
               }
             }
           })
-
+          
           expect(included).to.have.lengthOf(1)
           expect(included[0]).to.deep.equal({
             type: 'users',
             id: users[0].id.toString(),
-            attribues: {
+            attributes: {
               displayName: users[0].displayName,
               email: users[0].email
             }

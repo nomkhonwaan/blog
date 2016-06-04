@@ -1,5 +1,40 @@
+import _ from 'lodash'
 import mongoose from 'mongoose'
 import pagination from './utils/pagination'
+
+const format = ({
+  _id,
+  title,
+  slug,
+  publishedAt,
+  html,
+  tags,
+  users
+}) => {
+  return {
+    type: 'posts',
+    id: _id,
+    attributes: {
+      title,
+      slug,
+      publishedAt,
+      html,
+      tags,
+    },
+    relationships: {
+      author: {
+        data: users.
+          reduce((result, { id }) => {
+            result.push({
+              type: 'users',
+              id
+            })
+            return result
+          }, [])
+      }
+    }
+  }
+}
 
 export const publicFields = [
   'title',
@@ -76,21 +111,50 @@ export default {
               }
               return resolve(items)
             })
-        }).
-        then(
-          ([ totalItems, items ]) => {
-            res.
-              json({
-                meta: {
-                  totalItems
-                },
-              })
-          },
-          (err) => {
-            throw err
-          }
-        )
-      ])
+        })
+      ]).
+      then(
+        ([ totalItems, items ]) => {
+          res.
+            json({
+              meta: {
+                totalItems
+              },
+              links: pagination(
+                page.number,
+                page.size,
+                totalItems,
+                req.originalUrl
+              ),
+              data: items.
+                reduce((result, item) => {
+                  result.push(format(item))
+                  return result
+                }, []),
+              included: items. 
+                map((item) => {
+                  return item.users
+                }). 
+                reduce((result, item) => {
+                  return _.uniqBy(result.concat(item), 'email')
+                }, []). 
+                reduce((result, { id, displayName, email }) => {
+                  result.push({
+                    type: 'users',
+                    id,
+                    attributes: {
+                      displayName,
+                      email
+                    }
+                  })
+                  return result
+                }, [])
+            })
+        },
+        (err) => {
+          throw err
+        }
+      )
     } catch (err) {
       return next(err)
     }
