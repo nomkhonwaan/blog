@@ -88,7 +88,7 @@ describe('api/posts.js', () => {
       PostModelMock.restore()
     })
 
-    it('should return list of published post', (done) => {
+    it('should return list of published post by default parameters', (done) => {
       PostModelMock.
         expects('find').
           withArgs({
@@ -132,6 +132,84 @@ describe('api/posts.js', () => {
               title: posts[0].title,
               slug: posts[0].slug,
               html: posts[0].html
+            },
+            relationships: {
+              author: {
+                data: [{
+                  type: 'users',
+                  id: users[0].id.toString()
+                }]
+              }
+            }
+          })
+          
+          expect(included).to.have.lengthOf(1)
+          expect(included[0]).to.deep.equal({
+            type: 'users',
+            id: users[0].id.toString(),
+            attributes: {
+              displayName: users[0].displayName,
+              email: users[0].email
+            }
+          })
+
+          done()
+        })
+    })
+    
+    it('should return list of published post by custom parameters', (done) => {
+      const page = {
+        number: 2,
+        size: 1
+      }
+      
+      PostModelMock.
+        expects('find').
+          withArgs({
+            publishedAt: {
+              '$exists': true
+            }
+          }).
+        chain('select'). 
+          withArgs(publicFields.join(' ')).
+        chain('limit'). 
+          withArgs(page.size). 
+        chain('skip'). 
+          withArgs((page.number - 1) * page.size).
+        chain('sort'). 
+          withArgs({
+            publishedAt: 'desc'
+          }). 
+        chain('exec'). 
+        yields(null, posts.slice(1, 2))
+      
+      agent. 
+        get('/api/v1/posts'). 
+        query({
+          'page[number]': page.number,
+          'page[size]': page.size 
+        }). 
+        end((err, { body }) => {
+          expect(err).to.be.null 
+          
+          const { meta, links, data, included } = body 
+          
+          expect(meta.totalItems).to.equal(3)
+          
+          expect(links.self).to.match(/(?=.*page\[number\]\=2)(?=.*page\[size\]\=1).*$/)
+          expect(links.next).to.match(/(?=.*page\[number\]\=3)(?=.*page\[size\]\=1).*$/)
+          expect(links.previous).to.match(/(?=.*page\[number\]\=1)(?=.*page\[size\]\=1).*$/)
+          
+          expect(data).to.have.length.of.at.most(1)
+          expect(data[0]).to.deep.equal({
+            type: 'posts',
+            id: posts[1]._id.toString(),
+            attributes: {
+              publishedAt: posts[1].publishedAt,
+              tags: posts[1].tags,
+              title: posts[1].title,
+              slug: posts[1].slug,
+              html: posts[1].html
             },
             relationships: {
               author: {
