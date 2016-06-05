@@ -33,7 +33,8 @@ export default (state = initialState, action) => {
     case types.POSTS_FAILURE: {
       return Object.assign({}, state, {
         isFetching: false,
-        lastUpdated: action.receivedAt
+        lastUpdated: action.receivedAt,
+        errors: action.errors
       })
     }
     

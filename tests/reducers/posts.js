@@ -38,4 +38,18 @@ describe('reducers/posts.js', () => {
       included: []
     }))
   })
+  
+  it('should handle POSTS_FAILURE by toggle isFetching to "false" and parse errors object', () => {
+    const receivedAt = Date.now()
+    
+    expect(reducer(undefined, {
+      type: types.POSTS_FAILURE,
+      receivedAt,
+      errors: []
+    })).to.deep.equal(Object.assign({}, initialState, {
+      isFetching: false,
+      lastUpdated: receivedAt,
+      errors: []
+    }))
+  })
 })
