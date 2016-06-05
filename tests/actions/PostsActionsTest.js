@@ -9,7 +9,7 @@ import types from '../../src/constants/ActionTypes'
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
-describe('actions/posts.js', () => {
+describe('actions/PostsActions.js', () => {
   afterEach(() => {
     nock.cleanAll()
   })
