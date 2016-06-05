@@ -10,7 +10,7 @@ router.get('/posts', Posts.getIndex)
 // --
 
 router.use((err, req, res, next) => {
-  if (err) {
+  if (process.env.NODE_ENV !== 'test') {
     console.log('%s [error] %s', new Date().toString(), err)
   }
 
