@@ -1,9 +1,9 @@
 import { expect } from 'chai'
 
 import types from '../../src/constants/ActionTypes'
-import { onClickMenuButton } from '../../src/actions/nav'
+import { onClickMenuButton } from '../../src/actions/NavActions'
 
-describe('actions/nav.js', () => {
+describe('actions/NavActions.js', () => {
   it('should toggle state "true" when click on menu button', () => {
     const isExpanded = false 
     
