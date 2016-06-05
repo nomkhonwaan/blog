@@ -45,7 +45,7 @@ describe('actions/PostsActions.js', () => {
       })
   })
   
-  it('should create POSTS_FAILURE when fetching posts has been done with errors', () => {
+  it('should create POSTS_FAILURE when fetching posts has been done, but errors', () => {
     nock(/.*/). 
       get('/api/v1/posts'). 
       query(({ page }) => {
