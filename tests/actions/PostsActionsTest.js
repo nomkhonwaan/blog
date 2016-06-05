@@ -3,7 +3,7 @@ import nock from 'nock'
 import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
 
-import { fetchPosts } from '../../src/actions/posts'
+import { fetchPosts } from '../../src/actions/PostsActions'
 import types from '../../src/constants/ActionTypes'
 
 const middlewares = [ thunk ]
