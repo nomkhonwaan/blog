@@ -1,11 +1,11 @@
 import Express from 'express'
-import Posts from './posts'
+import PostsController from './PostsController'
 
 const router = Express.Router()
 
 // -- PLACE YOUR ROUTES HERE --
 
-router.get('/posts', Posts.getAll)
+router.get('/posts', PostsController.getAll)
 
 // --
 

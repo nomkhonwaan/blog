@@ -7,7 +7,7 @@ import mongoose from 'mongoose'
 import 'sinon-mongoose'
 
 import routes from '../../src/api/routes'
-import Posts, { Model as PostModel, publicFields } from '../../src/api/posts'
+import Posts, { Model as PostModel, publicFields } from '../../src/api/PostsController'
 
 const users = [{
   id: mongoose.Types.ObjectId(),
