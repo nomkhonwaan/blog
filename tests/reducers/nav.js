@@ -6,7 +6,8 @@ import reducer from '../../src/reducers/nav'
 describe('reducers/nav.js', () => {
   it('should handle ON_CLICK_MENU_BUTTON by toggle isExpanded to "true"', () => {
     expect(reducer(undefined, {
-      type: types.ON_CLICK_MENU_BUTTON
+      type: types.ON_CLICK_MENU_BUTTON,
+      isExpanded: true
     })).to.deep.equal({
       isExpanded: true
     })
@@ -17,7 +18,7 @@ describe('reducers/nav.js', () => {
       isExpanded: true
     }, {
       type: types.ON_CLICK_MENU_BUTTON,
-      isExpanded: true
+      isExpanded: false
     })).to.deep.equal({
       isExpanded: false
     })
