@@ -72,7 +72,7 @@ describe('api/posts.js', () => {
     PostModelMock.restore()
   })
 
-  describe('getIndex :: only published posts', () => {
+  describe('getAll :: only published posts', () => {
     beforeEach(() => {
       PostModelMock.
         expects('count').

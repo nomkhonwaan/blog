@@ -74,7 +74,7 @@ export const Model = (mongoose.models.Post
 
 export default {
 
-  getIndex: (req, res, next) => {
+  getAll: (req, res, next) => {
     try {
       const page = req.query.page || {}
       page.number = parseInt(page.number) || 1
