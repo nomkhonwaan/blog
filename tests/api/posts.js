@@ -234,5 +234,40 @@ describe('api/posts.js', () => {
           done()
         })
     })
+    
+    it('should return an error object when to get caught in an exception', (done) => {
+      PostModelMock.
+        expects('find').
+          withArgs({
+            publishedAt: {
+              '$exists': true
+            }
+          }).
+        chain('select').
+          withArgs(publicFields.join(' ')).
+        chain('limit').
+          withArgs(5).
+        chain('skip').
+          withArgs((1 - 1) * 5).
+        chain('sort').
+          withArgs({
+            publishedAt: 'desc'
+          }).
+        chain('exec').
+        yields(new Error, null)
+ 
+      
+      agent. 
+        get('/api/v1/posts'). 
+        end((err, { body }) => {
+          expect(err).to.not.be.undefined
+          
+          const { errors } = body 
+          
+          expect(errors).to.have.length.of.at.least(1)
+          
+          done()
+        })
+    })
   })
 })

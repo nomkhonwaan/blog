@@ -113,48 +113,46 @@ export default {
             })
         })
       ]).
-      then(
-        ([ totalItems, items ]) => {
-          res.
-            json({
-              meta: {
-                totalItems
-              },
-              links: pagination(
-                page.number,
-                page.size,
-                totalItems,
-                req.originalUrl
-              ),
-              data: items.
-                reduce((result, item) => {
-                  result.push(format(item))
-                  return result
-                }, []),
-              included: items. 
-                map((item) => {
-                  return item.users
-                }). 
-                reduce((result, item) => {
-                  return _.uniqBy(result.concat(item), 'email')
-                }, []). 
-                reduce((result, { id, displayName, email }) => {
-                  result.push({
-                    type: 'users',
-                    id,
-                    attributes: {
-                      displayName,
-                      email
-                    }
-                  })
-                  return result
-                }, [])
-            })
-        },
-        (err) => {
-          throw err
-        }
-      )
+      then(([ totalItems, items ]) => {
+        return res.
+          json({
+            meta: {
+              totalItems
+            },
+            links: pagination(
+              page.number,
+              page.size,
+              totalItems,
+              req.originalUrl
+            ),
+            data: items.
+              reduce((result, item) => {
+                result.push(format(item))
+                return result
+              }, []),
+            included: items. 
+              map((item) => {
+                return item.users
+              }). 
+              reduce((result, item) => {
+                return _.uniqBy(result.concat(item), 'email')
+              }, []). 
+              reduce((result, { id, displayName, email }) => {
+                result.push({
+                  type: 'users',
+                  id,
+                  attributes: {
+                    displayName,
+                    email
+                  }
+                })
+                return result
+              }, [])
+          })
+      }). 
+      catch((err) => {
+        return next(err)
+      })
     } catch (err) {
       return next(err)
     }
