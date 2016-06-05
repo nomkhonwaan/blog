@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
 
 import { fetchPosts } from '../../src/actions/posts'
-import types from '../../src/constants/actionTypes'
+import types from '../../src/constants/ActionTypes'
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)

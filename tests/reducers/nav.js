@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import types from '../../src/constants/actionTypes'
+import types from '../../src/constants/ActionTypes'
 import reducer from '../../src/reducers/nav'
 
 describe('reducers/nav.js', () => {

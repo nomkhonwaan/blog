@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import types from '../../src/constants/actionTypes'
+import types from '../../src/constants/ActionTypes'
 import { onClickMenuButton } from '../../src/actions/nav'
 
 describe('actions/nav.js', () => {

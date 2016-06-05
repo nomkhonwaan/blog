@@ -1,7 +1,7 @@
 import { get } from 'superagent'
 import superagentPromisePlugin from 'superagent-promise-plugin'
 
-import types from '../constants/actionTypes'
+import types from '../constants/ActionTypes'
 
 superagentPromisePlugin.Promise = Promise 
 

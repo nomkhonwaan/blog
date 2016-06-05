@@ -1,4 +1,4 @@
-import types from '../constants/actionTypes'
+import types from '../constants/ActionTypes'
 
 export const onClickMenuButton = (isExpanded = false) => {
   return {
