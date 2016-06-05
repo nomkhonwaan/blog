@@ -1,4 +1,5 @@
 import { expect } from 'chai'
+
 import pagination from '../../../src/api/utils/pagination'
 
 describe('api/utils/pagination.js', () => {

@@ -1,4 +1,5 @@
 import { expect } from 'chai'
+
 import types from '../../src/constants/actionTypes'
 import { onClickMenuButton } from '../../src/actions/nav'
 
