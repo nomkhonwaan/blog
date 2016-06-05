@@ -6,9 +6,9 @@ describe('actions/nav.js', () => {
   it('should toggle sidebar menu when click on menu button', () => {
     const isExpanded = false 
     
-    expect(onClickMenuButton(isExpanded)).to.deep.equal(Object.assign({}, {
+    expect(onClickMenuButton(isExpanded)).to.deep.equal({
       type: types.ON_CLICK_MENU_BUTTON,
       isExpanded: ! isExpanded
-    }))
+    })
   })
 })
