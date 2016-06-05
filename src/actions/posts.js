@@ -13,7 +13,7 @@ const request = () => {
 
 const failure = (err) => {
   return {
-    err,
+    ...err,
     receivedAt: Date.now(),
     type: types.POSTS_FAILURE
   }
@@ -40,10 +40,19 @@ export const fetchPosts = (page = 1, itemsPerPage = 5) => {
       }). 
       then(
         ({ body }) => {
+          if (body.errors) {
+            return dispatch(failure(body))
+          }
           return dispatch(success(body))
         },
         (err) => {
-          return dispatch(failure(err))
+          return dispatch(failure({
+            errors: [{
+              status: 400,
+              title: 'An error has occurred',
+              detail: err.toString()
+            }]
+          }))
         }
       )
   }

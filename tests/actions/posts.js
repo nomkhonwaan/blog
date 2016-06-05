@@ -17,9 +17,7 @@ describe('actions/posts.js', () => {
   it('should create POSTS_SUCCESS when fetching posts has been done', () => {
     nock(/.*/). 
       get('/api/v1/posts'). 
-      query((actualQueryObject) => {
-        const { page } = actualQueryObject 
-        
+      query(({ page }) => {
         return parseInt(page.number) === 1 &&
                parseInt(page.size) === 5 
       }). 
@@ -41,8 +39,45 @@ describe('actions/posts.js', () => {
       { type: types.POSTS_SUCCESS, meta: { totalItems: 1 } }
     ]
     
-    store.dispatch(fetchPosts())
-      .then(() => {
+    store.dispatch(fetchPosts()). 
+      then(() => {
+        expect(store.getActions()).to.deep.equal(expectedActions)
+      })
+  })
+  
+  it('should create POSTS_FAILURE when fetching posts has been done with errors', () => {
+    nock(/.*/). 
+      get('/api/v1/posts'). 
+      query(({ page }) => {
+        return parseInt(page.number) === 1 &&
+               parseInt(page.size) === 5 
+      }). 
+      reply(400, { 
+        body: {
+          errors: [{
+            status: 400,
+            title: 'An error has occurred',
+            detail: 'Something went wrong'
+          }]
+        }
+      })
+      
+    const store = mockStore({
+      page: 1,
+      itemsPerPage: 5
+    })
+    
+    const expectedActions = [
+      { type: types.POSTS_REQUEST },
+      { type: types.POSTS_FAILURE, errors: [{
+        status: 400,
+        title: 'An error has occurred',
+        detail: 'Something went wrong'
+      }] }
+    ]
+    
+    store.dispatch(fetchPosts()). 
+      then(() => {
         expect(store.getActions()).to.deep.equal(expectedActions)
       })
   })
