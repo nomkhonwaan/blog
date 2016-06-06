@@ -1,13 +1,13 @@
 import { expect } from 'chai'
-import sinon from 'sinon'
 import Express from 'express'
-import request from 'supertest'
 import mongoose from 'mongoose'
+import sinon from 'sinon'
+import request from 'supertest'
 
 import 'sinon-mongoose'
 
-import routes from '../../src/api/routes'
 import Posts, { Model as PostModel, publicFields } from '../../src/api/PostsController'
+import routes from '../../src/api/routes'
 
 const users = [{
   id: mongoose.Types.ObjectId(),
