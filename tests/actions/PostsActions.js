@@ -1,12 +1,12 @@
 import { expect } from 'chai'
 import nock from 'nock'
-import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
 
 import { fetchPosts } from '../../src/actions/PostsActions'
 import types from '../../src/constants/ActionTypes'
+import PromiseMiddleware from '../../src/middlewares/PromiseMiddleware'
 
-const middlewares = [ thunk ]
+const middlewares = [ PromiseMiddleware ]
 const mockStore = configureMockStore(middlewares)
 
 describe('actions/PostsActions.js', () => {
