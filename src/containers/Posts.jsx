@@ -1,7 +1,10 @@
+import React from 'react'
+import { connect } from 'react-redux'
+
 const Posts = () => {
   return (
-    <div>Posts</div>
+    <div>posts</div>
   )
 }
 
-export default Posts
+export default connect()(Posts)

@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux'
+import { reducer as reduxAsyncConnect } from 'redux-connect'
+import { routerReducer } from 'react-router-redux'
 
 import types from '../constants/ActionTypes'
 import nav from './nav'
@@ -30,6 +32,8 @@ const entities = (state = initialState, action) => {
 }
 
 export default combineReducers({
+  routing: routerReducer,
+  reduxAsyncConnect,
   nav,
   posts,
   entities

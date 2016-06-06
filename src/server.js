@@ -1,5 +1,7 @@
 import Express from 'express'
 
+import React from 'react'
+import { renderToString } from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { createMemoryHistory, match } from 'react-router'
@@ -30,22 +32,25 @@ export default (app) => {
         return res.redirect(redirect)
       } else if (renderProps) {
         const components = (
-          <Provider store={store} key="provider">
+          <Provider store={store}>
             <ReduxAsyncConnect {...renderProps} />
           </Provider>
         )
         
-        loadOnServer({ ...renderProps, store }). 
-          then(
-            (result) => {
-              return res.
-                status(200). 
-                send('<!DOCTYPE html>' + renderToString(components))
-            },
-            (err) => {
-              return next(err)
-            }
-          )
+        return res.
+          status(200). 
+          send('<!DOCTYPE html>' + renderToString(components))
+        // loadOnServer({ ...renderProps, store }). 
+        //   then(
+        //     (result) => {
+        //       return res.
+        //         status(200). 
+        //         send('<!DOCTYPE html>' + renderToString(components))
+        //     },
+        //     (err) => {
+        //       return next(err)
+        //     }
+        //   )
       }
     })
   })
