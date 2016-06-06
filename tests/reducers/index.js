@@ -5,7 +5,7 @@ import reducer from '../../src/reducers'
 
 describe('reducers/index.js', () => {
   it('should handle POSTS_SUCCESS and parse posts data to posts entities', () => {
-    expect(reducer(undefined, {
+    const { entities } = reducer(undefined, {
       type: types.POSTS_SUCCESS,
       data: [{
         id: 1,
@@ -14,33 +14,14 @@ describe('reducers/index.js', () => {
         id: 2,
         foo: 'bar'
       }]
-    })).to.deep.equal({
-      nav: { 
-        isExpanded: false 
+    })
+    
+    expect(entities).to.deep.equal({
+      posts: {
+        1: { id: 1, foo: 'bar' },
+        2: { id: 2, foo: 'bar' }
       },
-      posts: { 
-        page: 1,
-        itemsPerPage: 5,
-        isFetching: false,
-        lastUpdated: undefined,
-        data: [ 1, 2 ],
-        meta: undefined,
-        links: undefined,
-        included: undefined 
-      },
-      entities: {
-        posts: {
-          1: {
-            id: 1,
-            foo: 'bar'
-          },
-          2: {
-            id: 2,
-            foo: 'bar'
-          }
-        },
-        users: {}
-      }
+      users: {}
     })
   })
 })
