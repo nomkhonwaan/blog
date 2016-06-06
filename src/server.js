@@ -2,12 +2,13 @@ import Express from 'express'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { createMemoryHistory, match } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { createMemoryHistory, match, RouterContext } from 'react-router'
+import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
+import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
 import reducers from './reducers'
 
@@ -17,13 +18,18 @@ export default (app) => {
   }
   
   app.use((req, res, next) => {
-    const store = createStore(reducers)
+    const store = createStore(reducers, undefined, 
+      applyMiddleware(
+        PromiseMiddleware
+      )
+    )
+    
     const initialState = store.getState()
     const history = syncHistoryWithStore(createMemoryHistory(req.originalUrl), store)
     
     match({
       routes, 
-      location: req.originalUrl,
+      location: req.url,
       history
     }, (err, redirect, renderProps) => {
       if (err) {
@@ -37,20 +43,17 @@ export default (app) => {
           </Provider>
         )
         
-        return res.
-          status(200). 
-          send('<!DOCTYPE html>' + renderToString(components))
-        // loadOnServer({ ...renderProps, store }). 
-        //   then(
-        //     (result) => {
-        //       return res.
-        //         status(200). 
-        //         send('<!DOCTYPE html>' + renderToString(components))
-        //     },
-        //     (err) => {
-        //       return next(err)
-        //     }
-        //   )
+        loadOnServer({ ...renderProps, store }). 
+          then(
+            (result) => {
+              return res.
+                status(200). 
+                send('<!DOCTYPE html>' + renderToString(components))
+            },
+            (err) => {
+              return next(err)
+            }
+          )
       }
     })
   })

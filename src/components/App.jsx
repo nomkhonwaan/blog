@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 const App = ({ children }) => {
   return (
     <div>
-      {chidlren}
+      {children}
     </div>
   )
 }
