@@ -42,6 +42,7 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "flux-constants": "^0.2.2",
+    "font-awesome": "^4.6.3",
     "helmet": "^2.1.0",
     "mongoose": "^4.4.19",
     "normalize.css": "^4.1.1",
