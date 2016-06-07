@@ -38,5 +38,6 @@ render(
     } } history={ history }>
       { routes }
     </Router>
-  </Provider>
+  </Provider>,
+  document.getElementById('root')
 )
