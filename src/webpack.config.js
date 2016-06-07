@@ -33,6 +33,7 @@ export default {
     ]
   },
   plugins: [
+    webpackIsomorphicToolsPlugin,
     new ExtractTextPlugin('[hash].css', {
       allChucks: true
     }),
