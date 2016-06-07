@@ -12,6 +12,8 @@
     "build:webpack": "webpack --verbose --colors --display-error-details --production --config ./dist/webpack.config.js",
     "dev": "cross-env NODE_ENV=development babel-node src/index.js",
     "dev:debug": "npm run dev -- --debug",
+    "start": "cross-env NODE_ENV=production node ./dist/index.js",
+    "portinstall": "npm run build",
     "test": "cross-env NODE_ENV=test mocha --recursive --reporter spec ./tests/ --compilers js:babel-register",
     "test:debug": "npm test -- --debug-brk",
     "test:watch": "npm test -- --watch"
