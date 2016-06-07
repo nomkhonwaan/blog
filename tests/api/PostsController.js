@@ -7,7 +7,7 @@ import request from 'supertest'
 import 'sinon-mongoose'
 
 import Posts, { Model as PostModel, publicFields } from '../../src/api/PostsController'
-import routes from '../../src/api/routes'
+import apiRoutes from '../../src/api/routes'
 
 const users = [{
   id: mongoose.Types.ObjectId(),
@@ -59,7 +59,7 @@ describe('api/PostsController.js', () => {
 
   before(() => {
     const app = Express()
-    app.use('/api/v1', routes)
+    app.use('/api', apiRoutes)
 
     agent = request.agent(app)
   })

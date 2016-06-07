@@ -13,6 +13,7 @@ import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
+import apiRoutes from './api'
 import { Html } from './components'
 import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
@@ -40,6 +41,8 @@ export default (app) => {
       secure: true
     }
   }))
+  
+  app.use('/api', apiRoutes)
   
   app.use((req, res, next) => {
     if ( ! req.session) {
