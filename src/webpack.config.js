@@ -77,6 +77,9 @@ export default {
       test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
       loader: 'file' 
     }, {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'url?limit=10000&mimetype=image/svg+xml'
+    }, {
       test: webpackIsomorphicToolsPlugin.regular_expression('images'),
       loader: 'url?limit=10000&name=[hash].[ext]'
     }]
