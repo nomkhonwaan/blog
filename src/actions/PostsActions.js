@@ -8,7 +8,7 @@ superagentPromisePlugin.Promise = Promise
 export const fetchPosts = (page = 1, itemsPerPage = 5) => {
   return {
     types: [ 
-      types.POSTS_REQUST,
+      types.POSTS_REQUEST,
       types.POSTS_SUCCESS,
       types.POSTS_FAILURE
     ],
