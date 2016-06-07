@@ -3,14 +3,17 @@ import { asyncConnect } from 'redux-connect'
 
 import { fetchPosts } from '../actions/PostsActions'
 
-const Posts = ({ entities }) => {
+const Posts = ({ 
+  data,
+  isFetching,
+  entities
+}) => {
   return (
     <div></div>
   )
 }
 
 export default asyncConnect([{
-  key: 'posts',
   promise: ({ store: { dispatch, getState } }) => {
     return dispatch(fetchPosts(
       getState().posts.page,
@@ -19,7 +22,7 @@ export default asyncConnect([{
   }
 }], (state, ownProps) => {
   return {
-    entities: state.entities,
-    ...state.posts
+    ...state.posts,
+    entities: state.entities
   }
 })(Posts)
