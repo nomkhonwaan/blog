@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/nomkhonwaan/nomkhonwaan.com#readme",
   "dependencies": {
+    "breakpoint-sass": "^2.7.0",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "connect-redis": "^3.0.2",
@@ -41,6 +42,7 @@
     "flux-constants": "^0.2.2",
     "helmet": "^2.1.0",
     "mongoose": "^4.4.19",
+    "normalize.css": "^4.1.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-helmet": "^3.1.0",
