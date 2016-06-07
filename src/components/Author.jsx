@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 const Author = () => {
   const styles = require('../stylesheets/Author.scss')
-  
+
   return (
     <div className={ styles.author }>
       <a className={ styles.avatar } href="https://www.nomkhonwaan.com">

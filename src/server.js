@@ -18,6 +18,7 @@ import { Html } from './components'
 import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
 import reducers from './reducers'
+import webpackConfig from './webpack.config'
 
 export default (app) => {
   if ( ! app instanceof Express) {
@@ -29,6 +30,8 @@ export default (app) => {
   }
   
   app.disable('x-powered-by')
+  
+  app.use('/static', Express.static(webpackConfig.output.path))
   
   app.use(helmet())
   app.use(compression({ level: 9 }))
