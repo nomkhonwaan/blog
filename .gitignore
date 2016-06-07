@@ -1,6 +1,7 @@
 .env
 dump.rdb
 npm-debug.log
+webpack-*.json
 
 dist
 node_modules
