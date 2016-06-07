@@ -13,7 +13,7 @@ import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
-import apiRoutes from './api'
+import apiRoutes from './api/routes'
 import { Html } from './components'
 import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
@@ -27,6 +27,8 @@ export default (app) => {
   if ( ! mongoose.connection.readyState) {
     mongoose.connect(process.env.MONGODB_URI)
   }
+  
+  app.disable('x-powered-by')
   
   app.use(helmet())
   app.use(compression({ level: 9 }))
@@ -43,7 +45,9 @@ export default (app) => {
   }))
   
   app.use('/api', apiRoutes)
-  
+  app.set('json spaces', 4)
+  app.set('json replacer', null)
+
   app.use((req, res, next) => {
     if ( ! req.session) {
       console.log('%s [error] Redis session is not working!', 
