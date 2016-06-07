@@ -1,4 +1,5 @@
 import { get } from 'superagent'
+import superagentNodePlugin from 'superagent-node-plugin'
 import superagentPromisePlugin from 'superagent-promise-plugin'
 
 import types from '../constants/ActionTypes'
@@ -12,7 +13,8 @@ export const fetchPosts = (page = 1, itemsPerPage = 5) => {
       types.POSTS_SUCCESS,
       types.POSTS_FAILURE
     ],
-    promise: get('/api/v1/posts'). 
+    promise: get('/api/v1/posts').
+      use(superagentNodePlugin()).
       use(superagentPromisePlugin). 
       query({
         'page[number]': page,
