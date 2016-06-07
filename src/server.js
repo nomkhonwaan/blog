@@ -97,8 +97,9 @@ export default (app) => {
                 status(200). 
                 send('<!DOCTYPE html>' + renderToString(
                   <Html 
-                    initialState={ initialState }
-                    components={ components } />
+                    assets={ webpackIsomorphicTools.assets() }
+                    components={ components }
+                    initialState={ initialState } />
                 ))
             },
             (err) => {
