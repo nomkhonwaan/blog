@@ -1,4 +1,9 @@
+import compression from 'compression'
 import Express from 'express'
+import helmet from 'helmet'
+import mongoose from 'mongoose'
+import RedisStore from 'connect-redis'
+import session from 'express-session'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -17,6 +22,37 @@ export default (app) => {
   if ( ! app instanceof Express) {
     app = Express()
   }
+  
+  if ( ! mongoose.connection.readyState) {
+    mongoose.connect(process.env.MONGODB_URI)
+  }
+  
+  app.use(helmet())
+  app.use(compression({ level: 9 }))
+  app.use(session({
+    store: new (RedisStore(session))({
+      url: process.env.REDIS_URL
+    }),
+    secret: process.env.REDIS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true
+    }
+  }))
+  
+  app.use((req, res, next) => {
+    if ( ! req.session) {
+      console.log('%s [error] Redis session is not working!', 
+        new Date().toString())
+    }
+    
+    console.log('%s [info] %s', 
+      new Date().toString(),
+      req.originalUrl)
+      
+    return next()
+  })
   
   app.use((req, res, next) => {
     const store = createStore(reducers, undefined, 

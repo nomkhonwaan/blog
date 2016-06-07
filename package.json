@@ -29,9 +29,13 @@
   },
   "homepage": "https://github.com/nomkhonwaan/nomkhonwaan.com#readme",
   "dependencies": {
+    "compression": "^1.6.2",
+    "connect-redis": "^3.0.2",
     "es6-promise": "^3.2.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "flux-constants": "^0.2.2",
+    "helmet": "^2.1.0",
     "mongoose": "^4.4.19",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
