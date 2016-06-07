@@ -68,7 +68,6 @@ export default (app) => {
       )
     )
     
-    const initialState = store.getState()
     const history = syncHistoryWithStore(createMemoryHistory(req.originalUrl), store)
     
     match({
@@ -81,6 +80,7 @@ export default (app) => {
       } else if (redirect) {
         return res.redirect(redirect)
       } else if (renderProps) {
+        const initialState = store.getState()
         const components = (
           <Provider store={ store }>
             <ReduxAsyncConnect { ...renderProps } />
@@ -94,7 +94,8 @@ export default (app) => {
                 status(200). 
                 send('<!DOCTYPE html>' + renderToString(
                   <Html 
-                    components={ components }/>
+                    initialState={ initialState }
+                    components={ components } />
                 ))
             },
             (err) => {
