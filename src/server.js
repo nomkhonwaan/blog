@@ -1,4 +1,9 @@
+import compression from 'compression'
 import Express from 'express'
+import helmet from 'helmet'
+import mongoose from 'mongoose'
+import RedisStore from 'connect-redis'
+import session from 'express-session'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -8,6 +13,8 @@ import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
+import apiRoutes from './api/routes'
+import { Html } from './components'
 import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
 import reducers from './reducers'
@@ -17,6 +24,43 @@ export default (app) => {
     app = Express()
   }
   
+  if ( ! mongoose.connection.readyState) {
+    mongoose.connect(process.env.MONGODB_URI)
+  }
+  
+  app.disable('x-powered-by')
+  
+  app.use(helmet())
+  app.use(compression({ level: 9 }))
+  app.use(session({
+    store: new (RedisStore(session))({
+      url: process.env.REDIS_URL
+    }),
+    secret: process.env.REDIS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true
+    }
+  }))
+  
+  app.use('/api', apiRoutes)
+  app.set('json spaces', 4)
+  app.set('json replacer', null)
+
+  app.use((req, res, next) => {
+    if ( ! req.session) {
+      console.log('%s [error] Redis session is not working!', 
+        new Date().toString())
+    }
+    
+    console.log('%s [info] %s', 
+      new Date().toString(),
+      req.originalUrl)
+      
+    return next()
+  })
+  
   app.use((req, res, next) => {
     const store = createStore(reducers, undefined, 
       applyMiddleware(
@@ -24,7 +68,6 @@ export default (app) => {
       )
     )
     
-    const initialState = store.getState()
     const history = syncHistoryWithStore(createMemoryHistory(req.originalUrl), store)
     
     match({
@@ -37,20 +80,26 @@ export default (app) => {
       } else if (redirect) {
         return res.redirect(redirect)
       } else if (renderProps) {
+        const initialState = store.getState()
         const components = (
-          <Provider store={store}>
-            <ReduxAsyncConnect {...renderProps} />
+          <Provider store={ store }>
+            <ReduxAsyncConnect { ...renderProps } />
           </Provider>
         )
         
         loadOnServer({ ...renderProps, store }). 
           then(
-            (result) => {
+            () => {
               return res.
                 status(200). 
-                send('<!DOCTYPE html>' + renderToString(components))
+                send('<!DOCTYPE html>' + renderToString(
+                  <Html 
+                    initialState={ initialState }
+                    components={ components } />
+                ))
             },
             (err) => {
+              console.log(err);
               return next(err)
             }
           )

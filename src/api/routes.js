@@ -5,7 +5,7 @@ const router = Express.Router()
 
 // -- PLACE YOUR ROUTES HERE --
 
-router.get('/posts', PostsController.getAll)
+router.get('/v1/posts', PostsController.getAll)
 
 // --
 
