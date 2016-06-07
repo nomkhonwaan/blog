@@ -1,4 +1,7 @@
+import dotenv from 'dotenv'
 import Express from 'express'
+
+dotenv.config()
 
 const app = Express()
 

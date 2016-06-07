@@ -8,6 +8,7 @@ import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
+import { Html } from './components'
 import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
 import reducers from './reducers'
@@ -38,19 +39,23 @@ export default (app) => {
         return res.redirect(redirect)
       } else if (renderProps) {
         const components = (
-          <Provider store={store}>
-            <ReduxAsyncConnect {...renderProps} />
+          <Provider store={ store }>
+            <ReduxAsyncConnect { ...renderProps } />
           </Provider>
         )
         
         loadOnServer({ ...renderProps, store }). 
           then(
-            (result) => {
+            () => {
               return res.
                 status(200). 
-                send('<!DOCTYPE html>' + renderToString(components))
+                send('<!DOCTYPE html>' + renderToString(
+                  <Html 
+                    components={ components }/>
+                ))
             },
             (err) => {
+              console.log(err);
               return next(err)
             }
           )

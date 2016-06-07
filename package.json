@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development babel-node src/index.js",
+    "dev:debug": "npm run dev -- --debug",
     "test": "cross-env NODE_ENV=test mocha --recursive --reporter spec ./tests/ --compilers js:babel-register",
     "test:debug": "npm test -- --debug-brk",
     "test:watch": "npm test -- --watch"

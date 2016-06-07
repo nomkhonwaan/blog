@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
+import { renderToString } from 'react-dom/server'
 import Helmet from 'react-helmet'
 
 const Html = ({ components }) => {
   const head = Helmet.rewind()
-  const content = (components
+  const __html = (components
     ? renderToString(components)
     : null)
     
@@ -25,7 +26,7 @@ const Html = ({ components }) => {
       <meta name="apple-mobile-web-app-status-bar-style" content="#78909c" />
     </head>
     <body>
-      <div id="root" dangerouslySetInnerHTML={ { html: content } }></div>
+      <div id="root" dangerouslySetInnerHTML={ { __html } }></div>
     </body>
     </html>
   )
