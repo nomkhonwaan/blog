@@ -31,7 +31,7 @@ const Posts = ({
             : data. 
                 map((item) => {
                   return entities.posts[item]
-                }).
+                }). 
                 map((item, key) => {
                   return (
                     <Summary data={ item } key={ key } />
