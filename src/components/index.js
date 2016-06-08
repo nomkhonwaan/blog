@@ -5,6 +5,7 @@ import Header from './Header'
 import Html from './Html'
 import Nav from './Nav'
 import Pagination from './Pagination'
+import Summary from './Summary'
 
 export { 
   App, 
@@ -14,4 +15,5 @@ export {
   Html,
   Nav,
   Pagination,
+  Summary,
 }
