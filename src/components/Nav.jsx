@@ -80,7 +80,7 @@ const Nav = ({ dispatch, isExpanded }) => {
             event.preventDefault()
           })
       } }>
-        <i classNames={ classNames(
+        <i className={ classNames(
           styles.fa,
           styles['fa-fw'],
           styles['fa-bars']
