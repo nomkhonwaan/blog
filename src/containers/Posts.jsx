@@ -1,15 +1,47 @@
 import React from 'react'
 import { asyncConnect } from 'redux-connect'
+import classNames from 'classnames'
 
 import { fetchPosts } from '../actions/PostsActions'
+import { Pagination, Summary } from '../components'
 
 const Posts = ({ 
   data,
   isFetching,
   entities
 }) => {
+  const styles = Object.assign({}, 
+    require('../stylesheets/Posts.scss'),
+    require('font-awesome/css/font-awesome.css'))
+    
   return (
-    <div></div>
+    <div>
+      <div className={ styles.posts }>
+        {
+          (isFetching
+            ? <div className={ styles.loading }>
+                <i className={ classNames(
+                  styles.fa,
+                  styles['fa-fw'],
+                  styles['fa-spin'],
+                  styles['fa-refresh']
+                ) }></i>
+                <div>Loading...</div>
+              </div>
+            : data. 
+                map((item) => {
+                  return entities.posts[item]
+                }).
+                map((item, key) => {
+                  return (
+                    <Summary data={ item } key={ key } />
+                  )
+                }))
+        }
+      </div>
+      
+      <Pagination />
+    </div>
   )
 }
 
