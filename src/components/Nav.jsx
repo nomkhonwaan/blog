@@ -2,7 +2,9 @@ import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 
-const Nav = ({ isExpanded }) => {
+import { onClickMenuButton } from '../actions/NavActions'
+
+const Nav = ({ dispatch, isExpanded }) => {
   const styles = Object.assign({}, 
     require('../stylesheets/Nav.scss'),
     require('font-awesome/css/font-awesome.css'))
@@ -59,13 +61,31 @@ const Nav = ({ isExpanded }) => {
             return (
               <li className={ styles['menu-item'] } key={ key }>
                 <a href={ item.href }>
-                  { item.title }
+                  <i className={ classNames(item.iconClass) }></i>&nbsp;{ item.title }
                 </a>
               </li>
             )
           })
         }
       </ul>
+      <button className={ styles['btn-toggle'] } onClick={ () => {
+        dispatch(onClickMenuButton(isExpanded))
+        
+        document.getElementsByTagName('body')[0].
+          addEventListener('touchmove', (event) => {
+            if ( ! isExpanded) {
+              return true;
+            }
+            
+            event.preventDefault()
+          })
+      } }>
+        <i classNames={ classNames(
+          styles.fa,
+          styles['fa-fw'],
+          styles['fa-bars']
+        ) }></i>&nbsp;Menu
+      </button>
     </nav>
   )
 }
