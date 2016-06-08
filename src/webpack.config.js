@@ -8,12 +8,13 @@ import webpackIsomorphicToolsConfiguration from './webpack-isomorphic-tools-conf
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfiguration)
 const staticDirs = [ 'fonts', 'images', 'stylesheets' ]
 
-staticDirs.forEach((item) => {
-  fse.copySync(
-    path.resolve(__dirname, '..', 'src', item),
-    path.resolve(__dirname, '..', 'dist', item)
-  )
-})
+staticDirs.
+  map((item) => {
+    fse.copySync(
+      path.resolve(__dirname, '..', 'src', item),
+      path.resolve(__dirname, '..', 'dist', item)
+    )
+  })
 
 export default {
   devtool: 'cheap-module-source-map',
