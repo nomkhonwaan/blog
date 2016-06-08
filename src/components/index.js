@@ -4,6 +4,7 @@ import Footer from './Footer'
 import Header from './Header'
 import Html from './Html'
 import Nav from './Nav'
+import Pagination from './Pagination'
 
 export { 
   App, 
@@ -11,5 +12,6 @@ export {
   Footer,
   Header, 
   Html,
-  Nav
+  Nav,
+  Pagination,
 }
