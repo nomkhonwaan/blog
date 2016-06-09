@@ -44,6 +44,7 @@
     "flux-constants": "^0.2.2",
     "font-awesome": "^4.6.3",
     "helmet": "^2.1.0",
+    "moment": "^2.13.0",
     "mongoose": "^4.4.19",
     "normalize.css": "^4.1.1",
     "react": "^15.1.0",
