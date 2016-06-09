@@ -7,8 +7,12 @@ import { Pagination, Summary } from '../components'
 
 const Posts = ({ 
   data,
+  entities,
   isFetching,
-  entities
+  itemsPerPage,
+  links,
+  page,
+  totalItems
 }) => {
   const styles = Object.assign({}, 
     require('../stylesheets/Posts.scss'),
@@ -40,7 +44,11 @@ const Posts = ({
         }
       </div>
       
-      <Pagination />
+      <Pagination 
+        itemsPerPage={ itemsPerPage }
+        links={ links }
+        page={ page }
+        totalItems={ totalItems } />
     </div>
   )
 }
