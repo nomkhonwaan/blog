@@ -20,10 +20,10 @@ const store = createStore(
     applyMiddleware(
       PromiseMiddleware,
       routerMiddleware(browserHistory)
-    )
+    ),
+    window.devToolsExtension && window.devToolsExtension(),
+    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
   ),
-  window.devToolsExtension && window.devToolsExtension(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )
 
 const history = syncHistoryWithStore(browserHistory, store)
