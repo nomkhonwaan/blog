@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import Helmet from 'react-helmet'
 
-import { Header } from './'
+import { Header, Footer } from './'
 
 const App = ({ children }) => {
   return (
@@ -11,6 +11,7 @@ const App = ({ children }) => {
         titleTemplate="%s &middot; Trust me I'm Petdo" />
       <Header />
       { children }
+      <Footer />
     </div>
   )
 }
