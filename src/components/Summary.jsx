@@ -22,6 +22,37 @@ const Summary = ({ data }) => {
           Posted on { publishedAt.fromNow() }&nbsp;&middot;&nbsp;<Link to={ `${permalink}#disqus_thread` }>Comments</Link>
         </div>
       </header>
+      <article
+        className={ styles.article }
+        dangerouslySetInnerHTML={ {
+          __html: data.
+            attributes.
+            html. 
+            split('<!--more-->')[0]
+        } }>
+      </article>
+      <footer className={ styles.footer }>
+        <ul className={ styles['tag-list'] }>
+          {
+            data.attributes.tags. 
+              map((item, key) => {
+                return (
+                  <li 
+                    key={ key }
+                    className={ styles['tag-item'] }>
+                    <Link to={ [
+                      '',
+                      'tags',
+                      item.slug
+                    ].join('/') }>
+                      { item.name }
+                    </Link>
+                  </li>
+                )
+              })
+          }
+        </ul>
+      </footer>
     </div>
   )
 }
