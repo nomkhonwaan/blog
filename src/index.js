@@ -2,9 +2,9 @@ import dotenv from 'dotenv'
 import Express from 'express'
 import path from 'path'
 
+import config from './config/defaults'
 import WebpackIsomorphicTools from 'webpack-isomorphic-tools'
 import webpackIsomorphicToolsConfiguration from './webpack-isomorphic-tools-configuration'
-import { ip, port } from './config/defaults'
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfiguration)
   .development(process.env.NODE_ENV === 'development')
@@ -12,7 +12,7 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicTool
     const app = Express()
     const server = require('./server').
       default(app).
-      listen(port, ip, (err) => {
+      listen(config.PORT, config.IP, (err) => {
         if (err) {
           console.log(err)
         } else {

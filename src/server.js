@@ -15,6 +15,8 @@ import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
 import apiRoutes from './api/routes'
 import { Html } from './components'
+import config from './config/defaults'
+
 import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
 import reducers from './reducers'
@@ -26,7 +28,7 @@ export default (app) => {
   }
   
   if ( ! mongoose.connection.readyState) {
-    mongoose.connect(process.env.MONGODB_URI)
+    mongoose.connect(config.MONGODB_URI)
   }
   
   app.disable('x-powered-by')
