@@ -34,7 +34,9 @@ describe('reducers/posts.js', () => {
         totalItems: 1
       },
       links: {},
-      data: [ 'post_ID' ],
+      data: {
+        1: [ 'post_ID' ]
+      },
       included: []
     }))
   })

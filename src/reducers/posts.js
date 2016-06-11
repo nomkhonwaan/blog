@@ -5,7 +5,7 @@ export const initialState = {
   itemsPerPage: 5,
   isFetching: false,
   lastUpdated: NaN,
-  data: []
+  data: {}
 }
 
 export default (state = initialState, action) => {
@@ -22,10 +22,13 @@ export default (state = initialState, action) => {
         lastUpdated: action.receivedAt,
         meta: action.meta,
         links: action.links,
-        data: action.data.
-          map((item) => {
-            return item.id
-          }),
+        data: {
+          [state.page]: action.
+            data.
+            map((item) => {
+              return item.id
+            })
+        },
         included: action.included
       })
     }

@@ -32,7 +32,7 @@ const Posts = ({
                 ) }></i>
                 <div>Loading...</div>
               </div>
-            : data. 
+            : data[page]. 
                 map((item) => {
                   return entities.posts[item]
                 }). 
@@ -55,6 +55,13 @@ const Posts = ({
 
 export default asyncConnect([{
   promise: ({ store: { dispatch, getState } }) => {
+    const page = getState().posts.page 
+    const data = getState().posts.data
+
+    if (data[page]) {
+      return Promise.resolve()
+    }
+
     return dispatch(fetchPosts(
       getState().posts.page,
       getState().posts.itemsPerPage
