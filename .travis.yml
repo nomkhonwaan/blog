@@ -2,12 +2,19 @@ language: node_js
 node_js:
 - '5'
 deploy:
-  provider: openshift
-  user: me@nomkhonwaan.com
-  password:
-    secure: ZjZLznllroRWrWIUrQliWniFFXpIEAW2njmYD9L1KCWFjXiZd7gNqvKTl8rMaiZU0TJo0ie07hhWYMz/qXxCFryLF9Jwdffi/Ok03PG3+kjlvtNLQzASzzBDPd3iMb/BvA9Ia4lk6un1eA6pbA19NpOxBfgGqu3tkGsIFzEjGgh3w5qGYxFWQU3qdfDN+kW/WJUmgQV0D5l97y85sYyM/P/R2sdMa2FOF0nkJvOwHiAuonxeIHrNjsY6CtXleYd5TMqoZR3islO0i5Zdpzap6acTuZ0a35rQBII73UrGixuTkjJDfkQlTLMWNm9VwKCaV93AuTioGh0AqhL2v28y11XCNgs9nkLdYk/0RjybR35/t/+dvT2nU2SRbFY0wBCdfojAZqj0dticliX82TdOnH3zURAXQTbE/pdGHv2QCBY4jSDRm03F042XE//tf7SMHl9K0tmRnnSIEz4xKkIoDGSrkYJmidZIEtcL+a6fb3Tzgh7oCZJQ919sa72vp4JNe87RSMtwu+DzExDQXp9/8zlAUdwjAVdsGBHYthpXLF6cb/mJbcifmhdiLOpJVm3a9Hq6JKz/joiodnCoHNPqt3Jpx328F90RlXucP5nzqNkdF4ljvs9TY8QvqRbeYK0h9eXdP9YHFQ5qiPUI/3FUxiDi7AMNuewdN6/fB4qFiKw=
-  app: blog
-  domain: nomkhonwaan
-  on:
-    repo: nomkhonwaan/nomkhonwaan.com
-    branch: dev
+  - provider: heroku
+    api_key:
+      secure: J2qJlmVD83SfSm6FP+6znsoI+WmZ2XV8xQlAoCQiXIGePKBNW7ozjhIPO+qagI0xABabquvolC9EpKqUG5RdlH2eN4Z+OwUQ2zvds0bHWrNnw0OQVi/axZLpNM+yYKkOnzcSCmJj1a3AWGgZcou8uKDStahXEpgjilxjV+/4jPbx3AuV0PfXRg7SWZasS2DWcupWRoj6dc5hpyiAWl+zATeR+LNa5vwXVkvBj/e7910c8u12TjgfUSH8ujlrzZvUfws+JjsJitJGJTF66NVbdnLjQyRICGt9q0BrvgdfArFvDqlUKSvQshoaUKzAf9mkPSqc0pyQgYLrqnBSt+qp5cNpiBHf1IWzCvF8o3zdlqtefixlH0MEy3C6HnXuja/PpKAXNs8vdVh3MOPkm5FASTycGRufIEd0ILreWnbCkVDZQ3DdD6jSEZCz3hI2XGOCjbR8M6xUZm3NQBOdpa5AxXgNaGZr9uj8SuJX9Di4BQmYyNkP5Y4Umrqvxj6OVa/zLuz2y2wfFuUcViDbhDUjiZxRutqzA+xQfhxwKAwY9/6SRzdUlzBcgTNc2QEp3pWsbjypdJHuq8Rry0aYYBqp1s1N7aRtbfXYASFvyjnS30mrIhrXEbTkpUxmq7IJofMqnsLmicxEVcSbOnSJHr4R8WoXVQtvLlTvtaMZfvF8NUU=
+    app: immenseridge70180
+    on:
+      repo: nomkhonwaan/nomkhonwaan.com
+      branch: dev
+  - provider: openshift
+    user: me@nomkhonwaan.com
+    password:
+      secure: ZjZLznllroRWrWIUrQliWniFFXpIEAW2njmYD9L1KCWFjXiZd7gNqvKTl8rMaiZU0TJo0ie07hhWYMz/qXxCFryLF9Jwdffi/Ok03PG3+kjlvtNLQzASzzBDPd3iMb/BvA9Ia4lk6un1eA6pbA19NpOxBfgGqu3tkGsIFzEjGgh3w5qGYxFWQU3qdfDN+kW/WJUmgQV0D5l97y85sYyM/P/R2sdMa2FOF0nkJvOwHiAuonxeIHrNjsY6CtXleYd5TMqoZR3islO0i5Zdpzap6acTuZ0a35rQBII73UrGixuTkjJDfkQlTLMWNm9VwKCaV93AuTioGh0AqhL2v28y11XCNgs9nkLdYk/0RjybR35/t/+dvT2nU2SRbFY0wBCdfojAZqj0dticliX82TdOnH3zURAXQTbE/pdGHv2QCBY4jSDRm03F042XE//tf7SMHl9K0tmRnnSIEz4xKkIoDGSrkYJmidZIEtcL+a6fb3Tzgh7oCZJQ919sa72vp4JNe87RSMtwu+DzExDQXp9/8zlAUdwjAVdsGBHYthpXLF6cb/mJbcifmhdiLOpJVm3a9Hq6JKz/joiodnCoHNPqt3Jpx328F90RlXucP5nzqNkdF4ljvs9TY8QvqRbeYK0h9eXdP9YHFQ5qiPUI/3FUxiDi7AMNuewdN6/fB4qFiKw=
+    app: blog
+    domain: nomkhonwaan
+    on:
+      repo: nomkhonwaan/nomkhonwaan.com
+      branch: dev
