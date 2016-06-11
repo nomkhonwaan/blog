@@ -22,3 +22,10 @@ export const fetchPosts = (page = 1, itemsPerPage = 5) => {
       })
   }
 }
+
+export const changePage = (page) => {
+  return {
+    type: types.POSTS_PAGE,
+    page
+  }
+}

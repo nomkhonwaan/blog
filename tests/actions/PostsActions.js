@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import nock from 'nock'
 import configureMockStore from 'redux-mock-store'
 
-import { fetchPosts } from '../../src/actions/PostsActions'
+import { changePage, fetchPosts } from '../../src/actions/PostsActions'
 import types from '../../src/constants/ActionTypes'
 import PromiseMiddleware from '../../src/middlewares/PromiseMiddleware'
 
@@ -14,6 +14,23 @@ describe('actions/PostsActions.js', () => {
     nock.cleanAll()
   })
   
+  it('should create POSTS_PAGE when changing posts page', () => {
+    const page = 1 
+
+    expect(changePage(page)).to.deep.equal({
+      type: types.POSTS_PAGE,
+      page
+    })
+    expect(changePage(page + 1)).to.deep.equal({
+      type: types.POSTS_PAGE,
+      page: page + 1
+    })
+    expect(changePage(page - 1)).to.deep.equal({
+      type: types.POSTS_PAGE,
+      page: page - 1
+    })
+  })
+ 
   it('should create POSTS_SUCCESS when fetching posts has been done', () => {
     nock(/.*/). 
       get('/api/v1/posts'). 

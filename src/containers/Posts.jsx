@@ -11,8 +11,8 @@ const Posts = ({
   isFetching,
   itemsPerPage,
   links,
+  meta: { totalItems },
   page,
-  totalItems
 }) => {
   const styles = Object.assign({}, 
     require('../stylesheets/Posts.scss'),

@@ -18,7 +18,7 @@ const Pagination = ({
               '',
               'pages',
               page - 1
-            ].join('/') }>&laqou; Newer</Link>
+            ].join('/') }>&laquo; Newer</Link>
             : null
         }
       </div>

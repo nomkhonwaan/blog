@@ -10,6 +10,12 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+    case types.POSTS_PAGE: {
+      return Object.assign({}, state, {
+        page: action.page
+      })
+    }
+
     case types.POSTS_REQUEST: {
       return Object.assign({}, state, {
         isFetching: true

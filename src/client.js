@@ -36,7 +36,7 @@ render(
           render={ applyRouterMiddleware(useScroll()) } />
       )
     } } history={ history }>
-      { routes }
+      { routes(store) }
     </Router>
   </Provider>,
   document.getElementById('root')

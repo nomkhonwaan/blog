@@ -4,6 +4,29 @@ import types from '../../src/constants/ActionTypes'
 import reducer, { initialState } from '../../src/reducers/posts'
 
 describe('reducers/posts.js', () => {
+  it('should handle POSTS_PAGE by set new page number to state', () => {
+    const page = 1
+
+    expect(reducer(undefined, {
+      type: types.POSTS_PAGE,
+      page
+    })).to.deep.equal(Object.assign({}, initialState, {
+      page
+    })) 
+    expect(reducer(undefined, {
+      type: types.POSTS_PAGE,
+      page: page + 1
+    })).to.deep.equal(Object.assign({}, initialState, {
+      page: page + 1
+    })) 
+    expect(reducer(undefined, {
+      type: types.POSTS_PAGE,
+      page: page - 1
+    })).to.deep.equal(Object.assign({}, initialState, {
+      page: page - 1
+    })) 
+  })
+
   it('should handle POSTS_REQUEST by toggle isFetching to "true"', () => {
     expect(reducer(undefined, {
       type: types.POSTS_REQUEST

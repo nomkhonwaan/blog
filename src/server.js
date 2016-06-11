@@ -76,7 +76,7 @@ export default (app) => {
     const history = syncHistoryWithStore(createMemoryHistory(req.originalUrl), store)
     
     match({
-      routes, 
+      routes: routes(store), 
       location: req.url,
       history
     }, (err, redirect, renderProps) => {
