@@ -55,10 +55,7 @@ const Posts = ({
 
 export default asyncConnect([{
   promise: ({ store: { dispatch, getState } }) => {
-    const page = getState().posts.page 
-    const data = getState().posts.data
-
-    if (data[page]) {
+    if (getState().posts.data[getState().posts.page]) {
       return Promise.resolve()
     }
 
@@ -67,7 +64,7 @@ export default asyncConnect([{
       getState().posts.itemsPerPage
     ))
   }
-}], (state, ownProps) => {
+}], (state) => {
   return {
     ...state.posts,
     entities: state.entities
