@@ -9,12 +9,3 @@ deploy:
     on:
       repo: nomkhonwaan/nomkhonwaan.com
       branch: dev
-  - provider: openshift
-    user: me@nomkhonwaan.com
-    password:
-      secure: ZjZLznllroRWrWIUrQliWniFFXpIEAW2njmYD9L1KCWFjXiZd7gNqvKTl8rMaiZU0TJo0ie07hhWYMz/qXxCFryLF9Jwdffi/Ok03PG3+kjlvtNLQzASzzBDPd3iMb/BvA9Ia4lk6un1eA6pbA19NpOxBfgGqu3tkGsIFzEjGgh3w5qGYxFWQU3qdfDN+kW/WJUmgQV0D5l97y85sYyM/P/R2sdMa2FOF0nkJvOwHiAuonxeIHrNjsY6CtXleYd5TMqoZR3islO0i5Zdpzap6acTuZ0a35rQBII73UrGixuTkjJDfkQlTLMWNm9VwKCaV93AuTioGh0AqhL2v28y11XCNgs9nkLdYk/0RjybR35/t/+dvT2nU2SRbFY0wBCdfojAZqj0dticliX82TdOnH3zURAXQTbE/pdGHv2QCBY4jSDRm03F042XE//tf7SMHl9K0tmRnnSIEz4xKkIoDGSrkYJmidZIEtcL+a6fb3Tzgh7oCZJQ919sa72vp4JNe87RSMtwu+DzExDQXp9/8zlAUdwjAVdsGBHYthpXLF6cb/mJbcifmhdiLOpJVm3a9Hq6JKz/joiodnCoHNPqt3Jpx328F90RlXucP5nzqNkdF4ljvs9TY8QvqRbeYK0h9eXdP9YHFQ5qiPUI/3FUxiDi7AMNuewdN6/fB4qFiKw=
-    app: blog
-    domain: nomkhonwaan
-    on:
-      repo: nomkhonwaan/nomkhonwaan.com
-      branch: dev
