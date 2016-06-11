@@ -10,8 +10,8 @@ import {
 export default ({ dispatch }) => {
   return (
     <Route path="/" component={ App }>
-      { /*<IndexRoute component={ Posts } />*/ }
-      { /*<Route path="/:year/:month/:date/:slug" component={ Post } />*/ }
+      <IndexRoute component={ Posts } />
+      <Route path="/:year/:month/:date/:slug" component={ Post } />
       <Route path="/pages/:page" getComponent={ 
         (nextState, callback) => {
           const { params } = nextState
