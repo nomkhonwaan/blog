@@ -2,11 +2,19 @@ language: node_js
 node_js:
 - '5'
 deploy:
-  -
-    provider: heroku
+  - provider: heroku
     api_key:
-      secure: $HEROKU_SECURE
+      secure: J2qJlmVD83SfSm6FP+6znsoI+WmZ2XV8xQlAoCQiXIGePKBNW7ozjhIPO+qagI0xABabquvolC9EpKqUG5RdlH2eN4Z+OwUQ2zvds0bHWrNnw0OQVi/axZLpNM+yYKkOnzcSCmJj1a3AWGgZcou8uKDStahXEpgjilxjV+/4jPbx3AuV0PfXRg7SWZasS2DWcupWRoj6dc5hpyiAWl+zATeR+LNa5vwXVkvBj/e7910c8u12TjgfUSH8ujlrzZvUfws+JjsJitJGJTF66NVbdnLjQyRICGt9q0BrvgdfArFvDqlUKSvQshoaUKzAf9mkPSqc0pyQgYLrqnBSt+qp5cNpiBHf1IWzCvF8o3zdlqtefixlH0MEy3C6HnXuja/PpKAXNs8vdVh3MOPkm5FASTycGRufIEd0ILreWnbCkVDZQ3DdD6jSEZCz3hI2XGOCjbR8M6xUZm3NQBOdpa5AxXgNaGZr9uj8SuJX9Di4BQmYyNkP5Y4Umrqvxj6OVa/zLuz2y2wfFuUcViDbhDUjiZxRutqzA+xQfhxwKAwY9/6SRzdUlzBcgTNc2QEp3pWsbjypdJHuq8Rry0aYYBqp1s1N7aRtbfXYASFvyjnS30mrIhrXEbTkpUxmq7IJofMqnsLmicxEVcSbOnSJHr4R8WoXVQtvLlTvtaMZfvF8NUU=
     app: immense-ridge-70180
+    on:
+      repo: nomkhonwaan/nomkhonwaan.com
+      branch: dev
+  - provider: openshift
+    user: me@nomkhonwaan.com
+    password:
+      secure: MVgxfYqDv+ptY83DLzexSN+dZfnw7dMqsCHBNLdDUsSWAPtYAydlk9BSzIq/nvbq8S5aqlhs5KPk6D96qVVqk28/4wfnBjMcuClp0aXzMVO8fj3AoExtyneQj5vzQPXmLHVgNKts4YJTTxaCTNKg0Ni6WylXe7V+d+KOPVvacmU1ywVAGQspSLUClI3FE9tiUVFr5LRA5URJClUg9ZexBPVgFZ4AktSzD1g5uDJk1HsJunwSOzZDDCXWZwDdo+HcxLm0E8ybIUREgr1KkeJw+wRv/Y+acjniCBc+/IauywKjtXri3IGaY3gXqRKoy/8qksf0ONQatZI3Gm6/q8Nr6xqH556kEDekvL710CE473VJoWGtqhfvd3I3SeFj2oWaZv2Y2mdzHlKfxk5A8IDe5meDH2SxUBsr0BA2EL9wivb8Z7jcH5CBUuZef3vjh4IOhVCClRvU8Y081edBLyIRNtao3EyzBzTIzgksXY7Gb+ydIhnQRPIYnsZjGo6TpyNg7Vf3VNJ8sk30wyeiNmZQjB4cXpSqOOjoTcUttgGk+NNwtcciJM7oJALTGxsjyjkhpHlxmu9IqFF5w/RpvF1FiXbr5vTbSHdfC/23fOJ+X8jwJxArA1BslkmLZnoosH42yz85T6FO1dZevIcoVWn8II0zYGfFnat/xb/Gi98/vCo=
+    app: beta
+    domain: nomkhonwaan
     on:
       repo: nomkhonwaan/nomkhonwaan.com
       branch: dev
