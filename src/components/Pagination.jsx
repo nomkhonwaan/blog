@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const Pagination = ({ itemsPerPage, links, page, totalItems }) => {
+const Pagination = ({ 
+  itemsPerPage, 
+  links, 
+  page, 
+  totalItems
+ }) => {
   const styles = require('../stylesheets/Pagination.scss')
   
   return (
@@ -33,6 +38,17 @@ const Pagination = ({ itemsPerPage, links, page, totalItems }) => {
       </div>
     </div>    
   )
+}
+
+Pagination.propTypes = {
+  itemsPerPage: PropTypes.number.isRequired,
+  links: PropTypes.shape({
+    previous: PropTypes.string,
+    self: PropTypes.string.isRequired,
+    next: PropTypes.string
+  }).isRequired,
+  page: PropTypes.number.isRequired,
+  totalItems: PropTypes.number.isRequired
 }
 
 export default Pagination
