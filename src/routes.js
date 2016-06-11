@@ -10,14 +10,21 @@ import {
 export default ({ dispatch }) => {
   return (
     <Route path="/" component={ App }>
-      <IndexRoute component={ Posts } />
-      <Route path="/:year/:month/:date/:slug" component={ Post } />
-      <Route path="/pages/:page" getComponent={ (nextState, callback) => {
-        const { params } = nextState
-        dispatch(changePage(parseInt(params.page)))
-        
-        callback(null, Posts)
-      } } />
+      { /*<IndexRoute component={ Posts } />*/ }
+      { /*<Route path="/:year/:month/:date/:slug" component={ Post } />*/ }
+      <Route path="/pages/:page" getComponent={ 
+        (nextState, callback) => {
+          const { params } = nextState
+
+          dispatch(
+            changePage(
+              parseInt(params.page)
+            )
+          )
+          
+          callback(null, Posts)
+        } 
+      } />
     </Route>
   )
 }

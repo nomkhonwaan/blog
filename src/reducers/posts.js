@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
         meta: action.meta,
         links: action.links,
         data: {
+          ...state.data,
           [state.page]: action.
             data.
             map((item) => {

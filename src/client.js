@@ -12,7 +12,7 @@ import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import reducers from './reducers'
 import routes from './routes'
 
-const initialState = window.__INITIAL_STATE__
+const initialState = decodeURIComponent(window.__INITIAL_STATE__)
 const store = createStore(
   reducers,
   initialState,

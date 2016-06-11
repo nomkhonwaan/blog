@@ -1,5 +1,7 @@
 import _ from 'lodash'
 import mongoose from 'mongoose'
+import { AllHtmlEntities as Entities } from 'html-entities'
+
 import pagination from './utils/pagination'
 
 const format = ({
@@ -11,6 +13,8 @@ const format = ({
   tags,
   users
 }) => {
+  const entities = new Entities()
+
   return {
     type: 'posts',
     id: _id,
@@ -18,7 +22,7 @@ const format = ({
       title,
       slug,
       publishedAt,
-      html,
+      html: entities.encode(html),
       tags,
     },
     relationships: {

@@ -1,8 +1,10 @@
 import moment from 'moment'
 import React from 'react'
+import { AllHtmlEntities as Entities } from 'html-entities'
 import { Link } from 'react-router'
 
 const Summary = ({ data }) => {
+  const entities = new Entities()
   const styles = Object.assign({},
     require('../stylesheets/Summary.scss'))
   const publishedAt = moment(data.attributes.publishedAt)
@@ -25,10 +27,9 @@ const Summary = ({ data }) => {
       <article
         className={ styles.article }
         dangerouslySetInnerHTML={ {
-          __html: data.
-            attributes.
-            html. 
-            split('<!--more-->')[0]
+          __html: entities. 
+                  decode(data.attributes.html).
+                  split('<!--more-->')[0]
         } }>
       </article>
       <footer className={ styles.footer }>

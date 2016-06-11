@@ -17,7 +17,7 @@ const Posts = ({
   const styles = Object.assign({}, 
     require('../stylesheets/Posts.scss'),
     require('font-awesome/css/font-awesome.css'))
-    
+  
   return (
     <div>
       <div className={ styles.posts }>
