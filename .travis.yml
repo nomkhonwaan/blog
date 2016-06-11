@@ -5,7 +5,7 @@ deploy:
   - provider: heroku
     api_key:
       secure: J2qJlmVD83SfSm6FP+6znsoI+WmZ2XV8xQlAoCQiXIGePKBNW7ozjhIPO+qagI0xABabquvolC9EpKqUG5RdlH2eN4Z+OwUQ2zvds0bHWrNnw0OQVi/axZLpNM+yYKkOnzcSCmJj1a3AWGgZcou8uKDStahXEpgjilxjV+/4jPbx3AuV0PfXRg7SWZasS2DWcupWRoj6dc5hpyiAWl+zATeR+LNa5vwXVkvBj/e7910c8u12TjgfUSH8ujlrzZvUfws+JjsJitJGJTF66NVbdnLjQyRICGt9q0BrvgdfArFvDqlUKSvQshoaUKzAf9mkPSqc0pyQgYLrqnBSt+qp5cNpiBHf1IWzCvF8o3zdlqtefixlH0MEy3C6HnXuja/PpKAXNs8vdVh3MOPkm5FASTycGRufIEd0ILreWnbCkVDZQ3DdD6jSEZCz3hI2XGOCjbR8M6xUZm3NQBOdpa5AxXgNaGZr9uj8SuJX9Di4BQmYyNkP5Y4Umrqvxj6OVa/zLuz2y2wfFuUcViDbhDUjiZxRutqzA+xQfhxwKAwY9/6SRzdUlzBcgTNc2QEp3pWsbjypdJHuq8Rry0aYYBqp1s1N7aRtbfXYASFvyjnS30mrIhrXEbTkpUxmq7IJofMqnsLmicxEVcSbOnSJHr4R8WoXVQtvLlTvtaMZfvF8NUU=
-    app: immenseridge70180
+    app: immense-ridge-70180
     on:
       repo: nomkhonwaan/nomkhonwaan.com
       branch: dev
