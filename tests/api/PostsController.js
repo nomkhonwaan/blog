@@ -3,11 +3,13 @@ import Express from 'express'
 import mongoose from 'mongoose'
 import sinon from 'sinon'
 import request from 'supertest'
-
+import { AllHtmlEntities as Entities } from 'html-entities'
 import 'sinon-mongoose'
 
 import Posts, { Model as PostModel, publicFields } from '../../src/api/PostsController'
 import apiRoutes from '../../src/api/routes'
+
+const entities = new Entities()
 
 const users = [{
   id: mongoose.Types.ObjectId(),
@@ -121,7 +123,7 @@ describe('api/PostsController.js', () => {
           expect(links.self).to.match(/(?=.*page\[number\]\=1)(?=.*page\[size\]\=5).*$/)
           expect(links.next).to.be.undefined
           expect(links.previous).to.be.undefined
-
+          
           expect(data).to.have.length.of.at.most(5)
           expect(data[0]).to.deep.equal({
             type: 'posts',
@@ -131,7 +133,7 @@ describe('api/PostsController.js', () => {
               tags: posts[0].tags,
               title: posts[0].title,
               slug: posts[0].slug,
-              html: posts[0].html
+              html: entities.encode(posts[0].html)
             },
             relationships: {
               author: {
@@ -209,7 +211,7 @@ describe('api/PostsController.js', () => {
               tags: posts[1].tags,
               title: posts[1].title,
               slug: posts[1].slug,
-              html: posts[1].html
+              html: entities.encode(posts[1].html)
             },
             relationships: {
               author: {
