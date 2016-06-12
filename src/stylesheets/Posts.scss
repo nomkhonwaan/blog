@@ -9,5 +9,11 @@
   
   > .loading {
     text-align: center;
+
+    > div {
+      font-size: 1rem;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
   }
 }
