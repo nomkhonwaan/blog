@@ -22,7 +22,7 @@ const Posts = ({
     <div>
       <div className={ styles.posts }>
         {
-          (isFetching || ! data[page] || true
+          (isFetching || ! data[page]
             ? <div className={ styles.loading }>
                 <i className={ classNames(
                   styles.fa,
