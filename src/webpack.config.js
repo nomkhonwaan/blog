@@ -44,7 +44,10 @@ export default {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      minimize: true
+      minimize: true,      
+      compress: {
+        warnings: false
+      }
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin()
