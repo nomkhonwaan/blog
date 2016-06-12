@@ -33,10 +33,8 @@ export default (app) => {
   
   app.disable('x-powered-by')
   
-  app.use('/static', Express.static(webpackConfig.output.path))
-  
-  app.use(helmet())
   app.use(compression({ level: 9 }))
+  app.use(helmet())
   app.use(session({
     store: new (RedisStore(session))({
       url: process.env.REDIS_URL
@@ -53,6 +51,8 @@ export default (app) => {
   app.set('json spaces', 4)
   app.set('json replacer', null)
 
+  app.use('/static', Express.static(webpackConfig.output.path))
+  
   app.use((req, res, next) => {
     if ( ! req.session) {
       console.log('%s [error] Redis session is not working!', 
