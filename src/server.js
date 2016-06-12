@@ -13,14 +13,13 @@ import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
-import apiRoutes from './api/routes'
 import { Html } from './components'
-import config from './config/defaults'
-
-import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import routes from './routes'
 import reducers from './reducers'
 import webpackConfig from './webpack.config'
+import apiRoutes from './api/routes'
+import config from './config/defaults'
+import PromiseMiddleware from './middlewares/PromiseMiddleware'
 
 export default (app) => {
   if ( ! app instanceof Express) {
@@ -37,9 +36,9 @@ export default (app) => {
   app.use(helmet())
   app.use(session({
     store: new (RedisStore(session))({
-      url: process.env.REDIS_URL
+      url: config.REDIS_URL
     }),
-    secret: process.env.REDIS_SECRET,
+    secret: config.REDIS_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
