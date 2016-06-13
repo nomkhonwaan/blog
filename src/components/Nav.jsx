@@ -70,15 +70,6 @@ const Nav = ({ dispatch, isExpanded }) => {
       </ul>
       <button className={ styles['btn-toggle'] } onClick={ () => {
         dispatch(onClickMenuButton(isExpanded))
-        
-        document.getElementsByTagName('body')[0].
-          addEventListener('touchmove', (event) => {
-            if ( ! isExpanded) {
-              return true;
-            }
-            
-            event.preventDefault()
-          })
       } }>
         <i className={ classNames(
           styles.fa,
