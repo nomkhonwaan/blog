@@ -50,7 +50,9 @@ export default (app) => {
   app.set('json spaces', 4)
   app.set('json replacer', null)
 
-  app.use('/static', Express.static(webpackConfig.output.path))
+  app.use('/static', Express.static(webpackConfig.output.path, { 
+    maxAge: 86400000
+  }))
   
   app.use((req, res, next) => {
     if ( ! req.session) {
