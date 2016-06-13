@@ -51,7 +51,7 @@ export default (app) => {
   app.set('json replacer', null)
 
   app.use('/static', Express.static(webpackConfig.output.path, { 
-    maxAge: 86400000
+    maxAge: 86400000 * 365
   }))
   
   app.use((req, res, next) => {
