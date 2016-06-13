@@ -84,7 +84,7 @@ const Html = ({ assets, components, initialState }) => {
       {
         Object.keys(assets.javascript).map((item, key) => {
           return (
-            <script src={ assets.javascript[item] } key={ key }></script> 
+            <script async src={ assets.javascript[item] } key={ key }></script> 
           )
         })
       }
