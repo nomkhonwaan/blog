@@ -73,7 +73,7 @@ export default (app) => {
         PromiseMiddleware
       )
     )
-    
+    const initialState = store.getState()
     const history = syncHistoryWithStore(createMemoryHistory(req.originalUrl), store)
     
     match({
@@ -86,7 +86,6 @@ export default (app) => {
       } else if (redirect) {
         return res.redirect(redirect)
       } else if (renderProps) {
-        const initialState = store.getState()
         const components = (
           <Provider store={ store }>
             <ReduxAsyncConnect { ...renderProps } />
@@ -102,7 +101,7 @@ export default (app) => {
                   <Html 
                     assets={ webpackIsomorphicTools.assets() }
                     components={ components }
-                    initialState={ initialState } />
+                    initialState={ null } />
                 ))
             },
             (err) => {
