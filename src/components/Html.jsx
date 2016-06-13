@@ -29,18 +29,44 @@ const Html = ({ assets, components, initialState }) => {
       <meta name="theme-color" content="#78909c" />
       <meta name="msapplication-navbutton-color" content="#78909c" />
       <meta name="apple-mobile-web-app-status-bar-style" content="#78909c" />
-      
-      {
-        Object.keys(assets.styles).map((item, key) => {
-          return (
-            <link rel="stylesheet" href={ assets.styles[item] } key={ key } />
-          )
-        }) 
-      }
     </head>
     <body>
       <div id="root" dangerouslySetInnerHTML={ { __html: content } }></div>
-      
+
+      <noscript id="deferred-styles">
+        {
+          Object.keys(assets.styles).map((item, key) => {
+            return (
+              <link rel="stylesheet" href={ assets.styles[item] } key={ key } />
+            )
+          }) 
+        }
+      </noscript>
+      <script dangerouslySetInnerHTML={ {
+        __html: `
+          var loadDeferredStyles = function() {
+            var addStylesNode = document.getElementById('deferred-styles')
+            var replacement = document.createElement('div')
+
+            replacement.innerHTML = addStylesNode.textContent
+            document.body.appendChild(replacement)
+            addStylesNode.parentElement.removeChild(addStylesNode)
+          }
+
+          var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+                    webkitRequestAnimationFrame || msRequestAnimationFrame 
+          
+          if (raf) {
+            raf(function() {
+              window.setTimeout(loadDeferredStyles, 0)
+            })
+          } else {
+            window.addEventListener('load', loadDeferredStyles)
+          }
+        `
+      } }>
+      </script>
+
       <script dangerouslySetInnerHTML={ {
         __html: `
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
