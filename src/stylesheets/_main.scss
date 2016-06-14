@@ -60,3 +60,13 @@ a:visited {
   margin-right: auto;
   max-width: 1024px;
 }
+
+.preload {
+  display: none;
+}
+
+.root {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility .2s ease-in-out, opacity .2s ease-in-out;
+}
