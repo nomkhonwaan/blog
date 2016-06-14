@@ -26,6 +26,7 @@
   > .article {
     color: #4d4d4d;
     font-size: 1.5rem;
+    line-height: (1.5rem*48/100)+1.5rem;
     margin: 12px 12px 0 12px;
     text-align: justify;
   }
