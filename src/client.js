@@ -21,7 +21,7 @@ const store = createStore(
       PromiseMiddleware,
       routerMiddleware(browserHistory)
     ),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    window.devToolsExtension ? window.devToolsExtension() : f => f,
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
   ),
 )
