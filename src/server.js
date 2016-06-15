@@ -73,7 +73,6 @@ export default (app) => {
         PromiseMiddleware
       )
     )
-    const initialState = store.getState()
     const history = syncHistoryWithStore(createMemoryHistory(req.originalUrl), store)
     
     match({
@@ -101,7 +100,7 @@ export default (app) => {
                   <Html 
                     assets={ webpackIsomorphicTools.assets() }
                     components={ components }
-                    initialState={ initialState } />
+                    initialState={ store.getState() } />
                 ))
             },
             (err) => {
