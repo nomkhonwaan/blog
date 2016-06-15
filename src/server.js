@@ -101,7 +101,7 @@ export default (app) => {
                   <Html 
                     assets={ webpackIsomorphicTools.assets() }
                     components={ components }
-                    initialState={ null } />
+                    initialState={ initialState } />
                 ))
             },
             (err) => {
