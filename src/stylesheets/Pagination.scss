@@ -11,6 +11,11 @@
   justify-content: baseline;
   margin: 12px 0;
 
+  @include breakpoint($md) {
+    margin: 0 auto;
+    width: 64%;
+  }
+  
   > .next,
   > .previous,
   > .counter {
