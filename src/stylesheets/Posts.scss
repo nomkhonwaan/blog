@@ -7,6 +7,11 @@
   font-size: 1.3rem;
   margin: 12px;
   
+  @include breakpoint($md) {
+    margin: 0 auto;
+    width: 64%;
+  }
+
   > .loading {
     text-align: center;
 
