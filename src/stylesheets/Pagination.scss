@@ -13,7 +13,7 @@
 
   @include breakpoint($md) {
     margin: 0 auto;
-    width: 64%;
+    width: 48%;
   }
   
   > .next,
@@ -50,5 +50,15 @@
   
   > .next {
     text-align: right;
+  }
+
+  @include breakpoint($md) {
+    .previous > a {
+      margin-left: 0;
+    }
+
+    .next > a {
+      margin-right: 0;
+    }
   }
 }
