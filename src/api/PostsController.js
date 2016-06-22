@@ -23,7 +23,13 @@ const format = ({
       slug,
       publishedAt,
       html: entities.encode(html),
-      tags,
+      tags: tags.
+        map(({ name, slug }) => {
+          return {
+            name,
+            slug
+          }
+        }),
     },
     relationships: {
       author: {
@@ -58,7 +64,17 @@ export const Model = (mongoose.models.Post
     },
     updatedAt: Date,
     publishedAt: Date,
-    tags: [ mongoose.Schema.Types.Mixed ],
+    attachedImages: [ {
+      data: Buffer,
+      mimeType: String
+    } ],
+    tags: [ {
+      name: String,
+      slug: {
+        type: String,
+        index: true
+      }
+    } ],
     users: [ mongoose.Schema.Types.Mixed ],
     title: {
       type: String,
@@ -66,8 +82,10 @@ export const Model = (mongoose.models.Post
     },
     slug: {
       type: String,
-      unique: true,
-      required: true
+      required: true,
+      index: {
+        unique: true
+      }
     },
     markdown: String,
     html: String

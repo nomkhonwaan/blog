@@ -1,11 +1,13 @@
 import fs from 'fs'
 import marked from 'marked'
+import mime from 'mime'
 import mongoose from 'mongoose'
 import path from 'path'
 import grid from 'gridfs-stream'
 import toml from 'toml'
 
-const Schema = mongoose.Schema
+import { Model as PostModel } from '../api/PostsController'
+import { Model as UserModel } from '../api/UsersController'
 
 let mongodbURI      = 'mongodb://localhost:27017/nomkhonwaan_com'
 let postDirectory   = '/Users/natchalua/Sites/blog/content/post'
@@ -31,50 +33,11 @@ mongoose.connect(mongodbURI)
 const conn = mongoose.connection
 grid.mongo = mongoose.mongo
 
-const Post = mongoose.model('Post', new Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: Date,
-  publishedAt: Date,
-  tags: [ 
-    mongoose.Schema.Types.Mixed 
-  ],
-  users: [ 
-    mongoose.Schema.Types.Mixed 
-  ],
-  title: {
-    type: String,
-    required: true
-  },
-  slug: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  markdown: String,
-  html: String
-}, {
-  collection: 'posts'
-}))
-const User = mongoose.model('User', new Schema({
-  email: String,
-  displayName: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: Date,
-}, {
-  collection: 'users'
-}))
-
 conn.once('open', () => {
   Promise.
     all([
       new Promise((resolve, reject) => {
-        User.findOne({}, (err, user) => {
+        UserModel.findOne({}, (err, user) => {
           if (err) {
             return reject(err)
           }
@@ -92,8 +55,8 @@ conn.once('open', () => {
     ]). 
     then((values) => {
       const [ user, files ] = values
-
-      files.map((item) => {
+      
+      files.map((item, key) => {
         const fileMatches = item.match(/(.+)\.md$/)
         const content = fs.readFileSync(path.resolve(postDirectory, item), 'utf8')
         const [ , metadata, body ] = content.match(/^\+{3}([\s\S]+?)\+{3}([\s\S]+)/)
@@ -103,26 +66,66 @@ conn.once('open', () => {
         }
 
         const { date, tags, title } = toml.parse(metadata)
-        const post = new Post({
+        const post = new PostModel({
           publishedAt: new Date(date),
-          tags,
+          attachedImages: getAttachedImagesUrl(body).
+            map((uploadedImage) => {
+              return {
+                data: fs.readFileSync(uploadedImage, 'utf8'),
+                mimeType: mime.lookup(uploadedImage)
+              }
+            }),
+          tags: tags. 
+            map((item) => {
+              return {
+                name: item,
+                slug: item.toLowerCase()
+              }
+            }),
           users: [ user ],
           title,
           slug: fileMatches[1],
           markdown: body,
           html: marked(body)
         })
+
+console.log(tags. 
+            map((item) => {
+              return {
+                name: item,
+                slug: item.toLowerCase()
+              }
+            }))
+        post.save((err) => {
+          if (err) {
+            console.log('%s [error] %s',
+              new Date().toString(),
+              err)
+          } else {
+            console.log('%s [info] saving post number [%d], done',
+              new Date().toString(),
+              key)
+          }
+        })
       })
+    }, (err) => {
+      console.log('%s [error] %s',
+        new Date().toString(),
+        err)
     })
 })
 
-function getUploadedImagesUrl(body, prefixDirectory = uploadDirectory) {
-  const imageUrlMatches = body.match(/\/uploads\/[\d]+\/[\d]+\.png|jpg|jpeg/g)
-  
+function getAttachedImagesUrl(body, prefixDirectory = uploadDirectory) {
+  const imageUrlMatches = body.match(/\/uploads\/[\d]+\/[\d]+\.(png|jpg|jpeg)/g)
+
+  if ( ! Array.isArray(imageUrlMatches)) {
+    return []
+  }
+
   return imageUrlMatches.
     map((item) => {
       const [ , directoryName, filename ] 
-        = item.match(/^\/uploads\/([\d]+)\/([\d]+\.png|jpg|jpeg)/)
+        = item.match(/^\/uploads\/([\d]+)\/([\d]+\.(png|jpg|jpeg))/)
 
       return path.resolve(prefixDirectory, directoryName, filename)
     })
