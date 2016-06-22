@@ -3,23 +3,19 @@ services:
   mongo:
     image: mongo:latest
     ports:
-      - 27117:27017
+      - 27017:27017
     volumes:
       - ~/mongodb:/data/db
-    command: mongod --auth
   mongo_express:
     image: mongo-express:latest
     ports:
-      - 3003:8081
+      - 8081:8081
     links:
       - mongo 
     depends_on:
       - mongo
     environment:
       ME_CONFIG_MONGODB_PORT: '27017'
-      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
-      ME_CONFIG_MONGODB_ADMINUSERNAME: 'root'
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 'root'
   redis:
     image: redis:latest
     ports:
