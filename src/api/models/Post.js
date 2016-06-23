@@ -31,10 +31,7 @@ export default (mongoose.models.Post
     },
     tags: [ {
       name: String,
-      slug: {
-        type: String,
-        index: true
-      }
+      slug: String
     } ],
     title: {
       type: String,
