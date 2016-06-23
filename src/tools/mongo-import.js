@@ -9,9 +9,6 @@ import toml from 'toml'
 import Post from '../api/models/Post'
 import User from '../api/models/User'
 
-process.on('uncaughtException', function (error) {
-   console.log(error.stack);
-});
 const config = {
   MONGODB_URI: 'mongodb://localhost:27017/nomkhonwaan_com',
   POST_DIRECTORY: '~/Sites/blog/content/post',
@@ -63,7 +60,11 @@ conn.once('open', () => {
     all([
       // retrieve user model
       new Promise((resolve, reject) => {
-        User.findOne({}, (err, user) => {
+        new User({
+          email: 'me@nomkhonwaan.com',
+          displayName: 'Natcha Luang - Aroonchai'
+        }). 
+        save((err, user) => {
           if (err) return reject(err)
           return resolve(user)
         })
@@ -81,9 +82,7 @@ conn.once('open', () => {
 
       files.map((item, key) => {
         const matches = item.match(/(.+)\.(md|markdown)$/)
-        const content = fs.readFileSync(
-          path.resolve(config.POST_DIRECTORY, item),
-          'utf8')
+        const content = fs.readFileSync(path.resolve(config.POST_DIRECTORY, item), 'utf8')
         const [ , meta, body ] = content.match(/^\+{3}([\s\S]+?)\+{3}([\s\S]+)/)
 
         if ( ! Array.isArray(matches)) {
@@ -95,11 +94,14 @@ conn.once('open', () => {
         }
 
         // -- parse metadata --
+
         const { id, date, tags, title } = toml.parse(meta)
+        
         // --
 
         // -- save attachments --
-        const attachments = getAttachedImagesUrl(body, config.UPLOADS_DIRECTORY). 
+
+        const saveAttachments = getAttachedImagesUrl(body, config.UPLOADS_DIRECTORY). 
           map((item) => {
             return new Promise((resolve) => {
               const ws = gfs.createWriteStream({
@@ -112,21 +114,58 @@ conn.once('open', () => {
               })
             })
           })
+
         // --
 
         // -- save posts --
+
         Promise.
-          all(attachments). 
+          all(saveAttachments). 
           then((values) => {
             let markdown = body
 
-            values. 
+            const attachments = values. 
               map((item) => {
                 markdown = 
                   markdown.replace(/\(\/uploads\/\d+\/.+\..+\)/g, 
                     `(/api/v1/attachments/${item._id.toString()})`)
+                
+                return {
+                  id: item._id
+                }
               })
 
+            new Post({
+              markdown,
+              title,
+              attachments,
+              html: marked(markdown),
+              slug: matches[1],
+              tags: tags.
+                map((item) => {
+                  return {
+                    name: item,
+                    slug: item.toLowerCase()
+                  }
+                }),
+              users: [ {
+                id: user._id,
+                email: user.email,
+                displayName: user.displayName
+              } ],
+              publichedAt: new Date(date)
+            }). 
+            save((err) => {
+              if (err) {
+                console.log('%s [error] %s', 
+                  new Date().toString(),
+                  err)
+              } else {
+                console.log('%s [info] post [%s] had saved', 
+                  new Date().toString(),
+                  title)
+              }
+            })
           }, (err) => {
             console.log('%s [error] %s',
               new Date().toString(),

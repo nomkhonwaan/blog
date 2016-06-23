@@ -12,16 +12,9 @@ export const publicFields = [
 export default (mongoose.models.Post
   ? mongoose.model('Post')
   : mongoose.model('Post', new mongoose.Schema({
-    attachments: [ {
-      id: mongoose.Schema.Types.ObjectId,
-      title: String
-    } ],
+    attachments: [ mongoose.Schema.Types.Mixed ],
     html: String,
     markdown: String,
-    mimeType: {
-      type: String,
-      required: true
-    },
     slug: {
       type: String,
       required: true,
@@ -29,19 +22,12 @@ export default (mongoose.models.Post
         unique: true
       }
     },
-    tags: [ {
-      name: String,
-      slug: String
-    } ],
+    tags: [ mongoose.Schema.Types.Mixed ],
     title: {
       type: String,
       required: true
     },
-    users: [ {
-      id: mongoose.Schema.Types.ObjectId,
-      email: String,
-      displayName: String
-    } ],
+    users: [ mongoose.Schema.Types.Mixed ],
     createdAt: {
       type: Date,
       default: Date.now
