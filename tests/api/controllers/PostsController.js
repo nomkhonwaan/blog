@@ -6,8 +6,8 @@ import request from 'supertest'
 import { AllHtmlEntities as Entities } from 'html-entities'
 import 'sinon-mongoose'
 
-import Posts, { Model as PostModel, publicFields } from '../../src/api/PostsController'
-import apiRoutes from '../../src/api/routes'
+import Post, { publicFields } from '../../../src/api/models/Post'
+import apiRoutes from '../../../src/api/routes'
 
 const entities = new Entities()
 
@@ -57,7 +57,7 @@ const posts = [{
 
 describe('api/PostsController.js', () => {
   let agent
-  let PostModelMock
+  let PostMock
 
   before(() => {
     const app = Express()
@@ -67,16 +67,16 @@ describe('api/PostsController.js', () => {
   })
 
   beforeEach(() => {
-    PostModelMock = sinon.mock(PostModel)
+    PostMock = sinon.mock(Post)
   })
 
   afterEach(() => {
-    PostModelMock.restore()
+    PostMock.restore()
   })
 
   describe('getAll :: only published posts', () => {
     beforeEach(() => {
-      PostModelMock.
+      PostMock.
         expects('count').
           withArgs({
             publishedAt: {
@@ -87,11 +87,11 @@ describe('api/PostsController.js', () => {
     })
 
     afterEach(() => {
-      PostModelMock.restore()
+      PostMock.restore()
     })
 
     it('should return list of published post by default parameters', (done) => {
-      PostModelMock.
+      PostMock.
         expects('find').
           withArgs({
             publishedAt: {
@@ -123,7 +123,7 @@ describe('api/PostsController.js', () => {
           expect(links.self).to.match(/(?=.*page\[number\]\=1)(?=.*page\[size\]\=5).*$/)
           expect(links.next).to.be.undefined
           expect(links.previous).to.be.undefined
-          
+
           expect(data).to.have.length.of.at.most(5)
           expect(data[0]).to.deep.equal({
             type: 'posts',
@@ -144,7 +144,7 @@ describe('api/PostsController.js', () => {
               }
             }
           })
-          
+
           expect(included).to.have.lengthOf(1)
           expect(included[0]).to.deep.equal({
             type: 'users',
@@ -158,50 +158,50 @@ describe('api/PostsController.js', () => {
           done()
         })
     })
-    
+
     it('should return list of published post by custom parameters', (done) => {
       const page = {
         number: 2,
         size: 1
       }
-      
-      PostModelMock.
+
+      PostMock.
         expects('find').
           withArgs({
             publishedAt: {
               '$exists': true
             }
           }).
-        chain('select'). 
+        chain('select').
           withArgs(publicFields.join(' ')).
-        chain('limit'). 
-          withArgs(page.size). 
-        chain('skip'). 
+        chain('limit').
+          withArgs(page.size).
+        chain('skip').
           withArgs((page.number - 1) * page.size).
-        chain('sort'). 
+        chain('sort').
           withArgs({
             publishedAt: 'desc'
-          }). 
-        chain('exec'). 
+          }).
+        chain('exec').
         yields(null, posts.slice(1, 2))
-      
-      agent. 
-        get('/api/v1/posts'). 
+
+      agent.
+        get('/api/v1/posts').
         query({
           'page[number]': page.number,
-          'page[size]': page.size 
-        }). 
+          'page[size]': page.size
+        }).
         end((err, { body }) => {
-          expect(err).to.be.null 
-          
-          const { meta, links, data, included } = body 
-          
+          expect(err).to.be.null
+
+          const { meta, links, data, included } = body
+
           expect(meta.totalItems).to.equal(3)
-          
+
           expect(links.self).to.match(/(?=.*page\[number\]\=2)(?=.*page\[size\]\=1).*$/)
           expect(links.next).to.match(/(?=.*page\[number\]\=3)(?=.*page\[size\]\=1).*$/)
           expect(links.previous).to.match(/(?=.*page\[number\]\=1)(?=.*page\[size\]\=1).*$/)
-          
+
           expect(data).to.have.length.of.at.most(1)
           expect(data[0]).to.deep.equal({
             type: 'posts',
@@ -222,7 +222,7 @@ describe('api/PostsController.js', () => {
               }
             }
           })
-          
+
           expect(included).to.have.lengthOf(1)
           expect(included[0]).to.deep.equal({
             type: 'users',
@@ -236,9 +236,9 @@ describe('api/PostsController.js', () => {
           done()
         })
     })
-    
+
     it('should return an error object when to get caught in an exception', (done) => {
-      PostModelMock.
+      PostMock.
         expects('find').
           withArgs({
             publishedAt: {
@@ -257,17 +257,17 @@ describe('api/PostsController.js', () => {
           }).
         chain('exec').
         yields(new Error, null)
- 
-      
-      agent. 
-        get('/api/v1/posts'). 
+
+
+      agent.
+        get('/api/v1/posts').
         end((err, { body }) => {
           expect(err).to.not.be.undefined
-          
-          const { errors } = body 
-          
+
+          const { errors } = body
+
           expect(errors).to.have.length.of.at.least(1)
-          
+
           done()
         })
     })

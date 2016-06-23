@@ -2,9 +2,10 @@ import _ from 'lodash'
 import mongoose from 'mongoose'
 import { AllHtmlEntities as Entities } from 'html-entities'
 
-import pagination from './utils/pagination'
+import Post, { publicFields } from '../models/Post'
+import links from '../utils/links'
 
-const format = ({
+function format({
   _id,
   title,
   slug,
@@ -12,7 +13,7 @@ const format = ({
   html,
   tags,
   users
-}) => {
+}) {
   const entities = new Entities()
 
   return {
@@ -46,54 +47,6 @@ const format = ({
   }
 }
 
-export const publicFields = [
-  'title',
-  'slug',
-  'publishedAt',
-  'html',
-  'tags',
-  'users'
-]
-
-export const Model = (mongoose.models.Post
-  ? mongoose.model('Post')
-  : mongoose.model('Post', new mongoose.Schema({
-    createdAt: {
-      type: Date,
-      default: Date.now
-    },
-    updatedAt: Date,
-    publishedAt: Date,
-    attachedImages: [ {
-      data: Buffer,
-      mimeType: String
-    } ],
-    tags: [ {
-      name: String,
-      slug: {
-        type: String,
-        index: true
-      }
-    } ],
-    users: [ mongoose.Schema.Types.Mixed ],
-    title: {
-      type: String,
-      required: true
-    },
-    slug: {
-      type: String,
-      required: true,
-      index: {
-        unique: true
-      }
-    },
-    markdown: String,
-    html: String
-  }, {
-    collection: 'posts'
-  })
-))
-
 export default {
 
   getAll: (req, res, next) => {
@@ -110,7 +63,7 @@ export default {
 
       Promise.all([
         new Promise((resolve, reject) => {
-          Model.
+          Post.
             count(conditions, (err, totalItems) => {
               if (err) {
                 return reject(err)
@@ -119,7 +72,7 @@ export default {
             })
         }),
         new Promise((resolve, reject) => {
-          Model.
+          Post.
             find(conditions).
             select(publicFields.join(' ')).
             limit(page.size).
@@ -141,7 +94,7 @@ export default {
             meta: {
               totalItems
             },
-            links: pagination(
+            links: links(
               page.number,
               page.size,
               totalItems,
@@ -152,13 +105,13 @@ export default {
                 result.push(format(item))
                 return result
               }, []),
-            included: items. 
+            included: items.
               map((item) => {
                 return item.users
-              }). 
+              }).
               reduce((result, item) => {
                 return _.uniqBy(result.concat(item), 'email')
-              }, []). 
+              }, []).
               reduce((result, { id, displayName, email }) => {
                 result.push({
                   type: 'users',
@@ -171,7 +124,7 @@ export default {
                 return result
               }, [])
           })
-      }). 
+      }).
       catch((err) => {
         return next(err)
       })

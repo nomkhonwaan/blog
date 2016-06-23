@@ -1,5 +1,14 @@
 import mongoose from 'mongoose'
 
+export const publicFields = [
+  'title',
+  'slug',
+  'publishedAt',
+  'html',
+  'tags',
+  'users'
+]
+
 export default (mongoose.models.Post
   ? mongoose.model('Post')
   : mongoose.model('Post', new mongoose.Schema({
