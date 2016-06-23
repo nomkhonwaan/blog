@@ -127,9 +127,6 @@ conn.once('open', () => {
                     `(/api/v1/attachments/${item._id.toString()})`)
               })
 
-            if (values.length) {
-              console.log(markdown)
-            }
           }, (err) => {
             console.log('%s [error] %s',
               new Date().toString(),
