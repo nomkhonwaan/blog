@@ -1,17 +1,22 @@
 version: '2'
 services:
+  mongo_data:
+    image: alpine:latest
+    volumes:
+      - ~/mongodb:/data/db
+    command: /bin/true
   mongo:
     image: mongo:latest
     ports:
       - 27017:27017
-    volumes:
-      - ~/mongodb:/data/db
+    volumes_from:
+      - mongo_data
   mongo_express:
     image: mongo-express:latest
     ports:
       - 8081:8081
     links:
-      - mongo 
+      - mongo
     depends_on:
       - mongo
     environment:
