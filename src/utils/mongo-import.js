@@ -32,7 +32,7 @@ process.argv.map((item) => {
       break;
     }
     case 'post-directory': {
-      config.POST_DIRECTORY = value 
+      config.POST_DIRECTORY = value
       break;
     }
     case 'uploads-directory': {
@@ -56,14 +56,14 @@ const conn = mongoose.connection
 conn.once('open', () => {
   const gfs = Grid(conn.db, mongoose.mongo)
 
-  Promise. 
+  Promise.
     all([
       // retrieve user model
       new Promise((resolve, reject) => {
         new User({
           email: 'me@nomkhonwaan.com',
           displayName: 'Natcha Luang - Aroonchai'
-        }). 
+        }).
         save((err, user) => {
           if (err) return reject(err)
           return resolve(user)
@@ -76,7 +76,7 @@ conn.once('open', () => {
           return resolve(items)
         })
       })
-    ]). 
+    ]).
     then((values) => {
       const [ user, files ] = values
 
@@ -96,12 +96,12 @@ conn.once('open', () => {
         // -- parse metadata --
 
         const { id, date, tags, title } = toml.parse(meta)
-        
+
         // --
 
         // -- save attachments --
 
-        const saveAttachments = getAttachedImagesUrl(body, config.UPLOADS_DIRECTORY). 
+        const saveAttachments = getAttachedImagesUrl(body, config.UPLOADS_DIRECTORY).
           map((item) => {
             return new Promise((resolve) => {
               const ws = gfs.createWriteStream({
@@ -120,16 +120,16 @@ conn.once('open', () => {
         // -- save posts --
 
         Promise.
-          all(saveAttachments). 
+          all(saveAttachments).
           then((values) => {
             let markdown = body
 
-            const attachments = values. 
+            const attachments = values.
               map((item) => {
-                markdown = 
-                  markdown.replace(/\(\/uploads\/\d+\/.+\..+\)/g, 
+                markdown =
+                  markdown.replace(/\(\/uploads\/\d+\/.+\..+\)/g,
                     `(/api/v1/attachments/${item._id.toString()})`)
-                
+
                 return {
                   id: item._id
                 }
@@ -153,15 +153,15 @@ conn.once('open', () => {
                 email: user.email,
                 displayName: user.displayName
               } ],
-              publichedAt: new Date(date)
-            }). 
+              publishedAt: new Date(date)
+            }).
             save((err) => {
               if (err) {
-                console.log('%s [error] %s', 
+                console.log('%s [error] %s',
                   new Date().toString(),
                   err)
               } else {
-                console.log('%s [info] post [%s] had saved', 
+                console.log('%s [info] post [%s] had saved',
                   new Date().toString(),
                   title)
               }
@@ -178,7 +178,7 @@ conn.once('open', () => {
       console.log('%s [error] %s',
         new Date().toString(),
         err);
-    }). 
+    }).
     catch((err) => {
       console.log('%s [error] %s',
         new Date().toString(),
@@ -195,12 +195,12 @@ function getAttachedImagesUrl(str, uploaddir) {
     return []
   }
 
-  return matches. 
+  return matches.
     map((item) => {
-      const [ , dirname, filename ] = 
+      const [ , dirname, filename ] =
         item.match(/^\(\/uploads\/(\d+)\/(.+\.(gif|jpg|jpeg|png))\)$/)
-     
-      return path. 
+
+      return path.
         resolve(uploaddir, dirname, filename)
     })
 }
