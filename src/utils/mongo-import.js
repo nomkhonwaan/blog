@@ -11,8 +11,8 @@ import User from '../api/models/User'
 
 const config = {
   MONGODB_URI: 'mongodb://localhost:27017/nomkhonwaan_com',
-  POST_DIRECTORY: '~/Sites/blog/content/post',
-  UPLOADS_DIRECTORY: '~/Sites/blog/static/uploads'
+  POST_DIRECTORY: '/Users/nomkhonwaan/Sites/blog/content/post',
+  UPLOADS_DIRECTORY: '/Users/nomkhonwaan/Sites/blog/static/uploads'
 }
 
 // -- CLI parameters --
