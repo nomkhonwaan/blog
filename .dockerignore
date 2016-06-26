@@ -1,4 +1,5 @@
 .env
+.git
 .tmp
 dump.rdb
 npm-debug.log
