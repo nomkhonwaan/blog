@@ -1,24 +1,12 @@
-FROM mhart/alpine-node:5
+FROM eddywashere/alpine-node-sass:latest
 
-# Install libsass 
-RUN apk --update add git build-base libstdc++ && \
-    git clone https://github.com/sass/sassc /sassc && \
-    git clone https://github.com/sass/libsass /sassc/libsass && \
-    cd /sassc && \
-    SASS_LIBSASS_PATH=/sassc/libsass make && \
-    mv /sassc/bin/sassc /bin/sass && \
-	  rm -rf /sassc && \
-    apk del git build-base
-
-# Build application
-RUN mkdir -p /src/nomkhonwaan.com
-
-WORKDIR /src/nomkhonwaan.com
+WORKDIR /src
 ADD . .
 
-RUN npm install --all
-RUN npm run build
+RUN apk add --no-cache build-base python \
+ && npm install \
+ && apk del build-base python
 
 EXPOSE 8080
 
-CMD [ "node", "dist/index.js" ]
+CMD [ "npm", "start" ]
