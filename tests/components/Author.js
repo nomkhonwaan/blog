@@ -10,7 +10,7 @@ import Author from '../../src/components/Author'
 
 const webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfiguration)
 
-describe('components/Author.jsx', () => {
+xdescribe('components/Author.jsx', () => {
   it('should render correctly', (done) => {
     webpackIsomorphicTools.server(path.resolve(__dirname, '..', '..'), () => {
       done()
