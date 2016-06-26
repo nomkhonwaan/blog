@@ -1,7 +1,6 @@
 import fs from 'fs'
 import Grid from 'gridfs-stream'
 import marked from 'marked'
-import mime from 'mime'
 import mongoose from 'mongoose'
 import path from 'path'
 import toml from 'toml'
