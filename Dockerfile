@@ -1,14 +1,11 @@
-FROM eddywashere/alpine-node-sass:latest
+FROM node:5.12.0-slim
 
-ENV VERSION 5.11.1
-
-WORKDIR /src
+RUN mkdir -p /src/nomkhonwaan.com
+WORKDIR /src/nomkhonwaan.com
 ADD . .
 
-RUN apk add --no-cache build-base python \
- && npm install \
- && npm run build \
- && apk del build-base python
+RUN npm install --all \
+ && npm run build
 
 EXPOSE 8080
 
