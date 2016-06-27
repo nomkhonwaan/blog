@@ -7,8 +7,6 @@ services:
     command: /bin/true
   mongo:
     image: mongo:latest
-    ports:
-      - 27017:27017
     volumes_from:
       - mongo_data
   mongo_express:
@@ -17,11 +15,14 @@ services:
       - 8081:8081
     links:
       - mongo
-    depends_on:
-      - mongo
     environment:
       ME_CONFIG_MONGODB_PORT: '27017'
   redis:
     image: redis:latest
+  nomkhonwaan_com:
+    image: nomkhonwaan/nomkhonwaan.com:latest 
     ports:
-      - 6379:6379
+      - 3003:8080
+    links:
+      - mongo
+      - redis
