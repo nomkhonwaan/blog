@@ -9,6 +9,8 @@ services:
     image: mongo:latest
     volumes_from:
       - mongo_data
+    ports:
+      - 27017:27017
   mongo_express:
     image: mongo-express:latest
     ports:
@@ -20,7 +22,7 @@ services:
   redis:
     image: redis:latest
   nomkhonwaan_com:
-    image: nomkhonwaan/nomkhonwaan.com:latest 
+    image: nomkhonwaan/blog:latest 
     ports:
       - 3003:8080
     links:
