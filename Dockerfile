@@ -1,7 +1,7 @@
 FROM node:5.12.0-slim
 
-RUN mkdir -p /src/nomkhonwaan.com
-WORKDIR /src/nomkhonwaan.com
+RUN mkdir -p /home
+WORKDIR /home
 ADD . .
 
 RUN npm install --all \

@@ -6,8 +6,8 @@ services:
 - docker
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-- docker build -t nomkhonwaan/nomkhonwaan.com:latest .
-- docker push nomkhonwaan/nomkhonwaan.com
+- docker build -t nomkhonwaan/blog:latest .
+- docker push nomkhonwaan/blog
 env:
   global:
   - secure: F2PfwiU24OeMaHe3rjPYzQoVWLMlGxVlyAYgeDeFthaxgi/bVMrvD/7XgwH16eF7Z3zPTeceRNgRCd5VL/biTIid3RyQiFlb3p6mLVq+kvR7zAJDk5snwTzG+Y96YAox0ycE+He8qQjFO6Jqy2mqh0KcYBq7nZyDWlVrfi7fGBtzr8hQ07BAllU5CXpQ0OoCNN5Sez245krv3PWh7cMGL8pItnBBhGtbaqF0R/dCV+sZUiukm3WSp3VupCvhzEcRjx7kw3XuZB/9KYwvhrtnuL6mruz5l7vIHd0ly95/FI+F5BLy9UP+7Ji7VZJitSfOg90soV6e8OUEY4ESbvPYTyAuK/29kQ4wg5xe6SuAUQkWpCukWIddgqj3uI9/lFEinQztaEAfRAYcxFZSGfXPFyYeoMHDlFb9Joe7CNBXHZYhRcjic947eRAspiGx4NiQ8eZtUYXECNwKTCGLAzBwO25geWPPKlVe12Vyvik6aK1g3VkIt3Tqz8bqAHUHwAuuURDYVJhTVsK8IWh9rhffAUCjsBg5QPPZigB3K78sg4XUGdXfKLjjP8CS7cP8G7gTXuXe/NDXnCcoCBsQWf2HQe8JKslN11IJvA2fX5sIIAcn0MmXwlsj0inaRjAu2D5q+KFeyCD14Br2kSgojNuRCuzgbox8o7VtAZowGTcjgj0=
