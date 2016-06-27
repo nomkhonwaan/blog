@@ -5,7 +5,8 @@ WORKDIR /home
 ADD . .
 
 RUN npm install --all \
- && npm run build
+ && npm run build \
+ && cp .env.example .env
 
 EXPOSE 8080
 
