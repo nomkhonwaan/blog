@@ -17,6 +17,7 @@ services:
       - mongo
     environment:
       ME_CONFIG_MONGODB_PORT: '27017'
+      MONGODB_URI: mongodb://mongo:27017/nomkhonwaan_com
   redis:
     image: redis:latest
   nomkhonwaan_com:
@@ -26,3 +27,6 @@ services:
     links:
       - mongo
       - redis
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/nomkhonwaan_com
+      REDIS_URL: redis://redis:6379
