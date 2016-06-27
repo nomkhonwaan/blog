@@ -1,7 +1,9 @@
 .env
 .git
 .tmp
+docker-compose.yml
 dump.rdb
+jsconfig.json
 npm-debug.log
 webpack-*.json
 
