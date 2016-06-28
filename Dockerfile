@@ -5,9 +5,9 @@ ADD ./.babelrc /home/.babelrc
 ADD ./src /home/src
 ADD ./package.json /home/package.json
 
-RUN npm install --all \
- && npm run build \
- && cp ./src/config.example.js ./src/config.js
+RUN cp ./src/config.example.js ./src/config.js \
+ && npm install --all \
+ && npm run build
 
 EXPOSE 8080
 
