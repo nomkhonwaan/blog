@@ -18,7 +18,7 @@ import routes from './routes'
 import reducers from './reducers'
 import webpackConfig from './webpack.config'
 import apiRoutes from './api/routes'
-import config from './config/defaults'
+import config from './config'
 import PromiseMiddleware from './middlewares/PromiseMiddleware'
 
 export default (app) => {
