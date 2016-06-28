@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import querystring from 'querystring'
 
-import config from '../config'
 import types from '../constants/ActionTypes'
 
 export const fetchPosts = (page = 1, itemsPerPage = 5) => {
@@ -11,7 +10,7 @@ export const fetchPosts = (page = 1, itemsPerPage = 5) => {
       types.POSTS_SUCCESS,
       types.POSTS_FAILURE
     ],
-    promise: fetch(`//beta.nomkhonwaan.com/api/v1/posts?${querystring.stringify({
+    promise: fetch(`http://beta.nomkhonwaan.com/api/v1/posts?${querystring.stringify({
         'page[number]': page,
         'page[size]': itemsPerPage
       })}`). 
