@@ -1,12 +1,13 @@
 FROM node:5.12.0-slim
 
-WORKDIR /home 
-ADD src/ .
-ADD package.json .
+WORKDIR /home
+ADD ./.babelrc /home/.babelrc
+ADD ./src /home/src
+ADD ./package.json /home/package.json
 
 RUN npm install --all \
  && npm run build \
- && cp config.example.js config.js
+ && cp ./src/config.example.js ./src/config.js
 
 EXPOSE 8080
 
