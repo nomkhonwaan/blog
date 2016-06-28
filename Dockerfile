@@ -1,12 +1,12 @@
 FROM node:5.12.0-slim
 
-RUN mkdir -p /home
-WORKDIR /home
-ADD . .
+WORKDIR /home 
+ADD src/ .
+ADD package.json .
 
 RUN npm install --all \
  && npm run build \
- && cp .env.example .env
+ && cp config.example.js config.js
 
 EXPOSE 8080
 
