@@ -11,7 +11,7 @@ export default (store) => {
     
     return promise. 
       then(
-        ({ body }) => {
+        (body) => {
           if (body.errors) {
             return next({ 
               ...rest, 

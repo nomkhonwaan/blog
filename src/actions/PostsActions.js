@@ -1,10 +1,8 @@
-import { get } from 'superagent'
-import superagentNodePlugin from 'superagent-node-plugin'
-import superagentPromisePlugin from 'superagent-promise-plugin'
+import fetch from 'isomorphic-fetch'
+import querystring from 'querystring'
 
+import config from '../config'
 import types from '../constants/ActionTypes'
-
-superagentPromisePlugin.Promise = Promise 
 
 export const fetchPosts = (page = 1, itemsPerPage = 5) => {
   return {
@@ -13,12 +11,12 @@ export const fetchPosts = (page = 1, itemsPerPage = 5) => {
       types.POSTS_SUCCESS,
       types.POSTS_FAILURE
     ],
-    promise: get('/api/v1/posts').
-      use(superagentNodePlugin()).
-      use(superagentPromisePlugin). 
-      query({
+    promise: fetch(`//beta.nomkhonwaan.com/api/v1/posts?${querystring.stringify({
         'page[number]': page,
         'page[size]': itemsPerPage
+      })}`). 
+      then((res) => {
+        return res.json()
       })
   }
 }
