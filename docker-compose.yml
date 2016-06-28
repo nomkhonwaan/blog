@@ -22,7 +22,9 @@ services:
   redis:
     image: redis:latest
   nomkhonwaan_com:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 3003:8080
     links:
