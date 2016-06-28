@@ -22,12 +22,9 @@ services:
   redis:
     image: redis:latest
   nomkhonwaan_com:
-    image: nomkhonwaan/blog:latest 
+    build: .
     ports:
       - 3003:8080
     links:
       - mongo
       - redis
-    environment:
-      MONGODB_URI: mongodb://mongo:27017/nomkhonwaan_com
-      REDIS_URL: redis://redis:6379
