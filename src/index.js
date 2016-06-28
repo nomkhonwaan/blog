@@ -11,7 +11,7 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicTool
     const app = Express()
     const server = require('./server').
       default(app).
-      listen(config.PORT, (err) => {
+      listen(config.PORT, '0.0.0.0', (err) => {
         if (err) {
           console.log(err)
         } else {
