@@ -1,9 +1,16 @@
-.env
-.tmp
+# Redis
 dump.rdb
-npm-debug.log
+
+# Configuration
+config.js 
+
+# Build output
+dist 
+public 
 webpack-*.json
 
-dist
+# Dependencies
 node_modules
-public
+
+# Logs
+npm-debug.log
