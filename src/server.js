@@ -94,22 +94,35 @@ export default (app) => {
         loadOnServer({ ...renderProps, store }). 
           then(
             () => {
-              return res.
-                status(200). 
-                send('<!DOCTYPE html>' + renderToString(
-                  <Html 
-                    assets={ webpackIsomorphicTools.assets() }
-                    components={ components }
-                    initialState={ store.getState() } />
-                ))
+              try {
+                return res.
+                  status(200). 
+                  send('<!DOCTYPE html>' + renderToString(
+                    <Html 
+                      assets={ webpackIsomorphicTools.assets() }
+                      components={ components }
+                      initialState={ store.getState() } />
+                  ))
+              } catch (err) {
+                return next(err)
+              }
             },
             (err) => {
-              console.log(err);
               return next(err)
             }
           )
       }
     })
+  })
+
+  app.use((err, req, res, next) => {
+    if (err) {
+      console.log('%s [error] %s',
+        new Date().toString(),
+        err);
+    }
+
+    res.send('An error has occurred')
   })
   
   return app
