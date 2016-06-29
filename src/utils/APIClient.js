@@ -8,18 +8,16 @@ export default class APIClient {
   constructor({ path, method, query, body }) {
     const apiUrlObject = new url.Url()
 
-    delete apiUrlObject.search 
-
     apiUrlObject.pathname = path
     apiUrlObject.protocol = (this.isServer() ? 'http' : window.location.protocol)
-    apiUrlObject.host = (this.isServer() ? `localhost:${config.PORT}`: `${window.location.host}:${window.location.port}`)
+    apiUrlObject.host = (this.isServer() ? `localhost:${config.PORT}`: `${window.location.host}`)
     
     if (query) {
       apiUrlObject.query = query
     }
 
     return new Promise((resolve, reject) => {
-      fetch(url.format(apiUrlObject)). 
+      fetch(decodeURI(url.format(apiUrlObject))). 
         then((res) => {
           return res.json()
         }).
