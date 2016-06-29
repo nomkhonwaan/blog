@@ -9,17 +9,9 @@ export default (store) => {
     const [ REQUEST, SUCCESS, FAILURE ] = types 
     next({ ...rest, type: REQUEST })
     
-    return promise. 
+    return promise.
       then(
         (body) => {
-          if (body.errors) {
-            return next({ 
-              ...rest, 
-              ...body,
-              receivedAt: Date.now(), 
-              type: FAILURE 
-            })
-          }
           return next({ 
             ...rest, 
             ...body, 
@@ -28,6 +20,15 @@ export default (store) => {
           })
         },
         (err) => {
+          if (err.errors) {
+            return next({ 
+              ...rest, 
+              ...body,
+              receivedAt: Date.now(), 
+              type: FAILURE 
+            })
+          }
+          
           return next({ 
             ...rest, 
             errors: [{

@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import querystring from 'querystring'
 
+import APIClient from '../utils/APIClient'
 import types from '../constants/ActionTypes'
 
 export const fetchPosts = (page = 1, itemsPerPage = 5) => {
@@ -10,13 +11,13 @@ export const fetchPosts = (page = 1, itemsPerPage = 5) => {
       types.POSTS_SUCCESS,
       types.POSTS_FAILURE
     ],
-    promise: fetch(`http://beta.nomkhonwaan.com/api/v1/posts?${querystring.stringify({
+    promise: new APIClient({
+      path: '/api/v1/posts',
+      query: {
         'page[number]': page,
         'page[size]': itemsPerPage
-      })}`). 
-      then((res) => {
-        return res.json()
-      })
+      }
+    })
   }
 }
 
