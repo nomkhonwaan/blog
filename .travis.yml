@@ -2,6 +2,9 @@ sudo: required
 language: node_js
 node_js:
 - '5'
+branches:
+  only:
+    - dev
 services:
 - docker
 after_success:
