@@ -1,9 +1,6 @@
 # Redis
 dump.rdb
 
-# Configuration
-config.js 
-
 # Build output
 dist 
 public 
