@@ -58,8 +58,8 @@ export default {
       loader: 'babel',
       exclude: /node_modules/,
       include: __dirname
-    }, { 
-      test: /\.s?css$/, 
+    }, {
+      test: /\.s?css$/,
       loader: ExtractTextPlugin.extract('style', [
         'css?modules&importLoaders=2&sourceMap',
         'autoprefixer?browsers=last 2 version',

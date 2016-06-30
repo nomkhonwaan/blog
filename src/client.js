@@ -12,6 +12,8 @@ import PromiseMiddleware from './middlewares/PromiseMiddleware'
 import reducers from './reducers'
 import routes from './routes'
 
+require('./stylesheets/Main.scss')
+
 const initialState = window.__INITIAL_STATE__
 const store = createStore(
   reducers,
