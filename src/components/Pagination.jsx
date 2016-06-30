@@ -7,11 +7,9 @@ const Pagination = ({
   page, 
   totalItems
  }) => {
-  const styles = require('../stylesheets/Pagination.scss')
-  
   return (
-    <div className={ styles.pagination }>
-      <div className={ styles.previous }>
+    <div className="pagination">
+      <div className="previous">
         {
           links.previous
             ? <Link to={ [
@@ -22,10 +20,10 @@ const Pagination = ({
             : null
         }
       </div>
-      <div className={ styles.counter }>
+      <div className="counter">
         Page { page } of { Math.ceil(totalItems / itemsPerPage) }
       </div>
-      <div className={ styles.next }>
+      <div className="next">
         {
           links.next
             ? <Link to={ [

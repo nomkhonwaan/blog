@@ -7,8 +7,6 @@ const Html = ({ assets, components, initialState }) => {
   const content = (components
     ? renderToString(components)
     : null)
-  const styles = Object.assign({}, 
-    require('../stylesheets/Main.scss'))
 
   return (
     <html lang="en">
@@ -33,19 +31,19 @@ const Html = ({ assets, components, initialState }) => {
       <meta name="apple-mobile-web-app-status-bar-style" content="#78909c" />
 
       <style dangerouslySetInnerHTML={ {
-        __html: `.${styles.root}{opacity:0;visibility:hidden;}.${styles.preload}{align-items:center;background-color:#78909c;display:flex;bottom:0;justify-content:center;left:0;right:0;top:0;position:fixed;}.spinner{width:40px;height:40px;position:relative;margin:100px auto;}.double-bounce1,.double-bounce2{width:100%;height:100%;border-radius:50%;background-color:#def4ff;opacity:0.6;position:absolute;top:0;left:0;-webkit-animation:sk-bounce 2.0s infinite ease-in-out;animation:sk-bounce 2.0s infinite ease-in-out;}.double-bounce2{-webkit-animation-delay:-1.0s;animation-delay:-1.0s;}@-webkit-keyframes sk-bounce{0%,100%{-webkit-transform:scale(0.0)}50%{-webkit-transform:scale(1.0)}}@keyframes sk-bounce{0%,100%{transform:scale(0.0);-webkit-transform:scale(0.0);}50%{transform:scale(1.0);-webkit-transform:scale(1.0);}}`
+        __html: `.root{opacity:0;visibility:hidden;}.preload{align-items:center;background-color:#78909c;display:flex;bottom:0;justify-content:center;left:0;right:0;top:0;position:fixed;}.spinner{width:40px;height:40px;position:relative;margin:100px auto;}.double-bounce1,.double-bounce2{width:100%;height:100%;border-radius:50%;background-color:#def4ff;opacity:0.6;position:absolute;top:0;left:0;-webkit-animation:sk-bounce 2.0s infinite ease-in-out;animation:sk-bounce 2.0s infinite ease-in-out;}.double-bounce2{-webkit-animation-delay:-1.0s;animation-delay:-1.0s;}@-webkit-keyframes sk-bounce{0%,100%{-webkit-transform:scale(0.0)}50%{-webkit-transform:scale(1.0)}}@keyframes sk-bounce{0%,100%{transform:scale(0.0);-webkit-transform:scale(0.0);}50%{transform:scale(1.0);-webkit-transform:scale(1.0);}}`
       } }>
       </style>
     </head>
     <body>
-      <div className={ styles.preload }>
+      <div className="preload">
         <div className="spinner">
           <div className="double-bounce1"></div>
           <div className="double-bounce2"></div>
         </div>
       </div>
 
-      <div id="root" className={ styles.root } dangerouslySetInnerHTML={ { __html: content } }></div>
+      <div id="root" className="root" dangerouslySetInnerHTML={ { __html: content } }></div>
 
       <noscript id="deferred-styles">
         {

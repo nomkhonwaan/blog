@@ -14,22 +14,13 @@ const Posts = ({
   meta: { totalItems },
   page,
 }) => {
-  const styles = Object.assign({}, 
-    require('../stylesheets/Posts.scss'),
-    require('font-awesome/css/font-awesome.css'))
-  
   return (
     <div>
-      <div className={ styles.posts }>
+      <div className="posts">
         {
           (isFetching || ! data[page]
-            ? <div className={ styles.loading }>
-                <i className={ classNames(
-                  styles.fa,
-                  styles['fa-fw'],
-                  styles['fa-spin'],
-                  styles['fa-refresh'],
-                ) }></i>
+            ? <div className="loading">
+                <i className="fa fa-fw fa-spin fa-refresh"></i>
                 <div>Loading...</div>
               </div>
             : data[page]. 
