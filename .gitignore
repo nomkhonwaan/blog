@@ -1,13 +1,7 @@
-# Redis
+.vscode/.browse.VC.*
+dist
 dump.rdb
-
-# Build output
-dist 
-public 
-webpack-*.json
-
-# Dependencies
 node_modules
-
-# Logs
 npm-debug.log
+public
+webpack-*.json
