@@ -1,5 +1,7 @@
+import autoprefixer from 'autoprefixer'
 import fse from 'fs-extra'
 import path from 'path'
+import precss from 'precss'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin'
@@ -61,8 +63,8 @@ export default {
     }, {
       test: /\.s?css$/,
       loader: ExtractTextPlugin.extract('style', [
-        'css?modules&importLoaders=2&sourceMap',
-        'autoprefixer?browsers=last 2 version',
+        'css?sourceMap&modules&importLoaders=1&localIdentName=[local]',
+        'postcss',
         'sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
       ].join('!'))
     }, { 
@@ -84,5 +86,13 @@ export default {
       test: webpackIsomorphicToolsPlugin.regular_expression('images'),
       loader: 'url?limit=10000&name=[hash].[ext]'
     }]
+  }, 
+  postcss: () => {
+    return [ 
+      precss, 
+      autoprefixer({ 
+        browsers: ['last 1 version'] 
+      }) 
+    ]
   }
 }
