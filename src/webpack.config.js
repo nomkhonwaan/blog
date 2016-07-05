@@ -20,11 +20,13 @@ staticDirs.
 
 export default {
   devtool: 'cheap-module-source-map',
-  entry: [
-    path.join(__dirname, 'client.js')
-  ],
+  entry: {
+    main: path.join(__dirname, 'client.js'),
+    preload: path.join(__dirname, 'stylesheets', 'Preload.scss'),
+    postload: path.join(__dirname, 'stylesheets', 'Main.scss')
+  },
   output: {
-    filename: '[hash].js',
+    filename: '[name]-[hash].js',
     path: path.resolve(__dirname, '..', 'public'),
     publicPath: '/static/'
   },
@@ -37,7 +39,7 @@ export default {
   },
   plugins: [
     webpackIsomorphicToolsPlugin,
-    new ExtractTextPlugin('[hash].css', {
+    new ExtractTextPlugin('[name]-[hash].css', {
       allChucks: true
     }),
     new webpack.DefinePlugin({
@@ -69,22 +71,22 @@ export default {
       ].join('!'))
     }, { 
       test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, 
-      loader: 'url?limit=10000&mimetype=application/font-woff'
+      loader: 'url?limit=10000&name=[name]-[hash].[ext]&mimetype=application/font-woff'
     }, { 
       test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, 
-      loader: 'url?limit=10000&mimetype=application/font-woff'
+      loader: 'url?limit=10000&name=[name]-[hash].[ext]&mimetype=application/font-woff'
     }, { 
       test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
-      loader: 'url?limit=10000&mimetype=application/octet-stream'
+      loader: 'url?limit=10000&name=[name]-[hash].[ext]&mimetype=application/octet-stream'
     }, { 
       test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
-      loader: 'file' 
+      loader: 'file?name=[name]-[hash].[ext]' 
     }, {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'url?limit=10000&mimetype=image/svg+xml'
+      loader: 'url?limit=10000&name=[name]-[hash].[ext]&mimetype=image/svg+xml'
     }, {
       test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-      loader: 'url?limit=10000&name=[hash].[ext]'
+      loader: 'url?limit=10000&name=[name]-[hash].[ext]'
     }]
   }, 
   postcss: () => {

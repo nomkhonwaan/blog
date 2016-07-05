@@ -1,0 +1,51 @@
+@charset 'UTF-8';
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+  }
+  50% {
+    transform: scale(1.0);
+  }
+}
+
+#root {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preload {
+  align-items: center;
+  background-color: #78909c;
+  display: flex;
+  bottom: 0;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  position: fixed;
+
+  > .spinner {
+    height: 40px;
+    margin: 100px auto;
+    position: relative;
+    width: 40px;
+
+    > .double-bounce1, 
+    > .double-bounce2 {
+      animation: sk-bounce 2.0s infinite ease-in-out;
+      background-color: #def4ff;
+      border-radius: 50%;
+      height: 100%;
+      left: 0;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    > .double-bounce2 {
+      animation-delay: -1.0s;
+    }
+  }
+}
