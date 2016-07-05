@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react'
 import { renderToString } from 'react-dom/server'
 import Helmet from 'react-helmet'
 
+import '../stylesheets/Main.scss'
+
 const Html = ({ assets, components, initialState }) => {
   const head = Helmet.rewind()
   const content = (components
