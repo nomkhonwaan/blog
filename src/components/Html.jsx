@@ -2,9 +2,6 @@ import React, { PropTypes } from 'react'
 import { renderToString } from 'react-dom/server'
 import Helmet from 'react-helmet'
 
-// require('../stylesheets/Main.scss')
-// require('../stylesheets/Preload.scss')
-
 const Html = ({ assets, components, initialState }) => {
   const head = Helmet.rewind()
   const content = (components
@@ -60,9 +57,7 @@ const Html = ({ assets, components, initialState }) => {
             addStylesNode.parentElement.removeChild(addStylesNode)
           }
 
-          var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-                    webkitRequestAnimationFrame || msRequestAnimationFrame 
-          
+          var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame 
           if (raf) {
             raf(function() {
               window.setTimeout(loadDeferredStyles, 0)
