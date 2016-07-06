@@ -10,7 +10,8 @@
   margin: 12px 0;
 
   @include breakpoint($md) {
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     width: 48%;
   }
   

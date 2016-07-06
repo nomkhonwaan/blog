@@ -3,7 +3,11 @@
 .summary {
   background: #fff;
   display: block;
-  margin: 32px 0;
+  margin: 24px 0;
+
+  &:last-child {
+    margin-bottom: 12px;
+  }
 
   > .header {
     > .title {
