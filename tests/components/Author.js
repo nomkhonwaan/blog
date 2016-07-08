@@ -1,19 +1,18 @@
 import { expect } from 'chai'
 import path from 'path'
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
-
-import WebpackIsomorphicTools from 'webpack-isomorphic-tools'
-import webpackIsomorphicToolsConfiguration from '../../src/webpack-isomorphic-tools-configuration'
+import { shallow } from 'enzyme'
+import 'ignore-styles'
 
 import Author from '../../src/components/Author'
 
-const webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfiguration)
-
-xdescribe('components/Author.jsx', () => {
-  it('should render correctly', (done) => {
-    webpackIsomorphicTools.server(path.resolve(__dirname, '..', '..'), () => {
-      done()
-    })
+describe('components/Author.jsx', () => {
+  it('should render an `.author` component correctly', () => {
+    const wrapper = shallow(<Author />)
+    
+    expect(wrapper.find('.author')).to.have.length(1)
+    expect(wrapper.find('.avatar')).to.have.length(1)
+    expect(wrapper.find('.description').text()).to.equal('Trust me I\'m Petdo')
+    expect(wrapper.find('.location').text()).to.equal('Bangkok, Thailand')
   })
 })
