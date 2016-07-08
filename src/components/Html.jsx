@@ -74,6 +74,7 @@ const Html = ({ assets, components, initialState }) => {
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
         `
       } }></script>
+      
       <script dangerouslySetInnerHTML={ {
         __html: `
           var _gaq=[['_setAccount','UA-33411047-1'],['_trackPageview']];

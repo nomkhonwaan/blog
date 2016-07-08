@@ -1,7 +1,6 @@
 import { expect } from 'chai'
-import path from 'path'
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
 import 'ignore-styles'
 
 import Author from '../../src/components/Author'
