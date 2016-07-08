@@ -5,9 +5,9 @@ import config from './config'
 import WebpackIsomorphicTools from 'webpack-isomorphic-tools'
 import webpackIsomorphicToolsConfiguration from './webpack-isomorphic-tools-configuration'
 
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfiguration)
-  .development(process.env.NODE_ENV === 'development')
-  .server(path.resolve(__dirname, '..'), () => {
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfiguration).
+  development(process.env.NODE_ENV === 'development').
+  server(path.resolve(__dirname, '..'), () => {
     const app = Express()
     const server = require('./server').
       default(app).
