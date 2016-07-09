@@ -55,9 +55,7 @@ export default asyncConnect([{
       getState().posts.itemsPerPage
     ))
   }
-}], (state) => {
-  return {
-    ...state.posts,
-    entities: state.entities
-  }
-})(Posts)
+}], (state) => ({
+  ...state.posts,
+  entities: state.entities
+}))(Posts)
