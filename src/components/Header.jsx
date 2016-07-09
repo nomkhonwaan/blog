@@ -1,5 +1,5 @@
 import React from 'react'
-import { Author, Nav } from './index'
+import { Author, Nav } from './'
 
 const Header = () => {
   return (
