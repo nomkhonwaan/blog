@@ -19,9 +19,10 @@ const Posts = ({
       <div className="posts">
         {
           (isFetching || ! data[page]
-            ? <div className="loading">
-                <i className="fa fa-fw fa-spin fa-refresh"></i>
-                <div>Loading...</div>
+            ? <div className="spinner">
+                <div className="bounce1"></div>
+                <div className="bounce2"></div>
+                <div className="bounce3"></div>
               </div>
             : data[page]. 
                 map((item) => {
