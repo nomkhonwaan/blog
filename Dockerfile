@@ -5,7 +5,7 @@ ADD ./.babelrc /home/.babelrc
 ADD ./src /home/src
 ADD ./package.json /home/package.json
 
-RUN npm install --all \
+RUN npm install --all --silent \
  && npm run build
 
 EXPOSE 8080
