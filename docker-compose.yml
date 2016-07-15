@@ -19,8 +19,6 @@ services:
       - mongo
     environment:
       ME_CONFIG_MONGODB_PORT: '27017'
-  redis:
-    image: redis:latest
   nomkhonwaan_com:
     build:
       context: .
@@ -29,4 +27,3 @@ services:
       - 3003:8080
     links:
       - mongo
-      - redis

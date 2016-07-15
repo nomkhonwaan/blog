@@ -2,8 +2,8 @@ import compression from 'compression'
 import Express from 'express'
 import helmet from 'helmet'
 import mongoose from 'mongoose'
-import RedisStore from 'connect-redis'
 import session from 'express-session'
+import MongoDBStore from 'connect-mongodb-session'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -35,13 +35,15 @@ export default (app) => {
   app.use(compression({ level: 9 }))
   app.use(helmet())
   app.use(session({
-    store: new (RedisStore(session))({
-      url: config.REDIS_URL
+    store: new (MongoDBStore(session))({
+      uri: config.MONGODB_URI,
+      collection: 'sessions'
     }),
-    secret: config.REDIS_SECRET,
-    resave: false,
+    secret: config.SESSION_SECRET,
+    resave: true,
     saveUninitialized: false,
     cookie: {
+      maxAge: 1000 * 60 * 60,
       secure: true
     }
   }))
