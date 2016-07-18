@@ -2,11 +2,17 @@
 
 .summary {
   &.post-item {
+    border-radius: 0.2rem 0.2rem 0 0;
+    
     &:last-child {
       margin-bottom: 12px;
     }
 
     > .header {
+      @include breakpoint($md) {
+        padding: 12px 12px 0;
+      }
+
       > .title {
         color: #4d4d4d;
         font-size: 1.8rem;
@@ -28,6 +34,10 @@
       line-height: (1.5rem*48/100)+1.5rem;
       margin: 12px 12px 0 12px;
       text-align: justify;
+
+      @include breakpoint($md) {
+        padding: 0 12px 12px;
+      }
     }
 
     > .footer {
@@ -39,6 +49,10 @@
       height: 48px;
       justify-content: center;
       margin-top: 12px;
+      
+      @include breakpoint($md) {
+        margin-top: 0;
+      }
 
       > .tag-list {
         display: block;
