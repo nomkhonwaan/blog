@@ -1,10 +1,10 @@
+import bunyan from 'bunyan'
 import compression from 'compression'
 import Express from 'express'
 import helmet from 'helmet'
 import mongoose from 'mongoose'
 import session from 'express-session'
 import MongoDBStore from 'connect-mongodb-session'
-
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { applyMiddleware, createStore } from 'redux'
@@ -25,13 +25,13 @@ export default (app) => {
   if ( ! app instanceof Express) {
     app = Express()
   }
-  
+
   if ( ! mongoose.connection.readyState) {
     mongoose.connect(config.MONGODB_URI)
   }
-  
+
   app.disable('x-powered-by')
-  
+
   app.use(compression({ level: 9 }))
   app.use(helmet())
   app.use(session({
@@ -47,38 +47,39 @@ export default (app) => {
       secure: true
     }
   }))
-  
+
+  app.use((req, res, next) => {
+    if ( ! req.logger) {
+      req.logger = bunyan.createLogger({ name: 'nomkhonwaan' })
+    }
+
+    if ( ! req.session) {
+      req.logger.error('Session is not working!')
+    }
+
+    req.logger.info(req.originalUrl)
+
+    return next()
+  })
+
   app.use('/api', apiRoutes)
   app.set('json spaces', 4)
   app.set('json replacer', null)
 
-  app.use('/static', Express.static(webpackConfig.output.path, { 
+  app.use('/static', Express.static(webpackConfig.output.path, {
     maxAge: 31536000
   }))
-  
+
   app.use((req, res, next) => {
-    if ( ! req.session) {
-      console.log('%s [error] Redis session is not working!', 
-        new Date().toString())
-    }
-    
-    console.log('%s [info] %s', 
-      new Date().toString(),
-      req.originalUrl)
-      
-    return next()
-  })
-  
-  app.use((req, res, next) => {
-    const store = createStore(reducers, undefined, 
+    const store = createStore(reducers, undefined,
       applyMiddleware(
         PromiseMiddleware
       )
     )
     const history = syncHistoryWithStore(createMemoryHistory(req.originalUrl), store)
-    
+
     match({
-      routes: routes(store), 
+      routes: routes(store),
       location: req.url,
       history
     }, (err, redirect, renderProps) => {
@@ -92,15 +93,15 @@ export default (app) => {
             <ReduxAsyncConnect { ...renderProps } />
           </Provider>
         )
-        
-        loadOnServer({ ...renderProps, store }). 
+
+        loadOnServer({ ...renderProps, store }).
           then(
             () => {
               try {
                 return res.
-                  status(200). 
+                  status(200).
                   send('<!DOCTYPE html>' + renderToString(
-                    <Html 
+                    <Html
                       assets={ webpackIsomorphicTools.assets() }
                       components={ components }
                       initialState={ store.getState() } />
@@ -119,13 +120,11 @@ export default (app) => {
 
   app.use((err, req, res, next) => {
     if (err) {
-      console.log('%s [error] %s',
-        new Date().toString(),
-        err);
+      req.logger.error(err);
     }
 
     res.send('An error has occurred')
   })
-  
+
   return app
 }

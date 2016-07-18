@@ -10,8 +10,9 @@ router.get('/v1/posts', PostsController.getAll)
 // --
 
 router.use((err, req, res, next) => {
-  if (process.env.NODE_ENV !== 'test') {
-    console.log('%s [error] %s', new Date().toString(), err)
+  if (process.env.NODE_ENV !== 'test' &&
+      err) {
+    req.logger.error(err)
   }
 
   res.

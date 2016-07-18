@@ -46,6 +46,8 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "breakpoint-sass": "^2.7.0",
+    "bunyan": "^1.8.1",
+    "bunyan-mongodb-stream": "0.0.3",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "connect-mongodb-session": "^1.1.1",
