@@ -1,7 +1,6 @@
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { Footer } from '../../src/components/Footer'
 

@@ -1,7 +1,6 @@
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import React from 'react'
-import { connect } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 
 import { Nav } from '../../src/components/Nav'
