@@ -25,4 +25,7 @@ export default (mongoose.models.Log
     req : {
       type: Object
     }
-  })))
+  }, {
+    collection: 'logs'
+  }))
+)
