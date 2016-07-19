@@ -8,7 +8,7 @@ import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin'
 import webpackIsomorphicToolsConfiguration from './webpack-isomorphic-tools-configuration'
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfiguration)
-const staticDirs = [ 'fonts', 'images', 'stylesheets' ]
+const staticDirs = [ 'images', 'stylesheets' ]
 
 staticDirs.
   map((item) => {
