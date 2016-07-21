@@ -9,16 +9,20 @@ services:
     image: mongo:latest
     volumes_from:
       - mongo_data
-    ports:
-      - 27017:27017
   mongo_express:
     image: mongo-express:latest
     ports:
       - 8081:8081
     links:
       - mongo
-    environment:
-      ME_CONFIG_MONGODB_PORT: '27017'
+  elasticsearch:
+    image: elasticsearch:latest
+  kibana:
+    image: kibana
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch
   nomkhonwaan_com:
     build:
       context: .
@@ -27,3 +31,4 @@ services:
       - 3003:8080
     links:
       - mongo
+      - elasticsearch
