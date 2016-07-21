@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 import React from 'react'
+
 import Pagination from '../../src/components/Pagination'
 
 describe('component/Pagination', () => {
