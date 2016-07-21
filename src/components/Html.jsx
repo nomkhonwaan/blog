@@ -12,12 +12,14 @@ const Html = ({ assets, components, initialState }) => {
     <html lang="en">
     <head>
       <meta charSet="UTF-8" />
+      
       <meta name="viewport" content="width=device-width,minimum-scale=1" />
       <meta name="author" content="Natcha Luang - Aroonchai" />
       <meta name="description" content="Trust me I'm Petdo" />
-      <meta name="theme-color" content="#78909c" />
-      <meta name="msapplication-navbutton-color" content="#78909c" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="#78909c" />
+
+      <meta name="theme-color" content="#3e5d6d" />
+      <meta name="msapplication-navbutton-color" content="#3e5d6d" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="#3e5d6d" />
       
       { head.title.toComponent() }
       
@@ -27,10 +29,6 @@ const Html = ({ assets, components, initialState }) => {
       <link rel="icon" type="image/png" sizes="16x16" href={require('../images/favicon-16x16.png')} />
       
       <link rel="stylesheet" href={ assets.styles.preload } />
-      
-      <meta name="theme-color" content="#78909c" />
-      <meta name="msapplication-navbutton-color" content="#78909c" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="#78909c" />
     </head>
     <body>
       <div className="preload">
