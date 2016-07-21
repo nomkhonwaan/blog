@@ -9,19 +9,19 @@ export const initialState = {
   }, {
     title: 'GitHub',
     href: '//github.com/nomkhonwaan',
-    iconClass: 'fa fa-fw fa-github-square'
+    iconClass: 'fa fa-fw fa-github'
   }, {
     title: 'Twitter',
     href: '//twitter.com/nomkhonwaan',
-    iconClass: 'fa fa-fw fa-twitter-square'
+    iconClass: 'fa fa-fw fa-twitter'
   }, {
     title: 'LinkedIn',
     href: '//linkedin.com/in/nomkhonwaan',
-    iconClass: 'fa fa-fw fa-linkedin-square' 
+    iconClass: 'fa fa-fw fa-linkedin' 
   }, {
     title: 'RSS',
     href: '//www.nomkhonwaan.com/rss',
-    iconClass: 'fa fa-fw fa-rss-square' 
+    iconClass: 'fa fa-fw fa-rss' 
   }]
 }
 
