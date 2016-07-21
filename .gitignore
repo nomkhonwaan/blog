@@ -1,4 +1,4 @@
-.vscode/.browse.VC.*
+.vscode
 dist
 dump.rdb
 node_modules
