@@ -31,7 +31,7 @@
 
     > div {
       animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-      background-color: #78909c;
+      background-color: $theme-color;
       border-radius: 100%;
       display: inline-block;
       height: 12px;

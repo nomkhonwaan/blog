@@ -1,14 +1,10 @@
 @charset 'UTF-8';
 
-$sm: 768px;
-$md: 991px;
-$lg: 1200px;
-
-$fa-font-path: 'font-awesome/fonts';
-
+@import '_variables';
 @import '~normalize.css';
 @import '~font-awesome/scss/font-awesome';
 @import '~breakpoint-sass/stylesheets/_breakpoint';
+@import url(https://fonts.googleapis.com/css?family=Prompt&subset=latin,thai);
 
 * {
   box-sizing: border-box;
@@ -49,10 +45,10 @@ a:visited {
   visibility: hidden;
 }
 
-@import 'Author';
-@import 'Footer';
-@import 'Nav';
-@import 'Pagination';
-@import 'Posts';
-@import 'Post';
-@import 'Summary';
+@import '_Author';
+@import '_Footer';
+@import '_Nav';
+@import '_Pagination';
+@import '_Posts';
+@import '_Post';
+@import '_Summary';

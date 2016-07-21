@@ -15,7 +15,7 @@
   
   @include breakpoint($md) {
     align-items: center;
-    background: #78909c;
+    background: $theme-color;
     display: flex;
     flex-flow: row;
     justify-content: center;
@@ -55,9 +55,9 @@
       
       > a {
         color: #4d4d4d;
-        border-radius: .2rem;
         display: block;
         font-size: 1.2rem;
+        font-family: 'Prompt', sans-serif;
         line-height: initial;
         padding: 12px 18px;
         transition: all .2s ease-in-out;
@@ -72,6 +72,10 @@
         &:hover,
         &.actived {
           background: rgba(0,0,0,.08);
+
+          @include breakpoint($md) {
+            background: rgba(0,0,0,.16);
+          }
         }
       }
     }

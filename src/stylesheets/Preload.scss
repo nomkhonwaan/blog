@@ -1,5 +1,7 @@
 @charset 'UTF-8';
 
+@import '_variables';
+
 @keyframes sk-bounce {
   0%, 100% {
     transform: scale(0.0);
@@ -16,7 +18,7 @@
 
 .preload {
   align-items: center;
-  background-color: #78909c;
+  background-color: $theme-color;
   display: flex;
   bottom: 0;
   justify-content: center;
