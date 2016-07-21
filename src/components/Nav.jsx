@@ -15,7 +15,7 @@ export const Nav = ({ dispatch, isExpanded, menuItems }) => {
           menuItems.map((item, key) => {
             return (
               <li className="menu-item" key={ key }>
-                <a href={ item.href }>
+                <a className={ classNames({ 'actived': (item.title === 'Home') }) } href={ item.href }>
                   <i className={ item.iconClass }></i>&nbsp;{ item.title }
                 </a>
               </li>
