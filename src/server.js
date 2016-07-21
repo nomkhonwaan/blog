@@ -29,7 +29,17 @@ export default (app) => {
   }
 
   if ( ! mongoose.connection.readyState) {
-    mongoose.connect(config.MONGODB_URI)
+    mongoose.connect(config.MONGODB_URI, {
+      db: { 
+        native_parser: true 
+      },
+      server: { 
+        poolSize: 3 
+      },
+      replset: { 
+        rs_name: 'nomkhonwaan_com' 
+      }
+    })
   }
 
   app.disable('x-powered-by')
