@@ -272,4 +272,110 @@ describe('api/PostsController.js', () => {
         })
     })
   })
+
+  describe('getOne :: only published post', () => {
+    afterEach(() => {
+      PostMock.restore()
+    })
+
+    it('should return single published post by ID', (done) => {
+      PostMock. 
+        expects('findById'). 
+          withArgs(posts[0]._id.toString()). 
+        yields(null, posts[0])
+
+      agent.
+        get(`/api/v1/posts/${posts[0]._id.toString()}`).
+        end((err, { body }) => {
+          expect(err).to.be.null 
+          
+          const { links, data, included } = body 
+
+          expect(links.self).to.match(new RegExp(`/api/v1/posts/${posts[0]._id.toString()}`))
+
+          expect(Array.isArray(data)).to.be.false
+          expect(data).to.deep.equal({
+            type: 'posts',
+            id: posts[0]._id.toString(),
+            attributes: {
+              publishedAt: posts[0].publishedAt,
+              tags: posts[0].tags,
+              title: posts[0].title,
+              slug: posts[0].slug,
+              html: entities.encode(posts[0].html)
+            },
+            relationships: {
+              author: {
+                data: [{
+                  type: 'users',
+                  id: users[0].id.toString()
+                }]
+              }
+            }
+          })
+
+          expect(included).to.have.lengthOf(1)
+          expect(included[0]).to.deep.equal({
+            type: 'users',
+            id: users[0].id.toString(),
+            attributes: {
+              displayName: users[0].displayName,
+              email: users[0].email
+            }
+          })
+
+          done()
+        })
+    })
+
+    it('should return single published post by slug', (done) => {
+      PostMock. 
+        expects('findBySlug'). 
+          withArgs(posts[0].slug). 
+        yields(null, posts[0])
+      
+      agent. 
+        get(`/api/v1/posts/${posts[0].slug}`).
+        end((err, { body }) => {
+          expect(err).to.be.null 
+
+          const { links, data, included } = body 
+
+          expect(links.self).to.match(new RegExp(`/api/v1/posts/${posts[0].slug}`))
+
+          expect(Array.isArray(data)).to.be.false
+          expect(data).to.deep.equal({
+            type: 'posts',
+            id: posts[0]._id.toString(),
+            attributes: {
+              publishedAt: posts[0].publishedAt,
+              tags: posts[0].tags,
+              title: posts[0].title,
+              slug: posts[0].slug,
+              html: entities.encode(posts[0].html)
+            },
+            relationships: {
+              author: {
+                data: [{
+                  type: 'users',
+                  id: users[0].id.toString()
+                }]
+              }
+            }
+          })
+
+          expect(included).to.have.lengthOf(1)
+          expect(included[0]).to.deep.equal({
+            type: 'users',
+            id: users[0].id.toString(),
+            attributes: {
+              displayName: users[0].displayName,
+              email: users[0].email
+            }
+          })
+
+          done()
+        })
+    })
+  })
 })

@@ -6,6 +6,7 @@ const router = Express.Router()
 // -- PLACE YOUR ROUTES HERE --
 
 router.get('/v1/posts', PostsController.getAll)
+router.get('/v1/posts/:id', PostsController.getOne)
 
 // --
 

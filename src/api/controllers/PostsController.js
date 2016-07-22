@@ -131,6 +131,62 @@ export default {
     } catch (err) {
       return next(err)
     }
+  },
+
+  getOne: (req, res, next) => {
+    try {
+      const id = req.params.id
+
+      Promise.all([
+        new Promise((resolve, reject) => {
+          if (mongoose.Types.ObjectId.isValid(id)) {
+            Post.
+              findById(id, (err, item) => {
+                if (err) {
+                  return reject(err)
+                }
+                return resolve(item)
+              })
+          } else {
+            Post. 
+              findBySlug(id, (err, item) => {
+                if (err) {
+                  return reject(err)
+                }
+                return resolve(item)
+              })
+          }
+        })
+      ]). 
+      then(([ item ]) => {
+        return res. 
+          json({
+            links: {
+              self: req.originalUrl
+            },
+            data: format(item),
+            included: item.
+              users.
+              reduce((result, { id, displayName, email }) => {
+                result.push({
+                  type: 'users',
+                  id,
+                  attributes: {
+                    displayName,
+                    email
+                  }
+                })
+
+                return result
+              }, [])
+          })
+      }). 
+      catch((err) => {
+        return next(err)
+      })
+    } catch (err) {
+      return next(err)
+    }
   }
 
 }
