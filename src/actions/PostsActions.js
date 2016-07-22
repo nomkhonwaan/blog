@@ -11,6 +11,19 @@ export const changePage = function (page) {
   }
 }
 
+export const fetchPost = function(id) {
+  return {
+    types: [
+      types.POST_REQUEST,
+      types.POST_SUCCESS,
+      types.POST_FAILURE
+    ],
+    promise: new APIClient({
+      path: `/api/v1/posts/${id}`
+    })
+  }
+}
+
 export const fetchPosts = function (page = 1, itemsPerPage = 5) {
   return {
     types: [ 
