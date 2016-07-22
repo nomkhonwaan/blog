@@ -13,6 +13,7 @@ const initialState = {
 
 const entities = function (state = initialState, action) {
   switch (action.type) {
+    case types.POST_SUCCESS:
     case types.POSTS_SUCCESS: {
       return Object.assign({}, state, {
         posts: (Array.isArray(action.data)
@@ -22,7 +23,10 @@ const entities = function (state = initialState, action) {
                 result[item.id] = item
                 return result
               }, state.posts)
-          : {})
+          : (() => {
+              state.posts[action.data.id] = action.data
+              return state.posts
+            })())
       })
     }
     default: {

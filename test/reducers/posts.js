@@ -27,7 +27,7 @@ describe('reducers/posts.js', () => {
     })) 
   })
 
-  it('should handle POSTS_REQUEST by toggle isFetching to "true"', () => {
+  it('should handle POSTS_REQUEST by toggle `isFetching` to "true"', () => {
     expect(reducer(undefined, {
       type: types.POSTS_REQUEST
     })).to.deep.equal(Object.assign({}, initialState, {
@@ -35,7 +35,7 @@ describe('reducers/posts.js', () => {
     }))
   })
   
-  it('should handle POSTS_SUCCESS by toggle isFetching to "false" and parse response data to valid format', () => {
+  it('should handle POSTS_SUCCESS by toggle `isFetching` to "false" and parse response data to valid format', () => {
     const receivedAt = Date.now()
     
     expect(reducer(undefined, {
@@ -47,7 +47,7 @@ describe('reducers/posts.js', () => {
       links: {},
       data: [{
         type: 'posts',
-        id: 'post_ID'
+        id: 'post-id'
       }],
       included: []
     })).to.deep.equal(Object.assign({}, initialState, {
@@ -58,13 +58,13 @@ describe('reducers/posts.js', () => {
       },
       links: {},
       data: {
-        1: [ 'post_ID' ]
+        1: [ 'post-id' ]
       },
       included: []
     }))
   })
   
-  it('should handle POSTS_FAILURE by toggle isFetching to "false" and parse errors object', () => {
+  it('should handle POSTS_FAILURE by toggle `isFetching` to "false" and parse errors object', () => {
     const receivedAt = Date.now()
     
     expect(reducer(undefined, {
