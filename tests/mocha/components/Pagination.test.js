@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 import React from 'react'
 
-import Pagination from '../../src/components/Pagination'
+import Pagination from '../../../src/components/Pagination'
 
 describe('component/Pagination', () => {
   it('should render `.pagination` only next button and show page 1 of 3 pages', () => {

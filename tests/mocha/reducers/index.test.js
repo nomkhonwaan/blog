@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import types from '../../src/constants/ActionTypes'
-import reducer from '../../src/reducers'
+import types from '../../../src/constants/ActionTypes'
+import reducer from '../../../src/reducers'
 
 describe('reducers/index.js', () => {
   it('sholud handle POST_SUCCESS and parse post data to posts entities', () => {

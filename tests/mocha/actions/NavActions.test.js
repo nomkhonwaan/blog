@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import { onClickMenuButton } from '../../src/actions/NavActions'
-import types from '../../src/constants/ActionTypes'
+import { onClickMenuButton } from '../../../src/actions/NavActions'
+import types from '../../../src/constants/ActionTypes'
 
 describe('actions/NavActions.js', () => {
   it('should create ON_CLICK_MENU_BUTTON when click the menu button', () => {

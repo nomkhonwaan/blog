@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import 'ignore-styles'
 
-import Author from '../../src/components/Author'
+import Author from '../../../src/components/Author'
 
 describe('components/Author.jsx', () => {
   it('should render an `.author` component correctly', () => {

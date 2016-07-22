@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import types from '../../src/constants/ActionTypes'
-import reducer, { initialState } from '../../src/reducers/nav'
+import types from '../../../src/constants/ActionTypes'
+import reducer, { initialState } from '../../../src/reducers/nav'
 
 describe('reducers/nav.js', () => {
   it('should handle ON_CLICK_MENU_BUTTON by toggle isExpanded to "true"', () => {

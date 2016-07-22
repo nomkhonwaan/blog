@@ -16,13 +16,12 @@
     "dev": "cross-env NODE_ENV=development babel-node src/index.js",
     "dev:debug": "npm run dev -- --debug",
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js",
-    "test:debug": "npm test -- --debug-brk",
-    "test:watch": "npm test -- --watch"
+    "test": "cross-env NODE_ENV=test npm run unit-tests",
+    "unit-tests": "./scripts/runUnitTests.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nomkhonwaan/nomkhonwaan.com.git"
+    "url": "git+https://github.com/nomkhonwaan/blog.git"
   },
   "keywords": [
     "reactjs",
@@ -34,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/nomkhonwaan/nomkhonwaan.com/issues"
   },
-  "homepage": "https://github.com/nomkhonwaan/nomkhonwaan.com#readme",
+  "homepage": "https://beta.nomkhonwaan.com",
   "dependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",

@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 import configureMockStore from 'redux-mock-store'
 
-import types from '../../src/constants/ActionTypes'
-import PromiseMiddleware from '../../src/middlewares/PromiseMiddleware'
+import types from '../../../src/constants/ActionTypes'
+import PromiseMiddleware from '../../../src/middlewares/PromiseMiddleware'
 
 const middlewares = [ PromiseMiddleware ]
 const mockStore = configureMockStore(middlewares)

@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import { Footer } from '../../src/components/Footer'
+import { Footer } from '../../../src/components/Footer'
 
 describe('components/Footer.jsx', () => {
   it('should render `.layout-footer` component correctly', () => {

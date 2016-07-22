@@ -6,9 +6,9 @@ import {
   changePage, 
   fetchPost, 
   fetchPosts 
-} from '../../src/actions/PostsActions'
-import types from '../../src/constants/ActionTypes'
-import PromiseMiddleware from '../../src/middlewares/PromiseMiddleware'
+} from '../../../src/actions/PostsActions'
+import types from '../../../src/constants/ActionTypes'
+import PromiseMiddleware from '../../../src/middlewares/PromiseMiddleware'
 
 const middlewares = [ PromiseMiddleware ]
 const mockStore = configureMockStore(middlewares)

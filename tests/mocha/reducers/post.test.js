@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import types from '../../src/constants/ActionTypes'
-import reducer, { initialState } from '../../src/reducers/post'
+import types from '../../../src/constants/ActionTypes'
+import reducer, { initialState } from '../../../src/reducers/post'
 
 describe('reducers/post.js', () => {
   it('should handle POST_REQUEST by toggle `isFetching` to "true"', () => {

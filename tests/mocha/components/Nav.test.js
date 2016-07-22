@@ -3,8 +3,8 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import configureMockStore from 'redux-mock-store'
 
-import { Nav } from '../../src/components/Nav'
-import { initialState } from '../../src/reducers/nav'
+import { Nav } from '../../../src/components/Nav'
+import { initialState } from '../../../src/reducers/nav'
 
 const mockStore = configureMockStore()
 const store = mockStore(initialState)

@@ -6,8 +6,8 @@ import request from 'supertest'
 import { AllHtmlEntities as Entities } from 'html-entities'
 import 'sinon-mongoose'
 
-import Post, { publicFields } from '../../../src/api/models/Post'
-import apiRoutes from '../../../src/api/routes'
+import Post, { publicFields } from '../../../../src/api/models/Post'
+import apiRoutes from '../../../../src/api/routes'
 
 const entities = new Entities()
 

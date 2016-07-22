@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import links from '../../../src/api/utils/links'
+import links from '../../../../src/api/utils/links'
 
 describe('api/utils/links.js', () => {
   it('should create only self link', () => {

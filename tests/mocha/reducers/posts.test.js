@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import types from '../../src/constants/ActionTypes'
-import reducer, { initialState } from '../../src/reducers/posts'
+import types from '../../../src/constants/ActionTypes'
+import reducer, { initialState } from '../../../src/reducers/posts'
 
 describe('reducers/posts.js', () => {
   it('should handle POSTS_PAGE by set new page number to state', () => {

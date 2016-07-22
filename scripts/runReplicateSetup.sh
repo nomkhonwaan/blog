@@ -1,7 +1,5 @@
 #!/bin/sh
 
-sleep 10
-
 mongo --host mongo_primary --port 27017 <<EOF
   rs.initiate();
   rs.reconfig({
