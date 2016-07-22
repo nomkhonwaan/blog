@@ -25,8 +25,8 @@ export const initialState = {
   }]
 }
 
-export default (state = initialState, action) => {
-  switch(action.type) {
+export default function (state = initialState, action) {
+  switch (action.type) {
     case types.ON_CLICK_MENU_BUTTON: {
       return Object.assign({}, state, {
         isExpanded: action.isExpanded

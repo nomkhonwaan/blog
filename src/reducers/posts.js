@@ -8,8 +8,8 @@ export const initialState = {
   data: {}
 }
 
-export default (state = initialState, action) => {
-  switch(action.type) {
+export default function (state = initialState, action) {
+  switch (action.type) {
     case types.POSTS_PAGE: {
       return Object.assign({}, state, {
         page: action.page

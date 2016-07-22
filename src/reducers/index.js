@@ -11,8 +11,8 @@ const initialState = {
   users: {}
 }
 
-const entities = (state = initialState, action) => {
-  switch(action.type) {
+const entities = function (state = initialState, action) {
+  switch (action.type) {
     case types.POSTS_SUCCESS: {
       return Object.assign({}, state, {
         posts: (Array.isArray(action.data)
