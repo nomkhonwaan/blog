@@ -5,36 +5,17 @@ services:
     volumes:
       - ~/mongodb:/data/db
     command: /bin/true
-  mongo-primary:
+  mongo:
     image: mongo:latest
     volumes_from:
       - mongo-data
-    command: mongod --replSet nomkhonwaan_com --smallfiles
-  mongo-secondary:
-    image: mongo:latest
-    command: mongod --replSet nomkhonwaan_com --smallfiles
-  mongo-tertiary:
-    image: mongo:latest
-    command: mongod --replSet nomkhonwaan_com --smallfiles
-  mongo-replica-setup:
-    image: mongo:latest
-    volumes:
-      - $PWD/scripts:/scripts
-    entrypoint: /scripts/runReplicateSetup.sh
   mongo-express:
     image: mongo-express:latest
     ports:
       - 8081:8081
     links:
-      - mongo-primary:mongo
-  elasticsearch:
-    image: elasticsearch:latest
-  kibana:
-    image: kibana
-    ports:
-      - 5601:5601
-    links:
-      - elasticsearch
+      - mongo
+    restart: always
   blog:
     build:
       context: .
@@ -42,7 +23,5 @@ services:
     ports:
       - 3003:8080
     links:
-      - mongo-primary:mongo-primary
-      - mongo-secondary:mongo-secondary
-      - mongo-tertiary:mongo-tertiary
-      - elasticsearch
+      - mongo
+    restart: always
