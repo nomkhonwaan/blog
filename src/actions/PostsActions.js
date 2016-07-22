@@ -4,7 +4,14 @@ import querystring from 'querystring'
 import APIClient from '../utils/APIClient'
 import types from '../constants/ActionTypes'
 
-export const fetchPosts = (page = 1, itemsPerPage = 5) => {
+export const changePage = function (page) {
+  return {
+    type: types.POSTS_PAGE,
+    page
+  }
+}
+
+export const fetchPosts = function (page = 1, itemsPerPage = 5) {
   return {
     types: [ 
       types.POSTS_REQUEST,
@@ -18,12 +25,5 @@ export const fetchPosts = (page = 1, itemsPerPage = 5) => {
         'page[size]': itemsPerPage
       }
     })
-  }
-}
-
-export const changePage = (page) => {
-  return {
-    type: types.POSTS_PAGE,
-    page
   }
 }
