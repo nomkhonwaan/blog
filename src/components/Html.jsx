@@ -42,6 +42,7 @@ const Html = ({ assets, components, initialState }) => {
 
       <noscript id="deferred-styles">
         <link rel="stylesheet" href={ assets.styles.postload } />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.5.0/styles/solarized-dark.min.css" />
       </noscript>
       
       <script dangerouslySetInnerHTML={ {
@@ -83,9 +84,8 @@ const Html = ({ assets, components, initialState }) => {
       } }></script>
 
       <script src={ assets.javascript.main }></script> 
-      
+    
       <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
-
       <script dangerouslySetInnerHTML={ {
         __html: 'hljs.initHighlightingOnLoad()'
       } }></script>
