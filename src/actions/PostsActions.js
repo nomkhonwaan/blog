@@ -6,20 +6,27 @@ import types from '../constants/ActionTypes'
 
 export const changePage = function (page) {
   return {
-    type: types.POSTS_PAGE,
+    type: types.POSTS_PAGE_CHANGE,
     page
   }
 }
 
-export const fetchPost = function(id) {
+export const changePost = function (year, month, date, slug) {
+  return {
+    type: types.POSTS_POST_CHANGE,
+    year, month, date, slug 
+  }
+}
+
+export const fetchPost = function(slugOrID) {
   return {
     types: [
-      types.POST_REQUEST,
-      types.POST_SUCCESS,
-      types.POST_FAILURE
+      types.POSTS_POST_REQUEST,
+      types.POSTS_POST_SUCCESS,
+      types.POSTS_POST_FAILURE
     ],
     promise: new APIClient({
-      path: `/api/v1/posts/${id}`
+      path: `/api/v1/posts/${slugOrID}`
     })
   }
 }
@@ -27,9 +34,9 @@ export const fetchPost = function(id) {
 export const fetchPosts = function (page = 1, itemsPerPage = 5) {
   return {
     types: [ 
-      types.POSTS_REQUEST,
-      types.POSTS_SUCCESS,
-      types.POSTS_FAILURE
+      types.POSTS_PAGE_REQUEST,
+      types.POSTS_PAGE_SUCCESS,
+      types.POSTS_PAGE_FAILURE
     ],
     promise: new APIClient({
       path: '/api/v1/posts',

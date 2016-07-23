@@ -28,7 +28,10 @@ describe('reducers/post.js', () => {
       isFetching: false,
       lastUpdated: receivedAt,
       links: {},
-      data: 'post-id',
+      data: {
+        type: 'posts',
+        id: 'post-id'
+      },
       included: []
     }))
   })

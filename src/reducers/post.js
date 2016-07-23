@@ -1,30 +1,43 @@
 import types from '../constants/ActionTypes'
 
 export const initialState = {
-  isFetching: false,
+  year:        null,
+  month:       null,
+  date:        null,
+  slug:        null,
+  isFetching:  false,
   lastUpdated: NaN,
-  data: {}
+  data:        {}
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case types.POST_REQUEST: {
+    case types.POSTS_POST_CHANGE: {
+      return Object.assign({}, state, {
+        year: action.year,
+        month: action.month,
+        date: action.date,
+        slug: action.slug
+      })
+    }
+
+    case types.POSTS_POST_REQUEST: {
       return Object.assign({}, state, {
         isFetching: true
       })
     }
 
-    case types.POST_SUCCESS: {
+    case types.POSTS_POST_SUCCESS: {
       return Object.assign({}, state, {
         isFetching: false,
         lastUpdated: action.receivedAt,
         links: action.links,
-        data: action.data.id,
+        data: action.data,
         included: action.included
       })
     }
 
-    case types.POST_FAILURE: {
+    case types.POSTS_POST_FAILURE: {
       return Object.assign({}, state, {
         isFetching: false,
         lastUpdated: action.receivedAt,

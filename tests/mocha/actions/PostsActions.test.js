@@ -4,6 +4,7 @@ import configureMockStore from 'redux-mock-store'
 
 import { 
   changePage, 
+  changePost,
   fetchPost, 
   fetchPosts 
 } from '../../../src/actions/PostsActions'
@@ -16,6 +17,37 @@ const mockStore = configureMockStore(middlewares)
 describe('actions/PostsActions.js', () => {
   afterEach(() => {
     nock.cleanAll()
+  })
+
+  describe('changePage', () => {
+    it('should create POSTS_PAGE_CHANGE when changing posts page', () => {
+      const page = 1 
+
+      expect(changePage(page)).to.deep.equal({
+        type: types.POSTS_PAGE_CHANGE,
+        page
+      })
+      expect(changePage(page + 1)).to.deep.equal({
+        type: types.POSTS_PAGE_CHANGE,
+        page: page + 1
+      })
+      expect(changePage(page - 1)).to.deep.equal({
+        type: types.POSTS_PAGE_CHANGE,
+        page: page - 1
+      })
+    })
+  })
+
+  describe('changePost', () => {
+    it('should create POSTS_POST_CHANGE when changing post', () => {
+      expect(changePost('1989', '06', '20', 'happy-birthday')).to.deep.equal({
+        type: types.POSTS_POST_CHANGE,
+        year: '1989',
+        month: '06',
+        date: '20',
+        slug: 'happy-birthday'
+      })
+    })
   })
 
   describe('fetchPost :: only published post', () => {
@@ -75,23 +107,6 @@ describe('actions/PostsActions.js', () => {
   })
 
   describe('fetchPosts :: only published posts', () => {
-    it('should create POSTS_PAGE_CHANGE when changing posts page', () => {
-      const page = 1 
-
-      expect(changePage(page)).to.deep.equal({
-        type: types.POSTS_PAGE_CHANGE,
-        page
-      })
-      expect(changePage(page + 1)).to.deep.equal({
-        type: types.POSTS_PAGE_CHANGE,
-        page: page + 1
-      })
-      expect(changePage(page - 1)).to.deep.equal({
-        type: types.POSTS_PAGE_CHANGE,
-        page: page - 1
-      })
-    })
-  
     it('should create POSTS_PAGE_SUCCESS when fetching posts has been done', () => {
       nock(/.*/). 
         get('/api/v1/posts'). 
