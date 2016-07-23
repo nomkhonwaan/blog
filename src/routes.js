@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import { App } from './components'
-import { Post, Posts } from './containers'
+import { Posts, Single } from './containers'
 import { changePage, changePost } from './actions/PostsActions'
 
 export default ({ dispatch }) => {
@@ -19,7 +19,7 @@ export default ({ dispatch }) => {
             params.date,
             params.slug
           ));
-          callback(null, Post)
+          callback(null, Single)
         }
       } />
       <Route path="/pages/:page" getComponent={
