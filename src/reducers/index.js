@@ -21,11 +21,11 @@ const entities = function (state = initialState, action) {
           ? action.
               data. 
               reduce((result, item) => {
-                result[item.id] = item
+                result[item.attributes.slug] = item
                 return result
               }, state.posts)
           : (() => {
-              state.posts[action.data.id] = action.data
+              state.posts[action.data.attributes.slug] = action.data
               return state.posts
             })())
       })

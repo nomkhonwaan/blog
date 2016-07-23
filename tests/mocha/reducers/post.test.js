@@ -21,17 +21,17 @@ describe('reducers/post.js', () => {
       links: {},
       data: {
         type: 'posts',
-        id: 'post-id'
+        id: 'post-id',
+        attributes: {
+          slug: 'post-slug'
+        }
       },
       included: []
     })).to.deep.equal(Object.assign({}, initialState, {
+      slug: 'post-slug',
       isFetching: false,
       lastUpdated: receivedAt,
       links: {},
-      data: {
-        type: 'posts',
-        id: 'post-id'
-      },
       included: []
     }))
   })
@@ -44,6 +44,7 @@ describe('reducers/post.js', () => {
       receivedAt,
       errors: []
     })).to.deep.equal(Object.assign({}, initialState, {
+      slug: null,
       isFetching: false,
       lastUpdated: receivedAt,
       errors: []

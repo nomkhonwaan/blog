@@ -14,9 +14,6 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case types.POSTS_POST_CHANGE: {
       return Object.assign({}, state, {
-        year: action.year,
-        month: action.month,
-        date: action.date,
         slug: action.slug
       })
     }
@@ -29,16 +26,17 @@ export default function (state = initialState, action) {
 
     case types.POSTS_POST_SUCCESS: {
       return Object.assign({}, state, {
+        slug: action.data.attributes.slug,
         isFetching: false,
         lastUpdated: action.receivedAt,
         links: action.links,
-        data: action.data,
         included: action.included
       })
     }
 
     case types.POSTS_POST_FAILURE: {
       return Object.assign({}, state, {
+        slug: null,
         isFetching: false,
         lastUpdated: action.receivedAt,
         errors: action.errors

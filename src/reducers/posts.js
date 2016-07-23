@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
           [state.page]: action.
             data.
             map((item) => {
-              return item.id
+              return item.attributes.slug
             })
         },
         included: action.included

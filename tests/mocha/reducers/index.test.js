@@ -9,15 +9,21 @@ describe('reducers/index.js', () => {
       type: types.POSTS_POST_SUCCESS,
       data: {
         type: 'posts',
-        id: 'post-id-1'
+        id: 'post-id-1',
+        attributes: {
+          slug: 'post-slug-1'
+        }
       }
     })
 
     expect(entities).to.deep.equal(Object.assign({}, initialState, {
       posts: {
-        'post-id-1': {
+        'post-slug-1': {
           type: 'posts',
-          id: 'post-id-1'
+          id: 'post-id-1',
+          attributes: {
+            slug: 'post-slug-1'
+          }
         }
       }
     }))
@@ -28,22 +34,34 @@ describe('reducers/index.js', () => {
       type: types.POSTS_PAGE_SUCCESS,
       data: [{
         type: 'posts',
-        id: 'post-id-1'
+        id: 'post-id-1',
+        attributes: {
+          slug: 'post-slug-1'
+        }
       }, {
         type: 'posts',
-        id: 'post-id-2'
+        id: 'post-id-2',
+        attributes: {
+          slug: 'post-slug-2'
+        }
       }]
     })
 
     expect(entities).to.deep.equal(Object.assign({}, initialState, {
       posts: {
-        'post-id-1': {
+        'post-slug-1': {
           type: 'posts',
-          id: 'post-id-1'
+          id: 'post-id-1',
+          attributes: {
+            slug: 'post-slug-1'
+          }
         },
-        'post-id-2': {
+        'post-slug-2': {
           type: 'posts',
-          id: 'post-id-2'
+          id: 'post-id-2',
+          attributes: {
+            slug: 'post-slug-2'
+          }
         }
       }
     }))

@@ -47,7 +47,10 @@ describe('reducers/posts.js', () => {
       links: {},
       data: [{
         type: 'posts',
-        id: 'post-id'
+        id: 'post-id',
+        attributes: {
+          slug: 'post-slug'
+        }
       }],
       included: []
     })).to.deep.equal(Object.assign({}, initialState, {
@@ -58,7 +61,7 @@ describe('reducers/posts.js', () => {
       },
       links: {},
       data: {
-        1: [ 'post-id' ]
+        1: [ 'post-slug' ]
       },
       included: []
     }))
