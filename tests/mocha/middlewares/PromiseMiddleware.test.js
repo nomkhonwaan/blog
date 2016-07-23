@@ -21,9 +21,9 @@ describe('middlewares/PromiseMiddleware.js', () => {
   it('should dispatch request state while calling promise action and return success state', () => {
     const action = {
       types: [ 
-        types.POSTS_REQUEST, 
-        types.POSTS_SUCCESS,
-        types.POSTS_FAILURE
+        types.POSTS_PAGE_REQUEST, 
+        types.POSTS_PAGE_SUCCESS,
+        types.POSTS_PAGE_FAILURE
       ],
       promise: Promise.resolve({
         body: {
@@ -35,8 +35,8 @@ describe('middlewares/PromiseMiddleware.js', () => {
     const store = mockStore({})
     
     const expectedActions = [
-      { type: types.POSTS_REQUEST },
-      { type: types.POSTS_SUCCESS, foo: 'bar' }
+      { type: types.POSTS_PAGE_REQUEST },
+      { type: types.POSTS_PAGE_SUCCESS, foo: 'bar' }
     ]
     
     store.dispatch(action). 
@@ -48,9 +48,9 @@ describe('middlewares/PromiseMiddleware.js', () => {
   it('should dispatch request state while calling promise action and return failure state, errors response acquired', () => {
     const action = {
       types: [
-        types.POSTS_REQUEST,
-        types.POSTS_SUCCESS,
-        types.POSTS_FAILURE
+        types.POSTS_PAGE_REQUEST,
+        types.POSTS_PAGE_SUCCESS,
+        types.POSTS_PAGE_FAILURE
       ],
       promise: Promise.resolve({
         errors: [{
@@ -62,8 +62,8 @@ describe('middlewares/PromiseMiddleware.js', () => {
     const store = mockStore({})
     
     const expectedActions = [
-      { type: types.POSTS_REQUEST },
-      { type: types.POSTS_FAILURE, foo: 'bar' }
+      { type: types.POSTS_PAGE_REQUEST },
+      { type: types.POSTS_PAGE_FAILURE, foo: 'bar' }
     ]
     
     store.dispatch(action). 
@@ -75,9 +75,9 @@ describe('middlewares/PromiseMiddleware.js', () => {
   it('should dispatch request state while calling promise action and return failure state, an error has occurred', () => {
     const action = {
       types: [
-        types.POSTS_REQUEST,
-        types.POSTS_SUCCESS,
-        types.POSTS_FAILURE
+        types.POSTS_PAGE_REQUEST,
+        types.POSTS_PAGE_SUCCESS,
+        types.POSTS_PAGE_FAILURE
       ],
       promise: Promise.reject({
         errors: [{
@@ -89,8 +89,8 @@ describe('middlewares/PromiseMiddleware.js', () => {
     const store = mockStore({})
     
     const expectedActions = [
-      { type: types.POSTS_REQUEST },
-      { type: types.POSTS_FAILURE, foo: 'bar' }
+      { type: types.POSTS_PAGE_REQUEST },
+      { type: types.POSTS_PAGE_FAILURE, foo: 'bar' }
     ]
     
     store.dispatch(action). 

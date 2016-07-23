@@ -19,7 +19,7 @@ describe('actions/PostsActions.js', () => {
   })
 
   describe('fetchPost :: only published post', () => {
-    it('should create POST_SUCCESS when fetching post has been done', () => {
+    it('should create POSTS_POST_SUCCESS when fetching post has been done', () => {
       nock(/.*/). 
         get('/api/v1/posts/test-post'). 
         reply(200, {
@@ -33,8 +33,8 @@ describe('actions/PostsActions.js', () => {
       const store = mockStore()
 
       const expectedActions = [
-        { type: types.POST_REQUEST },
-        { type: types.POST_SUCCESS, links: { self: '/api/v1/posts/test-post' } }, 
+        { type: types.POSTS_POST_SUCCESS },
+        { type: types.POSTS_POST_SUCCESS, links: { self: '/api/v1/posts/test-post' } }, 
       ]
 
       store.dispatch(fetchPost('test-post')). 
@@ -43,7 +43,7 @@ describe('actions/PostsActions.js', () => {
         })
     })
 
-    it('should create POST_FAILURE when fetching post has been done, but errors', () => {
+    it('should create POSTS_POST_FAILURE when fetching post has been done, but errors', () => {
       nock(/.*/). 
         get('/api/v1/posts/test-post'). 
         reply(400, {
@@ -59,8 +59,8 @@ describe('actions/PostsActions.js', () => {
       const store = mockStore()
 
       const expectedActions = [
-        { type: types.POSTS_REQUEST },
-        { type: types.POSTS_FAILURE, errors: [{
+        { type: types.POSTS_PAGE_REQUEST },
+        { type: types.POSTS_PAGE_FAILURE, errors: [{
           status: 400,
           title: 'An error has occurred',
           detail: 'Something went wrong'
@@ -75,24 +75,24 @@ describe('actions/PostsActions.js', () => {
   })
 
   describe('fetchPosts :: only published posts', () => {
-    it('should create POSTS_PAGE when changing posts page', () => {
+    it('should create POSTS_PAGE_CHANGE when changing posts page', () => {
       const page = 1 
 
       expect(changePage(page)).to.deep.equal({
-        type: types.POSTS_PAGE,
+        type: types.POSTS_PAGE_CHANGE,
         page
       })
       expect(changePage(page + 1)).to.deep.equal({
-        type: types.POSTS_PAGE,
+        type: types.POSTS_PAGE_CHANGE,
         page: page + 1
       })
       expect(changePage(page - 1)).to.deep.equal({
-        type: types.POSTS_PAGE,
+        type: types.POSTS_PAGE_CHANGE,
         page: page - 1
       })
     })
   
-    it('should create POSTS_SUCCESS when fetching posts has been done', () => {
+    it('should create POSTS_PAGE_SUCCESS when fetching posts has been done', () => {
       nock(/.*/). 
         get('/api/v1/posts'). 
         query(({ page }) => {
@@ -113,8 +113,8 @@ describe('actions/PostsActions.js', () => {
       })
       
       const expectedActions = [
-        { type: types.POSTS_REQUEST },
-        { type: types.POSTS_SUCCESS, meta: { totalItems: 1 } }
+        { type: types.POSTS_PAGE_REQUEST },
+        { type: types.POSTS_PAGE_SUCCESS, meta: { totalItems: 1 } }
       ]
       
       store.dispatch(fetchPosts()). 
@@ -123,7 +123,7 @@ describe('actions/PostsActions.js', () => {
         })
     })
     
-    it('should create POSTS_FAILURE when fetching posts has been done, but errors', () => {
+    it('should create POSTS_PAGE_FAILURE when fetching posts has been done, but errors', () => {
       nock(/.*/). 
         get('/api/v1/posts'). 
         query(({ page }) => {
@@ -146,8 +146,8 @@ describe('actions/PostsActions.js', () => {
       })
       
       const expectedActions = [
-        { type: types.POSTS_REQUEST },
-        { type: types.POSTS_FAILURE, errors: [{
+        { type: types.POSTS_PAGE_REQUEST },
+        { type: types.POSTS_PAGE_FAILURE, errors: [{
           status: 400,
           title: 'An error has occurred',
           detail: 'Something went wrong'

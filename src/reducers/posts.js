@@ -10,19 +10,19 @@ export const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case types.POSTS_PAGE: {
+    case types.POSTS_PAGE_CHANGE: {
       return Object.assign({}, state, {
         page: action.page
       })
     }
 
-    case types.POSTS_REQUEST: {
+    case types.POSTS_PAGE_REQUEST: {
       return Object.assign({}, state, {
         isFetching: true
       }) 
     }
     
-    case types.POSTS_SUCCESS: {
+    case types.POSTS_PAGE_SUCCESS: {
       return Object.assign({}, state, {
         isFetching: false,
         lastUpdated: action.receivedAt,
@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
       })
     }
     
-    case types.POSTS_FAILURE: {
+    case types.POSTS_PAGE_FAILURE: {
       return Object.assign({}, state, {
         isFetching: false,
         lastUpdated: action.receivedAt,

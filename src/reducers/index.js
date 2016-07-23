@@ -4,17 +4,19 @@ import { routerReducer } from 'react-router-redux'
 
 import types from '../constants/ActionTypes'
 import nav from './nav'
+import post from './post'
 import posts from './posts'
 
-const initialState = {
+export const initialState = {
+  post:  {},
   posts: {},
   users: {}
 }
 
 const entities = function (state = initialState, action) {
   switch (action.type) {
-    case types.POST_SUCCESS:
-    case types.POSTS_SUCCESS: {
+    case types.POSTS_POST_SUCCESS:
+    case types.POSTS_PAGE_SUCCESS: {
       return Object.assign({}, state, {
         posts: (Array.isArray(action.data)
           ? action.
@@ -29,6 +31,7 @@ const entities = function (state = initialState, action) {
             })())
       })
     }
+    
     default: {
       return state
     }
@@ -39,6 +42,7 @@ export default combineReducers({
   routing: routerReducer,
   reduxAsyncConnect,
   nav,
+  post,
   posts,
   entities
 })
