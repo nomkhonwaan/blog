@@ -1,0 +1,32 @@
+@charset 'UTF-8';
+
+.loading {
+  > .spinner {
+    text-align: center;
+    width: 70px;
+    margin: 24px auto;
+
+    @include breakpoint($md) {
+      margin-top: 48px;
+      margin-bottom: 48px;
+    }
+
+    > div {
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      background-color: $theme-color;
+      border-radius: 100%;
+      display: inline-block;
+      height: 12px;
+      margin: 0 .2rem;
+      width: 12px;
+    }
+
+    > .bounce1 {
+      animation-delay: -0.32s;
+    }
+
+    > .bounce2 {
+      animation-delay: -0.16s;
+    }
+  }
+}
