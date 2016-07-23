@@ -42,7 +42,6 @@ const Html = ({ assets, components, initialState }) => {
 
       <noscript id="deferred-styles">
         <link rel="stylesheet" href={ assets.styles.postload } />
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.5.0/styles/solarized-dark.min.css" />
       </noscript>
       
       <script dangerouslySetInnerHTML={ {

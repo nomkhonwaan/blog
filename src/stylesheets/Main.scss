@@ -1,13 +1,15 @@
 @charset 'UTF-8';
 
 @import '_variables';
-@import '~normalize.css';
-@import '~font-awesome/scss/font-awesome';
-@import '~breakpoint-sass/stylesheets/_breakpoint';
 @import url(https://fonts.googleapis.com/css?family=Prompt&subset=latin,thai);
 
+@import '~breakpoint-sass/stylesheets/_breakpoint';
+@import '~font-awesome/scss/font-awesome';
+@import '~highlight.js/styles/solarized-dark';
+@import '~normalize.css/normalize';
+
 * {
-  box-sizing: border-box;
+  box-sizing: border-box!important;
 }
 
 html, body {
