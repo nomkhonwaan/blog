@@ -3,7 +3,7 @@ import { asyncConnect } from 'redux-connect'
 import classNames from 'classnames'
 
 import { fetchPosts } from '../actions/PostsActions'
-import { Pagination, Summary } from '../components'
+import { Loading, NotFound, Pagination, Summary } from '../components'
 
 export const Posts = ({ 
   data,
@@ -15,26 +15,22 @@ export const Posts = ({
   page,
 }) => {
   return (
-    <div>
-      <div className="posts">
-        {
-          (isFetching || ! data[page]
-            ? <div className="spinner">
-                <div className="bounce1"></div>
-                <div className="bounce2"></div>
-                <div className="bounce3"></div>
-              </div>
-            : data[page]. 
-                map((item) => {
-                  return entities.posts[item]
-                }). 
-                map((item, key) => {
-                  return (
-                    <Summary data={ item } key={ key } />
-                  )
-                }))
-        }
-      </div>
+    <div className="posts">
+      {
+        (isFetching
+          ? <Loading />
+          : (data[page]
+              ? data[page]. 
+                  map((item) => {
+                    return entities.posts[item]
+                  }). 
+                  map((item, key) => {
+                    return (
+                      <Summary data={ item } key={ key } />
+                    )
+                  })
+              : <NotFound />))
+      }
       
       <Pagination 
         itemsPerPage={ itemsPerPage }
