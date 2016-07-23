@@ -8,4 +8,24 @@
     font-family: 'Prompt', sans-serif;
     font-weight: 400;
   }
+  
+  hr {
+    border: none;
+    border-top: 1px dashed #f3f3f3;
+    margin: 23px 0 24px;
+  }
+  
+  img {
+    border: 1px solid #f3f3f3;
+    border-radius: 0.2rem;
+    margin: 12px 0;
+    max-width: 100%;
+    opacity: 0.8;
+    padding: 4px;
+    transition: opacity .2s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
