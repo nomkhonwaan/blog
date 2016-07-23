@@ -3,4 +3,12 @@
 .single {
   @extend .posts;
   @extend .summary;
+
+  > .post {
+    > .header {
+      > .title {
+        font-size: initial;
+      }
+    }
+  }
 }
