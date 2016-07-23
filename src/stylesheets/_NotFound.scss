@@ -1,0 +1,14 @@
+@charset 'UTF-8';
+
+.error {
+  color: $theme-color;
+  font-family: 'Prompt', sans-serif;
+  font-size: 16rem;
+  margin: 24px auto;
+  text-align: center;
+
+  @include breakpoint($md) {
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+}
