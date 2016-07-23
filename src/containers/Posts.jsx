@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { fetchPosts } from '../actions/PostsActions'
 import { Pagination, Summary } from '../components'
 
-const Posts = ({ 
+export const Posts = ({ 
   data,
   entities,
   isFetching,

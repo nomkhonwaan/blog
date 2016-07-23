@@ -1,6 +1,5 @@
 import React from 'react'
 import { AllHtmlEntities as Entities } from 'html-entities'
-import { Link } from 'react-router'
 
 import { PostHeader, PostFooter } from './'
 

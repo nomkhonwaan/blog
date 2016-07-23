@@ -8,7 +8,6 @@ import post from './post'
 import posts from './posts'
 
 export const initialState = {
-  post:  {},
   posts: {},
   users: {}
 }
