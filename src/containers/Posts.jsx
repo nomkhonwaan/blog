@@ -2,8 +2,13 @@ import React from 'react'
 import { asyncConnect } from 'redux-connect'
 import classNames from 'classnames'
 
+import { 
+  Loading, 
+  NotFound, 
+  Pagination, 
+  Summary 
+} from '../components'
 import { fetchPosts } from '../actions/PostsActions'
-import { Loading, NotFound, Pagination, Summary } from '../components'
 
 export const Posts = ({ 
   data,

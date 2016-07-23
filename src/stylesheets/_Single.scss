@@ -1,5 +1,6 @@
 @charset 'UTF-8';
 
 .single {
+  @extend .posts;
   @extend .summary;
 }

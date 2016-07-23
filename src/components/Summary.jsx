@@ -7,17 +7,19 @@ const Summary = ({ data }) => {
   const entities = new Entities()
 
   return (
-    <div className="summary post">
-      <PostHeader data={data} />
-      <article
-        className="article"
-        dangerouslySetInnerHTML={ {
-          __html: entities. 
-                  decode(data.attributes.html).
-                  split('<!--more-->')[0]
-        } }>
-      </article>
-      <PostFooter data={data} />
+    <div className="summary">
+      <div className="post">
+        <PostHeader data={data} />
+        <article
+          className="article"
+          dangerouslySetInnerHTML={ {
+            __html: entities. 
+                    decode(data.attributes.html).
+                    split('<!--more-->')[0]
+          } }>
+        </article>
+        <PostFooter data={data} />
+      </div>
     </div>
   )
 }
