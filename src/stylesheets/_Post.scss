@@ -4,6 +4,14 @@
   background: #fff;
   margin: 24px 0;
 
+  blockquote {
+    border-left: 4px solid $theme-color;
+    color: #999;
+    font-style: italic;
+    margin: 0;
+    padding: 4px 8px 4px;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Prompt', sans-serif;
     font-weight: 400;
