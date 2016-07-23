@@ -58,7 +58,6 @@
     "font-awesome": "^4.6.3",
     "gridfs-stream": "^1.1.1",
     "helmet": "^2.1.0",
-    "highlight.js": "^9.5.0",
     "html-entities": "^1.2.0",
     "isomorphic-fetch": "^2.2.1",
     "marked": "^0.3.5",
