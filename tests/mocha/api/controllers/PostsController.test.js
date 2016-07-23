@@ -260,6 +260,7 @@ describe('api/controllers/PostsController.js', () => {
 
       agent.
         get('/api/v1/posts').
+        expect(400).
         end((err, { body }) => {
           expect(err).to.not.be.undefined
 
@@ -384,7 +385,7 @@ describe('api/controllers/PostsController.js', () => {
       
       agent.
         get(`/api/v1/posts/${posts[0].slug}`).
-        // expect(400).
+        expect(400).
         end((err, { body }) => {
           expect(err).to.not.be.undefined
           
