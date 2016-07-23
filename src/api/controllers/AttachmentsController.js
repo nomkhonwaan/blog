@@ -24,7 +24,7 @@ AttachmentsController.getOne = function (req, res, next) {
           set({
             'Content-Type': metadata.contentType
           })
-          
+        
         return readStream.pipe(res)
       },
       (err) => {
