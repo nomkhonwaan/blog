@@ -47,48 +47,54 @@ function format({
   }
 }
 
-export default {
+// --
 
-  getAll: (req, res, next) => {
-    try {
-      const page = req.query.page || {}
-      page.number = parseInt(page.number) || 1
-      page.size = parseInt(page.size) || 5
+const PostsController = {}
+export default PostsController
 
-      const conditions = {
-        publishedAt: {
-          '$exists': true
-        }
+// -- 
+
+PostsController.getAll = function (req, res, next) {
+  try {
+    const page = req.query.page || {}
+    page.number = parseInt(page.number) || 1
+    page.size = parseInt(page.size) || 5
+
+    const conditions = {
+      publishedAt: {
+        '$exists': true
       }
+    }
 
-      Promise.all([
-        new Promise((resolve, reject) => {
-          Post.
-            count(conditions, (err, totalItems) => {
-              if (err) {
-                return reject(err)
-              }
-              return resolve(totalItems)
-            })
-        }),
-        new Promise((resolve, reject) => {
-          Post.
-            find(conditions).
-            select(publicFields.join(' ')).
-            limit(page.size).
-            skip((page.number - 1) * page.size).
-            sort({
-              publishedAt: 'desc'
-            }).
-            exec((err, items) => {
-              if (err) {
-                return reject(err)
-              }
-              return resolve(items)
-            })
-        })
-      ]).
-      then(([ totalItems, items ]) => {
+    Promise.all([
+      new Promise((resolve, reject) => {
+        Post.
+          count(conditions, (err, totalItems) => {
+            if (err) {
+              return reject(err)
+            }
+            return resolve(totalItems)
+          })
+      }),
+      new Promise((resolve, reject) => {
+        Post.
+          find(conditions).
+          select(publicFields.join(' ')).
+          limit(page.size).
+          skip((page.number - 1) * page.size).
+          sort({
+            publishedAt: 'desc'
+          }).
+          exec((err, items) => {
+            if (err) {
+              return reject(err)
+            }
+            return resolve(items)
+          })
+      })
+    ]).
+    then(
+      ([ totalItems, items ]) => {
         return res.
           json({
             meta: {
@@ -124,41 +130,43 @@ export default {
                 return result
               }, [])
           })
-      }).
-      catch((err) => {
+      },
+      (err) => {
         return next(err)
+      }
+    )
+  } catch (err) {
+    return next(err)
+  }
+}
+
+PostsController.getOne = function (req, res, next) {
+  try {
+    const id = req.params.id
+
+    Promise.all([
+      new Promise((resolve, reject) => {
+        if (mongoose.Types.ObjectId.isValid(id)) {
+          Post.
+            findById(id, (err, item) => {
+              if (err) {
+                return reject(err)
+              }
+              return resolve(item)
+            })
+        } else {
+          Post. 
+            findBySlug(id, (err, item) => {
+              if (err) {
+                return reject(err)
+              }
+              return resolve(item)
+            })
+        }
       })
-    } catch (err) {
-      return next(err)
-    }
-  },
-
-  getOne: (req, res, next) => {
-    try {
-      const id = req.params.id
-
-      Promise.all([
-        new Promise((resolve, reject) => {
-          if (mongoose.Types.ObjectId.isValid(id)) {
-            Post.
-              findById(id, (err, item) => {
-                if (err) {
-                  return reject(err)
-                }
-                return resolve(item)
-              })
-          } else {
-            Post. 
-              findBySlug(id, (err, item) => {
-                if (err) {
-                  return reject(err)
-                }
-                return resolve(item)
-              })
-          }
-        })
-      ]). 
-      then(([ item ]) => {
+    ]). 
+    then(
+      ([ item ]) => {
         return res. 
           json({
             links: {
@@ -180,13 +188,12 @@ export default {
                 return result
               }, [])
           })
-      }). 
-      catch((err) => {
+      },
+      (err) => {
         return next(err)
-      })
-    } catch (err) {
-      return next(err)
-    }
+      }
+    )
+  } catch (err) {
+    return next(err)
   }
-
 }

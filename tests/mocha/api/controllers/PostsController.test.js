@@ -55,14 +55,13 @@ const posts = [{
   users
 }]
 
-describe('api/PostsController.js', () => {
+describe('api/controllers/PostsController.js', () => {
   let agent
   let PostMock
 
   before(() => {
     const app = Express()
     app.use('/api', apiRoutes)
-
     agent = request.agent(app)
   })
 
@@ -237,7 +236,7 @@ describe('api/PostsController.js', () => {
         })
     })
 
-    it('should return an error object when to get caught in an exception', (done) => {
+    it('should return an error object when get caught in an exception', (done) => {
       PostMock.
         expects('find').
           withArgs({
@@ -256,7 +255,7 @@ describe('api/PostsController.js', () => {
             publishedAt: 'desc'
           }).
         chain('exec').
-        yields(new Error, null)
+        yields(new Error('An error has occurred'), null)
 
 
       agent.
@@ -265,7 +264,6 @@ describe('api/PostsController.js', () => {
           expect(err).to.not.be.undefined
 
           const { errors } = body
-
           expect(errors).to.have.length.of.at.least(1)
 
           done()
@@ -373,6 +371,25 @@ describe('api/PostsController.js', () => {
               email: users[0].email
             }
           })
+
+          done()
+        })
+    })
+
+    it('should return an error object when get caught in an exception', (done) => {
+      PostMock.
+        expects('findBySlug').
+          withArgs(posts[0].slug).
+        yields(new Error('An error has occurred'), null)
+      
+      agent.
+        get(`/api/v1/posts/${posts[0].slug}`).
+        // expect(400).
+        end((err, { body }) => {
+          expect(err).to.not.be.undefined
+          
+          const { errors } = body 
+          expect(errors).to.have.length.of.at.least(1)
 
           done()
         })

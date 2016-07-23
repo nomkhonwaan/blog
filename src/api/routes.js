@@ -14,15 +14,16 @@ router.get('/v1/posts/:id', PostsController.getOne)
 // --
 
 router.use((err, req, res, next) => {
-  if (err) {
+  if (process.env.NODE_ENV !== 'test' && 
+      err) {
     req.logger.error(err)
+  }
     
-    if (process.env.NODE_ENV !== 'production') {
-      console.error(err)
-    }
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err)
   }
 
-  res.
+  return res.
     status(400).
     json({
       errors: [{
