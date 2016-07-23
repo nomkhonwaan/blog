@@ -1,7 +1,7 @@
-import Post from './Post'
 import Posts from './Posts'
+import Single from './Single'
 
 export { 
-  Post,
-  Posts 
+  Posts ,
+  Single,
 }

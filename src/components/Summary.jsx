@@ -7,7 +7,7 @@ const Summary = ({ data }) => {
   const entities = new Entities()
 
   return (
-    <div className="summary post-item">
+    <div className="summary post">
       <PostHeader data={data} />
       <article
         className="article"
