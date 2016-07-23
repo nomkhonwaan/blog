@@ -7,10 +7,10 @@
   > .post {
     > .header {
       > .title {
-        font-size: 2rem;
+        font-size: 2rem!important;
 
         @include breakpoint($md) {
-          font-size: 2.2rem;
+          font-size: 2.2rem!important;
         }
       }
     }

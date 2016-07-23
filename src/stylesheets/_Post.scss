@@ -4,6 +4,17 @@
   background: #fff;
   margin: 24px 0;
 
+  .hljs {
+    margin: 12px 0;
+  }
+
+  .hljs,
+  code {
+    border-radius: .2rem;
+    font-size: 1.2rem;
+    font-family: 'Source Code Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', monospace;
+  }
+
   blockquote {
     border-left: 4px solid $theme-color;
     color: #999;
@@ -11,10 +22,15 @@
     margin: 0;
     padding: 4px 8px 4px;
   }
+
+  code {
+    color: $theme-color;
+  }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Prompt', sans-serif;
     font-weight: 400;
+    margin-top: 24px;
   }
   
   hr {
@@ -26,7 +42,8 @@
   img {
     border: 1px solid #f3f3f3;
     border-radius: 0.2rem;
-    margin: 12px 0;
+    display: block;
+    margin: 12px auto;
     max-width: 100%;
     opacity: 0.8;
     padding: 4px;
