@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { AllHtmlEntities as Entities } from 'html-entities'
 import { asyncConnect } from 'redux-connect'
 
@@ -10,35 +10,50 @@ import {
 } from '../components'
 import { fetchPost } from '../actions/PostsActions'
 
-export const Single = ({ 
-  slug, 
-  entities: { posts },
-  isFetching
-}) => {
-  const data = posts[slug]
-  const entities = new Entities()
+export class Single extends Component {
+  componentDidMount() {
+    if (typeof hljs !== 'undefined') {
+      const codeElements = document.getElementsByTagName('pre')
 
-  return (
-    <div className="single">
-      {
-        (isFetching
-          ? <Loading />
-          : (data
-            ? <div className="post">
-                <PostHeader data={ data } />
-                <article
-                  className="article"
-                  dangerouslySetInnerHTML={ {
-                    __html: entities. 
-                            decode(data.attributes.html)
-                  } }>
-                </article>
-                <PostFooter data={ data } /> 
-              </div>
-            : <NotFound />))
-      }
-    </div>
-  )
+      Object.
+        keys(codeElements).
+        map((item) => {
+          hljs.highlightBlock(codeElements[item])
+        })
+    }
+  }
+
+  render() {
+    const {
+      slug,
+      entities: { posts },
+      isFetching
+    } = this.props
+    const data = posts[slug]
+    const entities = new Entities()
+
+    return (
+      <div className="single">
+        {
+          (isFetching
+            ? <Loading />
+            : (data
+              ? <div className="post">
+                  <PostHeader data={ data } />
+                  <article
+                    className="article"
+                    dangerouslySetInnerHTML={ {
+                      __html: entities. 
+                              decode(data.attributes.html)
+                    } }>
+                  </article>
+                  <PostFooter data={ data } /> 
+                </div>
+              : <NotFound />))
+        }
+      </div>
+    )
+  }
 }
 
 export default asyncConnect([{
