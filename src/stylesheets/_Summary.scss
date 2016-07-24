@@ -32,12 +32,17 @@
     > .article {
       color: #4d4d4d;
       font-size: 1.4rem;
-      line-height: (1.4rem*48/100)+1.4rem;
+      line-height: (1.4rem*64/100)+1.4rem;
       margin: 12px 12px 0 12px;
       text-align: justify;
 
       @include breakpoint($md) {
         padding: 0 12px 12px;
+      }
+
+      a {
+        border-bottom: 1px dotted $theme-color;
+        padding-bottom: 1px;
       }
     }
 
