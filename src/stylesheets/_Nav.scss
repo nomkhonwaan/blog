@@ -71,7 +71,7 @@
         
         &:hover,
         &.actived {
-          background: rgba(0,0,0,.08);
+          background: rgba(0,0,0,.03);
 
           @include breakpoint($md) {
             background: rgba(0,0,0,.16);
