@@ -8,8 +8,7 @@
     margin: 12px 0;
   }
 
-  .hljs,
-  code {
+  .hljs {
     border-radius: .2rem;
     font-size: 1.2rem;
     font-family: 'Source Code Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', monospace;
@@ -24,7 +23,12 @@
   }
 
   code {
-    color: $theme-color;
+    background: #002b36;
+    border-radius: .2rem;
+    color: #839496;
+    font-size: 1.1rem;
+    font-family: 'Source Code Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', monospace;
+    padding: .1rem .4rem;
   }
   
   h1, h2, h3, h4, h5, h6 {
