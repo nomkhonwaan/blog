@@ -37,9 +37,9 @@ export const Posts = ({
                       <Summary
                         data={ item }
                         key={ key }
-                        {/*onClickTitle={ () => {
+                        _onClickTitle={ () => {
                           dispatch(togglePopupPost(isPopup))
-                        } } */} />
+                        } } />
                     )
                   })
               : <NotFound />))
