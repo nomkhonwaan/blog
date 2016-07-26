@@ -1,0 +1,35 @@
+@charset 'UTF-8';
+
+@keyframes zoom-in {
+  0% {
+    opacity: 0;
+    transform: scale3d(.3,.3,.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.zoom-in {
+  animation-name: zoom-in;
+}
+
+@keyframes zoom-out {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale3d(.3,.3,.3);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.zoom-out {
+  animation-name: zoom-out;
+}
