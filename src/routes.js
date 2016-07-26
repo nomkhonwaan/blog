@@ -11,14 +11,9 @@ export default ({ dispatch }) => {
       <IndexRoute component={ Posts } />
       <Route path="/:year/:month/:date/:slug" getComponent={
         (nextState, callback) => {
-          const { params } = nextState 
+          const { params } = nextState
 
-          dispatch(changePost(
-            params.year, 
-            params.month, 
-            params.date,
-            params.slug
-          ));
+          dispatch(changePost(params.slug));
           callback(null, Single)
         }
       } />

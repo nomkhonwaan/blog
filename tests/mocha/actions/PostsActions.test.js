@@ -2,11 +2,11 @@ import { expect } from 'chai'
 import nock from 'nock'
 import configureMockStore from 'redux-mock-store'
 
-import { 
-  changePage, 
+import {
+  changePage,
   changePost,
-  fetchPost, 
-  fetchPosts 
+  fetchPost,
+  fetchPosts
 } from '../../../src/actions/PostsActions'
 import types from '../../../src/constants/ActionTypes'
 import PromiseMiddleware from '../../../src/middlewares/PromiseMiddleware'
@@ -21,7 +21,7 @@ describe('actions/PostsActions.js', () => {
 
   describe('changePage', () => {
     it('should create POSTS_PAGE_CHANGE when changing posts page', () => {
-      const page = 1 
+      const page = 1
 
       expect(changePage(page)).to.deep.equal({
         type: types.POSTS_PAGE_CHANGE,
@@ -40,20 +40,17 @@ describe('actions/PostsActions.js', () => {
 
   describe('changePost', () => {
     it('should create POSTS_POST_CHANGE when changing post', () => {
-      expect(changePost('1989', '06', '20', 'happy-birthday')).to.deep.equal({
+      expect(changePost('test-post')).to.deep.equal({
         type: types.POSTS_POST_CHANGE,
-        year: '1989',
-        month: '06',
-        date: '20',
-        slug: 'happy-birthday'
+        slug: 'test-post'
       })
     })
   })
 
   describe('fetchPost :: only published post', () => {
     it('should create POSTS_POST_SUCCESS when fetching post has been done', () => {
-      nock(/.*/). 
-        get('/api/v1/posts/test-post'). 
+      nock(/.*/).
+        get('/api/v1/posts/test-post').
         reply(200, {
           body: {
             links: {
@@ -66,28 +63,28 @@ describe('actions/PostsActions.js', () => {
 
       const expectedActions = [
         { type: types.POSTS_POST_SUCCESS },
-        { type: types.POSTS_POST_SUCCESS, links: { self: '/api/v1/posts/test-post' } }, 
+        { type: types.POSTS_POST_SUCCESS, links: { self: '/api/v1/posts/test-post' } },
       ]
 
-      store.dispatch(fetchPost('test-post')). 
+      store.dispatch(fetchPost('test-post')).
         then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions)
         })
     })
 
     it('should create POSTS_POST_FAILURE when fetching post has been done, but errors', () => {
-      nock(/.*/). 
-        get('/api/v1/posts/test-post'). 
+      nock(/.*/).
+        get('/api/v1/posts/test-post').
         reply(400, {
           body: {
             errors: [{
               status: 400,
-              title: 'An error has occurred', 
+              title: 'An error has occurred',
               detail: 'Something went wrong'
             }]
           }
         })
-      
+
       const store = mockStore()
 
       const expectedActions = [
@@ -98,8 +95,8 @@ describe('actions/PostsActions.js', () => {
           detail: 'Something went wrong'
         }] }
       ]
-      
-      store.dispatch(fetchPost()). 
+
+      store.dispatch(fetchPost()).
         then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions)
         })
@@ -108,12 +105,12 @@ describe('actions/PostsActions.js', () => {
 
   describe('fetchPosts :: only published posts', () => {
     it('should create POSTS_PAGE_SUCCESS when fetching posts has been done', () => {
-      nock(/.*/). 
-        get('/api/v1/posts'). 
+      nock(/.*/).
+        get('/api/v1/posts').
         query(({ page }) => {
           return parseInt(page.number) === 1 &&
-                parseInt(page.size) === 5 
-        }). 
+                parseInt(page.size) === 5
+        }).
         reply(200, {
           body: {
             meta: {
@@ -121,31 +118,31 @@ describe('actions/PostsActions.js', () => {
             }
           }
         })
-      
+
       const store = mockStore({
         page: 1,
         itemsPerPage: 5
       })
-      
+
       const expectedActions = [
         { type: types.POSTS_PAGE_REQUEST },
         { type: types.POSTS_PAGE_SUCCESS, meta: { totalItems: 1 } }
       ]
-      
-      store.dispatch(fetchPosts()). 
+
+      store.dispatch(fetchPosts()).
         then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions)
         })
     })
-    
+
     it('should create POSTS_PAGE_FAILURE when fetching posts has been done, but errors', () => {
-      nock(/.*/). 
-        get('/api/v1/posts'). 
+      nock(/.*/).
+        get('/api/v1/posts').
         query(({ page }) => {
           return parseInt(page.number) === 1 &&
-                parseInt(page.size) === 5 
-        }). 
-        reply(400, { 
+                parseInt(page.size) === 5
+        }).
+        reply(400, {
           body: {
             errors: [{
               status: 400,
@@ -154,12 +151,12 @@ describe('actions/PostsActions.js', () => {
             }]
           }
         })
-        
+
       const store = mockStore({
         page: 1,
         itemsPerPage: 5
       })
-      
+
       const expectedActions = [
         { type: types.POSTS_PAGE_REQUEST },
         { type: types.POSTS_PAGE_FAILURE, errors: [{
@@ -168,8 +165,8 @@ describe('actions/PostsActions.js', () => {
           detail: 'Something went wrong'
         }] }
       ]
-      
-      store.dispatch(fetchPosts()). 
+
+      store.dispatch(fetchPosts()).
         then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions)
         })

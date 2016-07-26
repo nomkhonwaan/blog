@@ -11,10 +11,10 @@ export const changePage = function (page) {
   }
 }
 
-export const changePost = function (year, month, date, slug) {
+export const changePost = function (slug) {
   return {
     type: types.POSTS_POST_CHANGE,
-    year, month, date, slug 
+    slug
   }
 }
 
@@ -33,7 +33,7 @@ export const fetchPost = function(slugOrID) {
 
 export const fetchPosts = function (page = 1, itemsPerPage = 5) {
   return {
-    types: [ 
+    types: [
       types.POSTS_PAGE_REQUEST,
       types.POSTS_PAGE_SUCCESS,
       types.POSTS_PAGE_FAILURE
