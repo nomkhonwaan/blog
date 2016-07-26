@@ -6,7 +6,8 @@ import {
   changePage,
   changePost,
   fetchPost,
-  fetchPosts
+  fetchPosts,
+  togglePopupPost
 } from '../../../src/actions/PostsActions'
 import types from '../../../src/constants/ActionTypes'
 import PromiseMiddleware from '../../../src/middlewares/PromiseMiddleware'
@@ -20,7 +21,7 @@ describe('actions/PostsActions.js', () => {
   })
 
   describe('changePage', () => {
-    it('should create POSTS_PAGE_CHANGE when changing posts page', () => {
+    it('should create `POSTS_PAGE_CHANGE` when changing posts page', () => {
       const page = 1
 
       expect(changePage(page)).to.deep.equal({
@@ -39,7 +40,7 @@ describe('actions/PostsActions.js', () => {
   })
 
   describe('changePost', () => {
-    it('should create POSTS_POST_CHANGE when changing post', () => {
+    it('should create `POSTS_POST_CHANGE` when changing post', () => {
       expect(changePost('test-post')).to.deep.equal({
         type: types.POSTS_POST_CHANGE,
         slug: 'test-post'
@@ -48,7 +49,7 @@ describe('actions/PostsActions.js', () => {
   })
 
   describe('fetchPost :: only published post', () => {
-    it('should create POSTS_POST_SUCCESS when fetching post has been done', () => {
+    it('should create `POSTS_POST_SUCCESS` when fetching post has been done', () => {
       nock(/.*/).
         get('/api/v1/posts/test-post').
         reply(200, {
@@ -72,7 +73,7 @@ describe('actions/PostsActions.js', () => {
         })
     })
 
-    it('should create POSTS_POST_FAILURE when fetching post has been done, but errors', () => {
+    it('should create `POSTS_POST_FAILURE` when fetching post has been done, but errors', () => {
       nock(/.*/).
         get('/api/v1/posts/test-post').
         reply(400, {
@@ -104,7 +105,7 @@ describe('actions/PostsActions.js', () => {
   })
 
   describe('fetchPosts :: only published posts', () => {
-    it('should create POSTS_PAGE_SUCCESS when fetching posts has been done', () => {
+    it('should create `POSTS_PAGE_SUCCESS` when fetching posts has been done', () => {
       nock(/.*/).
         get('/api/v1/posts').
         query(({ page }) => {
@@ -135,7 +136,7 @@ describe('actions/PostsActions.js', () => {
         })
     })
 
-    it('should create POSTS_PAGE_FAILURE when fetching posts has been done, but errors', () => {
+    it('should create `POSTS_PAGE_FAILURE` when fetching posts has been done, but errors', () => {
       nock(/.*/).
         get('/api/v1/posts').
         query(({ page }) => {
@@ -170,6 +171,21 @@ describe('actions/PostsActions.js', () => {
         then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions)
         })
+    })
+  })
+
+  describe('togglePopupPost', () => {
+    it('should create `POSTS_TOGGLE_POPUP_POST` when click on post title on posts page', () => {
+      const isPopup = false
+
+      expect(togglePopupPost(isPopup)).to.deep.equal({
+        type: types.POSTS_TOGGLE_POPUP_POST,
+        isPopup: ! isPopup
+      })
+      expect(togglePopupPost( ! isPopup)).to.deep.equal({
+        type: types.POSTS_TOGGLE_POPUP_POST,
+        isPopup
+      })
     })
   })
 })
