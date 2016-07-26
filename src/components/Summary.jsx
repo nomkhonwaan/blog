@@ -1,19 +1,26 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { AllHtmlEntities as Entities } from 'html-entities'
 
 import { PostHeader, PostFooter } from './'
+import { Single } from '../containers'
+import { changePost } from '../actions/PostsActions'
 
-const Summary = ({ data }) => {
+const Summary = ({ dispatch, data }) => {
   const entities = new Entities()
 
   return (
     <div className="summary">
       <div className="post">
-        <PostHeader data={data} />
+        <PostHeader
+          data={data}
+          onClickTitle={ () => {
+            dispatch(changePost(data.attributes.slug))
+          } } />
         <article
           className="article"
           dangerouslySetInnerHTML={ {
-            __html: entities. 
+            __html: entities.
                     decode(data.attributes.html).
                     split('<!--more-->')[0]
           } }>
@@ -24,4 +31,4 @@ const Summary = ({ data }) => {
   )
 }
 
-export default Summary
+export default connect()(Summary)
