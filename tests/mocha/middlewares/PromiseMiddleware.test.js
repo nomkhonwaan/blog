@@ -10,18 +10,18 @@ const mockStore = configureMockStore(middlewares)
 describe('middlewares/PromiseMiddleware.js', () => {
   it('should not dispatch if action does not have "promise" property', () => {
     const action = {
-      type: types.ON_CLICK_MENU_BUTTON
+      type: types.NAV_TOGGLE_MENU_BUTTON
     }
-    
+
     const store = mockStore({})
-    
+
     expect(store.dispatch(action)).to.deep.equal(action)
   })
-  
+
   it('should dispatch request state while calling promise action and return success state', () => {
     const action = {
-      types: [ 
-        types.POSTS_PAGE_REQUEST, 
+      types: [
+        types.POSTS_PAGE_REQUEST,
         types.POSTS_PAGE_SUCCESS,
         types.POSTS_PAGE_FAILURE
       ],
@@ -31,20 +31,20 @@ describe('middlewares/PromiseMiddleware.js', () => {
         }
       })
     }
-    
+
     const store = mockStore({})
-    
+
     const expectedActions = [
       { type: types.POSTS_PAGE_REQUEST },
       { type: types.POSTS_PAGE_SUCCESS, foo: 'bar' }
     ]
-    
-    store.dispatch(action). 
+
+    store.dispatch(action).
       then(() => {
         expect(store.getActions()).to.deep.equal(expectedActions)
       })
   })
-  
+
   it('should dispatch request state while calling promise action and return failure state, errors response acquired', () => {
     const action = {
       types: [
@@ -58,20 +58,20 @@ describe('middlewares/PromiseMiddleware.js', () => {
         }]
       })
     }
-    
+
     const store = mockStore({})
-    
+
     const expectedActions = [
       { type: types.POSTS_PAGE_REQUEST },
       { type: types.POSTS_PAGE_FAILURE, foo: 'bar' }
     ]
-    
-    store.dispatch(action). 
+
+    store.dispatch(action).
       then(() => {
         expect(store.getActions()).to.deep.equal(expectedActions)
       })
   })
-  
+
   it('should dispatch request state while calling promise action and return failure state, an error has occurred', () => {
     const action = {
       types: [
@@ -85,18 +85,17 @@ describe('middlewares/PromiseMiddleware.js', () => {
         }]
       })
     }
-    
+
     const store = mockStore({})
-    
+
     const expectedActions = [
       { type: types.POSTS_PAGE_REQUEST },
       { type: types.POSTS_PAGE_FAILURE, foo: 'bar' }
     ]
-    
-    store.dispatch(action). 
+
+    store.dispatch(action).
       then(() => {
         expect(store.getActions()).to.deep.equal(expectedActions)
       })
   })
 })
-

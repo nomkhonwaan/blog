@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 
-import { onClickMenuButton } from '../actions/NavActions'
+import { toggleMenuButton } from '../actions/NavActions'
 
 export const Nav = ({ dispatch, isExpanded, menuItems }) => {
   return (
@@ -24,7 +24,7 @@ export const Nav = ({ dispatch, isExpanded, menuItems }) => {
         }
       </ul>
       <button className="btn-toggle" onClick={ () => {
-        dispatch(onClickMenuButton(isExpanded))
+        dispatch(toggleMenuButton(isExpanded))
       } }>
         <i className="fa fa-fw fa-bars"></i>&nbsp;Menu
       </button>

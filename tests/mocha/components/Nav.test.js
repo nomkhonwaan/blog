@@ -10,6 +10,10 @@ const mockStore = configureMockStore()
 const store = mockStore(initialState)
 
 describe('components/Nav.jsx', () => {
+  beforeEach(() => {
+    store.clearActions()
+  })
+
   it('should render `.layout-nav` component correctly', () => {
     const wrapper = shallow(<Nav {...store} {...store.getState()} />)
 
@@ -20,11 +24,13 @@ describe('components/Nav.jsx', () => {
     expect(wrapper.find('.btn-toggle')).to.have.length(1)
   })
 
-  it('should render `.expanded` component when `isExpanded` was true', () => {
-    const wrapper = shallow(<Nav {...store} {...Object.assign({}, store.getState(), {
-      isExpanded: true
-    })} />)
+  xit('should render `.expanded` component when perform click on menu button', () => {
+    const wrapper = shallow(<Nav {...store} {...store.getState()} />)
 
-    expect(wrapper.find('.expanded')).to.have.length(1)
+    wrapper.find('.btn-toggle').simulate('click')
+    // expect(wrapper.find('.expanded')).to.have.length(1)
+    // expect(store.getState()).to.deep.equal(Object.assign({}, initialState, {
+    //   isExpanded: true
+    // }))
   })
 })

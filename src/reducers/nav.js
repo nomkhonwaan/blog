@@ -17,22 +17,22 @@ export const initialState = {
   }, {
     title: 'LinkedIn',
     href: '//linkedin.com/in/nomkhonwaan',
-    iconClass: 'fa fa-fw fa-linkedin' 
+    iconClass: 'fa fa-fw fa-linkedin'
   }, {
     title: 'RSS',
     href: '//www.nomkhonwaan.com/rss',
-    iconClass: 'fa fa-fw fa-rss' 
+    iconClass: 'fa fa-fw fa-rss'
   }]
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case types.ON_CLICK_MENU_BUTTON: {
+    case types.NAV_TOGGLE_MENU_BUTTON: {
       return Object.assign({}, state, {
         isExpanded: action.isExpanded
       })
     }
-    
+
     default: {
       return state
     }
