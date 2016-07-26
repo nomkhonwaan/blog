@@ -1,9 +1,6 @@
 import types from '../constants/ActionTypes'
 
 export const initialState = {
-  year:        null,
-  month:       null,
-  date:        null,
   slug:        null,
   isFetching:  false,
   lastUpdated: NaN,

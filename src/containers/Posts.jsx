@@ -2,18 +2,21 @@ import React from 'react'
 import { asyncConnect } from 'redux-connect'
 import classNames from 'classnames'
 
-import { 
-  Loading, 
-  NotFound, 
-  Pagination, 
-  Summary 
+import { Single } from './'
+import {
+  Loading,
+  NotFound,
+  Pagination,
+  Summary
 } from '../components'
-import { fetchPosts } from '../actions/PostsActions'
+import { changePost, fetchPosts, togglePopupPost } from '../actions/PostsActions'
 
-export const Posts = ({ 
+export const Posts = ({
   data,
+  dispatch,
   entities,
   isFetching,
+  isPopup,
   itemsPerPage,
   links,
   meta: { totalItems },
@@ -25,23 +28,37 @@ export const Posts = ({
         (isFetching
           ? <Loading />
           : (data[page]
-              ? data[page]. 
+              ? data[page].
                   map((item) => {
                     return entities.posts[item]
-                  }). 
+                  }).
                   map((item, key) => {
                     return (
-                      <Summary data={ item } key={ key } />
+                      <Summary
+                        data={ item }
+                        key={ key }
+                        {/*onClickTitle={ () => {
+                          dispatch(togglePopupPost(isPopup))
+                        } } */} />
                     )
                   })
               : <NotFound />))
       }
-      
-      <Pagination 
+
+      <Pagination
         itemsPerPage={ itemsPerPage }
         links={ links }
         page={ page }
         totalItems={ totalItems } />
+
+      <div className={ classNames(
+          'animation',
+          'popup-post', {
+            'zoom-in': isPopup,
+            'zoom-out': ! isPopup
+          }
+        ) }>
+      </div>
     </div>
   )
 }

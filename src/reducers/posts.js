@@ -1,11 +1,12 @@
 import types from '../constants/ActionTypes'
 
 export const initialState = {
-  page: 1,
+  data: {},
   itemsPerPage: 5,
   isFetching: false,
+  isPopup: false,
   lastUpdated: NaN,
-  data: {}
+  page: 1,
 }
 
 export default function (state = initialState, action) {
@@ -19,9 +20,9 @@ export default function (state = initialState, action) {
     case types.POSTS_PAGE_REQUEST: {
       return Object.assign({}, state, {
         isFetching: true
-      }) 
+      })
     }
-    
+
     case types.POSTS_PAGE_SUCCESS: {
       return Object.assign({}, state, {
         isFetching: false,
@@ -39,7 +40,7 @@ export default function (state = initialState, action) {
         included: action.included
       })
     }
-    
+
     case types.POSTS_PAGE_FAILURE: {
       return Object.assign({}, state, {
         isFetching: false,
@@ -47,7 +48,13 @@ export default function (state = initialState, action) {
         errors: action.errors
       })
     }
-    
+
+    case types.POSTS_TOGGLE_POPUP_POST: {
+      return Object.assign({}, state, {
+        isPopup: action.isPopup
+      })
+    }
+
     default: {
       return state
     }

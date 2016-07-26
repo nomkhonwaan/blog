@@ -3,20 +3,19 @@ import { connect } from 'react-redux'
 import { AllHtmlEntities as Entities } from 'html-entities'
 
 import { PostHeader, PostFooter } from './'
-import { Single } from '../containers'
-import { changePost } from '../actions/PostsActions'
 
-const Summary = ({ dispatch, data }) => {
+const Summary = ({
+  data,
+  onClickTitle
+}) => {
   const entities = new Entities()
 
   return (
     <div className="summary">
       <div className="post">
         <PostHeader
-          data={data}
-          onClickTitle={ () => {
-            dispatch(changePost(data.attributes.slug))
-          } } />
+          data={ data }
+          onClickTitle={ onClickTitle } />
         <article
           className="article"
           dangerouslySetInnerHTML={ {
@@ -31,4 +30,4 @@ const Summary = ({ dispatch, data }) => {
   )
 }
 
-export default connect()(Summary)
+export default Summary

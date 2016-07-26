@@ -47,3 +47,10 @@ export const fetchPosts = function (page = 1, itemsPerPage = 5) {
     })
   }
 }
+
+export const togglePopupPost = function (isPopup = false) {
+  return {
+    type: types.POSTS_TOGGLE_POPUP_POST,
+    isPopup: ! isPopup
+  }
+}
