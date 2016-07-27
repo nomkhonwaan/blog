@@ -1,5 +1,6 @@
 import App from './App'
 import Author from './Author'
+import Disqus from './Disqus'
 import Footer from './Footer'
 import Header from './Header'
 import Html from './Html'
@@ -13,8 +14,9 @@ import PostHeader from './PostHeader'
 import Summary from './Summary'
 
 export {
-  App, 
+  App,
   Author,
+  Disqus,
   Footer,
   Header,
   Html,

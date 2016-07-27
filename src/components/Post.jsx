@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AllHtmlEntities as Entities } from 'html-entities'
 
 import {
+  Disqus,
   PostHeader,
   PostFooter
 } from './'
@@ -33,6 +34,7 @@ export class Post extends Component {
                       decode(data.attributes.html)
           } }>
         </article>
+        <Disqus />
         <PostFooter data={ data } />
       </div>
     )
