@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export const Disqus = () => {
-  return (
-    <div className="comments">
-      <h2>Comments</h2>
+export class Disqus extends Component {
+  componentDidMount() {
+    if (typeof DISQUS !== 'undefined') {
+      DISQUS.reset({ reload: true })
+    }
+  }
 
-      <div id="disqus_thread"></div>
-    </div>
-  )
+  render() {
+    return (
+      <div className="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+      </div>
+    )
+  }
 }
 
 export default Disqus
