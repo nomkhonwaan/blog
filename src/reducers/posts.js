@@ -4,7 +4,7 @@ export const initialState = {
   data: {},
   itemsPerPage: 5,
   isFetching: false,
-  isPopup: false,
+  isPopup: undefined,
   lastUpdated: NaN,
   page: 1,
 }

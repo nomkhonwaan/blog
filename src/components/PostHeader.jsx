@@ -9,14 +9,11 @@ const PostHeader = ({ data, onClickTitle }) => {
     publishedAt.format('YYYY/MM/DD'),
     data.attributes.slug
   ].join('/')
-  
+
   return (
     <header className="header">
-      <h1 className="title" onClick={ onClickTitle }>
-        { (typeof onClickTitle === 'function'
-            ? <span>{ data.attributes.title }</span>
-            : <Link to={ permalink }>{ data.attributes.title }</Link>)
-        }
+      <h1 className="title">
+        <Link to={ permalink } onClick={ onClickTitle }>{ data.attributes.title }</Link>
       </h1>
       <div className="metadata">
         Posted on { publishedAt.fromNow() }&nbsp;&middot;&nbsp;<Link to={ `${permalink}#disqus_thread` }>Comments</Link>
