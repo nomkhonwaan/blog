@@ -26,9 +26,11 @@ export const Single = ({
             ? <Loading />
             : (data
               ? <Post data={ data } />
-            : <NotFound />))
+              : <NotFound />)
+          )
         }
       </div>
+
     </div>
   )
 }
