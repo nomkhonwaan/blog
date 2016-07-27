@@ -25,6 +25,7 @@ export const Nav = ({ dispatch, isExpanded, menuItems }) => {
       </ul>
       <button className="btn-toggle" onClick={ () => {
         dispatch(toggleMenuButton(isExpanded))
+        console.log(isExpanded);
       } }>
         <i className="fa fa-fw fa-bars"></i>&nbsp;Menu
       </button>

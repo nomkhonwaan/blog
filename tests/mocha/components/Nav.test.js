@@ -15,7 +15,7 @@ describe('components/Nav.jsx', () => {
   })
 
   it('should render `.layout-nav` component correctly', () => {
-    const wrapper = shallow(<Nav {...store} {...store.getState()} />)
+    const wrapper = shallow(<Nav { ...store } { ...store.getState() } />)
 
     expect(wrapper.find('.layout-nav')).to.have.length(1)
     expect(wrapper.find('.menu-list')).to.have.length(1)
@@ -24,13 +24,12 @@ describe('components/Nav.jsx', () => {
     expect(wrapper.find('.btn-toggle')).to.have.length(1)
   })
 
-  xit('should render `.expanded` component when perform click on menu button', () => {
-    const wrapper = shallow(<Nav {...store} {...store.getState()} />)
+  it('should render `.expanded` component when perform click on menu button', () => {
+    const wrapper = shallow(<Nav
+      { ...store }
+      { ...store.getState() }
+      isExpanded={ true }  />)
 
-    wrapper.find('.btn-toggle').simulate('click')
-    // expect(wrapper.find('.expanded')).to.have.length(1)
-    // expect(store.getState()).to.deep.equal(Object.assign({}, initialState, {
-    //   isExpanded: true
-    // }))
+    expect(wrapper.find('.expanded')).to.have.length(1)
   })
 })
