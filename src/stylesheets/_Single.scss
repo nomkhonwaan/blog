@@ -5,6 +5,10 @@
   @extend .summary;
 
   > .post {
+    &:last-child {
+      margin-bottom: 24px!important;
+    }
+
     > .header {
       > .title {
         font-size: 2rem!important;
