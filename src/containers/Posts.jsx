@@ -15,16 +15,13 @@ import { changePost, fetchPosts, togglePopupPost } from '../actions/PostsActions
 
 export const Posts = ({
   data,
-  dispatch,
   entities,
-  history,
   isFetching,
   isPopup,
   itemsPerPage,
   links,
   meta: { totalItems },
-  page,
-  slug
+  page
 }) => {
   return (
     <div>
@@ -41,43 +38,11 @@ export const Posts = ({
                     }).
                     map((item, key) => {
                       return (
-                        <Summary
-                          data={ item }
-                          key={ key }
-                          onClickTitle={ (e) => {
-                            e.preventDefault()
-                            dispatch(togglePopupPost(isPopup))
-                            dispatch(changePost(item.attributes.slug))
-                          } } />
+                        <Summary data={ item } key={ key } />
                       )
                     })
                 : <NotFound />))
         }
-
-        <div className={ classNames(
-            'animation',
-            'popup-post', {
-              'zoom-in': (isPopup !== undefined && isPopup),
-              'zoom-out': (isPopup !== undefined && ! isPopup)
-            }
-          ) }>
-          <button
-              className="close"
-              onClick={ () => {
-                dispatch(togglePopupPost(isPopup))
-              } }>
-            <i className="fa fa-fw fa-close"></i>
-          </button>
-          {
-            (isPopup
-              ? <div className="wrapper">
-                  <Helmet
-                    title={ entities.posts[slug].attributes.title } />
-                  <Post data={ entities.posts[slug] } />
-                </div>
-              : null)
-          }
-        </div>
 
         <Pagination
           itemsPerPage={ itemsPerPage }

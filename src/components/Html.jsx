@@ -1,8 +1,14 @@
+import classNames from 'classnames'
 import React, { PropTypes } from 'react'
 import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 
-const Html = ({ assets, components, initialState }) => {
+const Html = ({
+  assets,
+  components,
+  initialState
+}) => {
   const head = Helmet.rewind()
   const content = (components
     ? renderToString(components)
@@ -12,7 +18,7 @@ const Html = ({ assets, components, initialState }) => {
     <html lang="en">
     <head>
       <meta charSet="UTF-8" />
-      
+
       <meta name="viewport" content="width=device-width,minimum-scale=1" />
       <meta name="author" content="Natcha Luang - Aroonchai" />
       <meta name="description" content="Trust me I'm Petdo" />
@@ -20,17 +26,19 @@ const Html = ({ assets, components, initialState }) => {
       <meta name="theme-color" content="#3e5d6d" />
       <meta name="msapplication-navbutton-color" content="#3e5d6d" />
       <meta name="apple-mobile-web-app-status-bar-style" content="#3e5d6d" />
-      
+
       { head.title.toComponent() }
-      
-      <link rel="icon" href={require('../images/favicon.ico')} />
-      <link rel="icon" type="image/png" sizes="32x32" href={require('../images/favicon-32x32.png')} />
-      <link rel="icon" type="image/png" sizes="96x96" href={require('../images/favicon-96x96.png')} />
-      <link rel="icon" type="image/png" sizes="16x16" href={require('../images/favicon-16x16.png')} />
-      
+
+      <link rel="icon" href={ require('../images/favicon.ico') } />
+      <link rel="icon" type="image/png" sizes="32x32" href={ require('../images/favicon-32x32.png') } />
+      <link rel="icon" type="image/png" sizes="96x96" href={ require('../images/favicon-96x96.png') } />
+      <link rel="icon" type="image/png" sizes="16x16" href={ require('../images/favicon-16x16.png') } />
+
       <link rel="stylesheet" href={ assets.styles.preload } />
     </head>
-    <body>
+    <body className={ classNames({
+        'popup-open': initialState.entities.posts.isPopup
+      }) }>
       <div className="preload">
         <div className="spinner">
           <div className="double-bounce1"></div>
@@ -44,7 +52,7 @@ const Html = ({ assets, components, initialState }) => {
         <link rel="stylesheet" href={ assets.styles.postload } />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.5.0/styles/solarized-dark.min.css" />
       </noscript>
-      
+
       <script dangerouslySetInnerHTML={ {
         __html: `
           var loadDeferredStyles = function() {
@@ -56,7 +64,7 @@ const Html = ({ assets, components, initialState }) => {
             addStylesNode.parentElement.removeChild(addStylesNode)
           }
 
-          var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame 
+          var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame
           if (raf) {
             raf(function() {
               window.setTimeout(loadDeferredStyles, 0)
@@ -73,7 +81,7 @@ const Html = ({ assets, components, initialState }) => {
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
         `
       } }></script>
-      
+
       <script dangerouslySetInnerHTML={ {
         __html: `
           var _gaq=[['_setAccount','UA-33411047-1'],['_trackPageview']];
@@ -83,8 +91,8 @@ const Html = ({ assets, components, initialState }) => {
         `
       } }></script>
 
-      <script src={ assets.javascript.main }></script> 
-    
+      <script src={ assets.javascript.main }></script>
+
       <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
       <script dangerouslySetInnerHTML={ {
         __html: 'hljs.initHighlightingOnLoad()'

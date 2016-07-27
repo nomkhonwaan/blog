@@ -2,7 +2,7 @@
 
 .layout-nav {
   @extend .container;
-  
+
   @include breakpoint(max-width $sm) {
     background: #fff;
     border-bottom: 1px solid #ececec;
@@ -10,9 +10,9 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 99;
+    z-index: 1;
   }
-  
+
   @include breakpoint($md) {
     align-items: center;
     background: $theme-color;
@@ -21,12 +21,12 @@
     justify-content: center;
     max-width: 100%;
   }
-  
+
   .menu-list {
     display: block;
     margin: 0!important;
     padding: 0!important;
-    
+
     @include breakpoint(max-width $sm) {
       background: #fff;
       border-top: 1px solid #ececec;
@@ -39,20 +39,20 @@
       top: 48px;
       transition: left .2s ease-in-out;
       width: 48%;
-      z-index: 99;
-      
+      z-index: 1;
+
       &.expanded {
         left: 0;
       }
     }
-    
+
     > .menu-item {
       display: block;
-      
+
       @include breakpoint($md) {
         display: inline-block;
       }
-      
+
       > a {
         color: #4d4d4d;
         display: block;
@@ -61,14 +61,14 @@
         line-height: initial;
         padding: 12px 18px;
         transition: all .2s ease-in-out;
-        
+
         @include breakpoint($md) {
           color: #f2f2f2;
           display: inline-block;
           font-size: 1.3rem;
           padding: 12px;
         }
-        
+
         &:hover,
         &.actived {
           background: rgba(0,0,0,.03);
@@ -80,7 +80,7 @@
       }
     }
   }
-  
+
   > .btn-toggle {
     background: #fff;
     border: 1px solid #ececec;
@@ -91,11 +91,11 @@
     height: 24px;
     margin: 12px;
     transition: background .2s ease-in-out;
-    
+
     &:hover {
       background: #f9f9f9;
     }
-    
+
     @include breakpoint($md) {
       display: none;
     }

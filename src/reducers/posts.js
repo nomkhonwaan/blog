@@ -4,7 +4,6 @@ export const initialState = {
   data: {},
   itemsPerPage: 5,
   isFetching: false,
-  isPopup: undefined,
   lastUpdated: NaN,
   page: 1,
 }
@@ -48,13 +47,7 @@ export default function (state = initialState, action) {
         errors: action.errors
       })
     }
-
-    case types.POSTS_TOGGLE_POPUP_POST: {
-      return Object.assign({}, state, {
-        isPopup: action.isPopup
-      })
-    }
-
+    
     default: {
       return state
     }

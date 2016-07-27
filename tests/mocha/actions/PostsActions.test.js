@@ -6,8 +6,7 @@ import {
   changePage,
   changePost,
   fetchPost,
-  fetchPosts,
-  togglePopupPost
+  fetchPosts
 } from '../../../src/actions/PostsActions'
 import types from '../../../src/constants/ActionTypes'
 import PromiseMiddleware from '../../../src/middlewares/PromiseMiddleware'
@@ -171,21 +170,6 @@ describe('actions/PostsActions.js', () => {
         then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions)
         })
-    })
-  })
-
-  describe('togglePopupPost', () => {
-    it('should create `POSTS_TOGGLE_POPUP_POST` when click on post title on posts page', () => {
-      const isPopup = false
-
-      expect(togglePopupPost(isPopup)).to.deep.equal({
-        type: types.POSTS_TOGGLE_POPUP_POST,
-        isPopup: ! isPopup
-      })
-      expect(togglePopupPost( ! isPopup)).to.deep.equal({
-        type: types.POSTS_TOGGLE_POPUP_POST,
-        isPopup
-      })
     })
   })
 })

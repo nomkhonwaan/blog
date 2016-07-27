@@ -80,19 +80,4 @@ describe('reducers/posts.js', () => {
       errors: []
     }))
   })
-
-  it('sholud handle `POSTS_TOGGLE_POPUP_POST` by toggle `isPopup`', () => {
-    expect(reducer(undefined, {
-      type: types.POSTS_TOGGLE_POPUP_POST,
-      isPopup: true
-    })).to.deep.equal(Object.assign({}, initialState, {
-      isPopup: true
-    }))
-    expect(reducer(undefined, {
-      type: types.POSTS_TOGGLE_POPUP_POST,
-      isPopup: false
-    })).to.deep.equal(Object.assign({}, initialState, {
-      isPopup: false
-    }))
-  })
 })
