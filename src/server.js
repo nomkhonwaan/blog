@@ -142,12 +142,9 @@ export default (app) => {
   app.use((err, req, res, next) => {
     if (err) {
       req.logger.error(err);
-    }
-
-    if (process.env.NODE_ENV === 'development') {
       console.error(err)
     }
-
+    
     res.send('An error has occurred')
   })
 
