@@ -9,7 +9,7 @@ import { initialState } from '../../../src/reducers/post'
 const mockStore = configureMockStore()
 const store = mockStore(initialState)
 
-describe('containers/Post.jsx', () => {
-  it('should render `.post` component correctly', () => {
+describe('containers/Single.jsx', () => {
+  it('should render `.single` container correctly', () => {
   })
 })
