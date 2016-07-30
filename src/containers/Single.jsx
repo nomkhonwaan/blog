@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { asyncConnect } from 'redux-connect'
 import Helmet from 'react-helmet'
 
@@ -9,30 +9,49 @@ import {
 } from '../components'
 import { fetchPost } from '../actions/PostsActions'
 
-export const Single = ({
-  entities,
-  isFetching,
-  slug
-}) => {
-  const data = entities.posts[slug]
+class Single extends Component {
+  componentWillMount() {
+    this.state = {
+      isFetching: (typeof window !== 'undefined' && window.document
+        ? true
+        : this.props.isFetching)
+    }
+  }
 
-  return (
-    <div>
-      <Helmet
-        title={ data.attributes.title } />
-      <div className="single">
-        {
-          (isFetching
-            ? <Loading />
-            : (data
-              ? <Post data={ data } />
-              : <NotFound />)
-          )
-        }
-      </div>
+  componentDidMount() {
+    const { entities, slug } = this.props
 
-    </div>
-  )
+    setTimeout(() => {
+      if (entities.posts[slug]) {
+        this.setState({ isFetching: false })
+      }
+    }, 500)
+  }
+
+  render() {
+    const { entities, slug } = this.props
+    let { isFetching } = this.state
+
+    const data = entities.posts[slug]
+
+    return (
+        <div>
+          <Helmet
+            title={ data.attributes.title } />
+          <div className="single">
+            {
+              (isFetching
+                ? <Loading />
+                : (data
+                  ? <Post data={ data } />
+                  : <NotFound />)
+              )
+            }
+          </div>
+
+        </div>
+      )
+  }
 }
 
 export default asyncConnect([{
