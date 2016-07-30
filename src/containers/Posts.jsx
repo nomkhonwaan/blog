@@ -11,7 +11,7 @@ import {
   Post,
   Summary
 } from '../components'
-import { changePost, fetchPosts, togglePopupPost } from '../actions/PostsActions'
+import { changePost, fetchPosts } from '../actions/PostsActions'
 
 export const Posts = ({
   data,
@@ -66,7 +66,6 @@ export default asyncConnect([{
     ))
   }
 }], (state) => ({
-  ...state.post,
   ...state.posts,
   entities: state.entities
 }))(Posts)
