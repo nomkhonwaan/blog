@@ -48,7 +48,6 @@ class Single extends Component {
               )
             }
           </div>
-
         </div>
       )
   }
