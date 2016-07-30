@@ -29,15 +29,16 @@ export default (app) => {
   }
 
   if ( ! mongoose.connection.readyState) {
+    mongoose.Promise = global.Promise;
     mongoose.connect(config.MONGODB_URI, {
-      db: { 
-        native_parser: true 
+      db: {
+        native_parser: true
       },
-      server: { 
-        poolSize: 3 
+      server: {
+        poolSize: 3
       },
-      replset: { 
-        rs_name: 'nomkhonwaan_com' 
+      replset: {
+        rs_name: 'nomkhonwaan_com'
       }
     })
   }
@@ -62,7 +63,7 @@ export default (app) => {
 
   app.use((req, res, next) => {
     if ( ! req.logger) {
-      req.logger = bunyan.createLogger({ 
+      req.logger = bunyan.createLogger({
         name: 'nomkhonwaan',
         streams: [
           {
