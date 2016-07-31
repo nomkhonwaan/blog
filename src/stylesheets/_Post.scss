@@ -5,13 +5,10 @@
   margin: 24px 0;
 
   .hljs {
-    margin: 12px 0;
-  }
-
-  .hljs {
     border-radius: .2rem;
     font-size: 1.2rem;
     font-family: 'Source Code Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', monospace;
+    margin: 12px 0;
   }
 
   blockquote {
@@ -23,10 +20,7 @@
   }
 
   code {
-    background: #002b36;
-    border-radius: .2rem;
-    color: #839496;
-    font-size: 1.1rem;
+    color: #002b36;
     font-family: 'Source Code Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', monospace;
     padding: .1rem .4rem;
   }
@@ -58,6 +52,13 @@
 
     &:hover {
       opacity: 1;
+    }
+  }
+
+  pre {
+    overflow: auto;
+    > code {
+      color: inherit;
     }
   }
 }
