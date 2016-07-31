@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import { AllHtmlEntities as Entities } from 'html-entities'
+import React, { Component } from 'react'
 
 import {
   Disqus,
@@ -10,7 +10,8 @@ import {
 export class Post extends Component {
   componentDidMount() {
     if (typeof hljs !== 'undefined') {
-      const codeElements = document.getElementsByTagName('pre')
+      const codeElements = document.
+        getElementsByTagName('pre')
 
       Object.
         keys(codeElements).
