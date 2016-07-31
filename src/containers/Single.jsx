@@ -19,14 +19,7 @@ export const Single = ({
   return (
     <div>
       <Helmet
-        title={ data.attributes.title }
-        script={ [{
-          type: 'text/javascript',
-          src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js'
-        }, {
-          type: 'text/javascript',
-          innerHTML: 'hljs.initHighlightingOnLoad()'
-        }] } />
+        title={ data.attributes.title } />
       <div className="single">
         {
           (isFetching

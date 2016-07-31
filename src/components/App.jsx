@@ -6,9 +6,16 @@ import { Header, Footer } from './'
 const App = ({ children }) => {
   return (
     <div>
-      <Helmet 
+      <Helmet
         title="Nomkhonwaan"
-        titleTemplate="%s &middot; Trust me I'm Petdo" />
+        titleTemplate="%s &middot; Trust me I'm Petdo"
+        script={ [{
+          type: 'text/javascript',
+          src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js'
+        }, {
+          type: 'text/javascript',
+          innerHTML: 'hljs.initHighlightingOnLoad()'
+        }] } />
       <Header />
       { children }
       <Footer />
