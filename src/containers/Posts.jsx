@@ -26,7 +26,9 @@ export const Posts = ({
   return (
     <div>
       <Helmet
-        title={ `Page ${page}` } />
+        title={ (page === 1
+          ? 'Nomkhonwaan'
+          : `Page ${page}`) } />
       <div className="posts">
         {
           (isFetching
