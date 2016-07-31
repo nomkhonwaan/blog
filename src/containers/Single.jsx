@@ -9,48 +9,36 @@ import {
 } from '../components'
 import { fetchPost } from '../actions/PostsActions'
 
-class Single extends Component {
-  componentWillMount() {
-    this.state = {
-      isFetching: (typeof window !== 'undefined' && window.document
-        ? true
-        : this.props.isFetching)
-    }
-  }
+export const Single = ({
+  entities,
+  isFetching,
+  slug
+}) => {
+  const data = entities.posts[slug]
 
-  componentDidMount() {
-    const { entities, slug } = this.props
-
-    setTimeout(() => {
-      if (entities.posts[slug]) {
-        this.setState({ isFetching: false })
-      }
-    }, 500)
-  }
-
-  render() {
-    const { entities, slug } = this.props
-    let { isFetching } = this.state
-
-    const data = entities.posts[slug]
-
-    return (
-        <div>
-          <Helmet
-            title={ data.attributes.title } />
-          <div className="single">
-            {
-              (isFetching
-                ? <Loading />
-                : (data
-                  ? <Post data={ data } />
-                  : <NotFound />)
-              )
-            }
-          </div>
-        </div>
-      )
-  }
+  return (
+    <div>
+      <Helmet
+        title={ data.attributes.title }
+        script={ [{
+          type: 'text/javascript',
+          src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js'
+        }, {
+          type: 'text/javascript',
+          innerHTML: 'hljs.initHighlightingOnLoad()'
+        }] } />
+      <div className="single">
+        {
+          (isFetching
+            ? <Loading />
+            : (data
+              ? <Post data={ data } />
+              : <NotFound />)
+          )
+        }
+      </div>
+    </div>
+  )
 }
 
 export default asyncConnect([{
