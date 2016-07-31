@@ -15,11 +15,13 @@ export class Disqus extends Component {
           script={ [{
             type: 'text/javascript',
             innerHTML: `
-              (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-                s.src = '//nomkhonwaan.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
+              (function() {
+                if (typeof DISQUS === 'undefined') {
+                  var d = document, s = d.createElement('script');
+                  s.src = '//nomkhonwaan.disqus.com/embed.js';
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+                }
               })();
             `
           }] }/>
