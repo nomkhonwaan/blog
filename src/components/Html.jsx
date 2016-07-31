@@ -35,6 +35,8 @@ const Html = ({
       <link rel="icon" type="image/png" sizes="16x16" href={ require('../images/favicon-16x16.png') } />
 
       <link rel="stylesheet" href={ assets.styles.preload } />
+
+      { head.script.toComponent() }
     </head>
     <body className={ classNames({
         'popup-open': initialState.entities.posts.isPopup
@@ -95,31 +97,9 @@ const Html = ({
 
       <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
       <script dangerouslySetInnerHTML={ {
-        __html: 'hljs.initHighlightingOnLoad()'
-      } }></script>
-
-      <script dangerouslySetInnerHTML={ {
-        __html: `/**
-          * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-          * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-          */
-          /*
-          var disqus_config = function () {
-          this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-          };
-          */
-          (function() { // DON'T EDIT BELOW THIS LINE
-          var d = document, s = d.createElement('script');
-
-          s.src = '//nomkhonwaan.disqus.com/embed.js';
-
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-          })();`
+          __html: 'hljs.initHighlightingOnLoad()'
         } }>
       </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
     </body>
     </html>
   )
