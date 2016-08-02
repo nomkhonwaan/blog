@@ -2,7 +2,7 @@ import moment from 'moment'
 import React from 'react'
 import { Link } from 'react-router'
 
-const PostHeader = ({ data, onClickTitle }) => {
+const PostHeader = ({ data }) => {
   const publishedAt = moment(data.attributes.publishedAt)
   const permalink = [
     '',
