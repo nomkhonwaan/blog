@@ -21,7 +21,7 @@ describe('components/Nav.jsx', () => {
     expect(wrapper.find('.menu-list')).to.have.length(1)
     expect(wrapper.find('.expanded')).to.have.length(0)
     expect(wrapper.find('.menu-item')).to.have.length(store.getState().menuItems.length)
-    expect(wrapper.find('.btn-toggle')).to.have.length(1)
+    expect(wrapper.find('.menu-button')).to.have.length(1)
   })
 
   it('should render `.expanded` component when perform click on menu button', () => {
