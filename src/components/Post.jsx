@@ -22,11 +22,21 @@ export class Post extends Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, goBack } = this.props
     const entities = new Entities()
 
     return (
       <div className="post">
+        {
+          (typeof goBack === 'function'
+            ? <nav>
+                <button
+                  className="button--clean"
+                  onClick={ goBack }><i className="fa fa-fw fa-arrow-circle-left"></i>&nbsp;Back to Home</button>
+              </nav>
+            : null)
+        }
+
         <PostHeader data={ data } />
         <article
           className="article"

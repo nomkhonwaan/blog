@@ -11,6 +11,7 @@ import { fetchPost } from '../actions/PostsActions'
 
 export const Single = ({
   entities,
+  history,
   isFetching,
   slug
 }) => {
@@ -25,7 +26,11 @@ export const Single = ({
           (isFetching
             ? <Loading />
             : (data
-              ? <Post data={ data } />
+              ? <Post
+                  data={ data }
+                  goBack={ () => {
+                    history.goBack()
+                  } } />
               : <NotFound />)
           )
         }
