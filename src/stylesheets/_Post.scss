@@ -4,6 +4,18 @@
   background: #fff;
   margin: 24px 0;
 
+  > nav {
+    padding-top: 12px;
+
+    > button {
+      margin: 0 12px;
+
+      @include breakpoint($md) {
+        margin: 12px 24px 0;
+      }
+    }
+  }
+
   .hljs {
     border-radius: .2rem;
     font-size: 1.2rem;

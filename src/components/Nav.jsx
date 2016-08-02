@@ -23,7 +23,7 @@ export const Nav = ({ dispatch, isExpanded, menuItems }) => {
           })
         }
       </ul>
-      <button className="btn-toggle" onClick={ () => {
+      <button className="button--clean menu-button" onClick={ () => {
         dispatch(toggleMenuButton(isExpanded))
         console.log(isExpanded);
       } }>

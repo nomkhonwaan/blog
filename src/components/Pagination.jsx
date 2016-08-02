@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const Pagination = ({ 
-  itemsPerPage, 
-  links, 
-  page, 
+const Pagination = ({
+  itemsPerPage,
+  links,
+  page,
   totalItems
  }) => {
   return (
@@ -12,11 +12,15 @@ const Pagination = ({
       <div className="previous">
         {
           links.previous
-            ? <Link to={ [
-              '',
-              'pages',
-              page - 1
-            ].join('/') }>&laquo; Newer</Link>
+            ? <Link
+                className="button--clean"
+                to={ [
+                  '',
+                  'pages',
+                  page - 1
+                ].join('/') }>
+                  <i className="fa fa-fw fa-angle-double-left"></i> Newer 
+                </Link>
             : null
         }
       </div>
@@ -26,15 +30,19 @@ const Pagination = ({
       <div className="next">
         {
           links.next
-            ? <Link to={ [
-              '',
-              'pages',
-              page + 1
-            ].join('/') }>Older &raquo;</Link>
+            ? <Link
+                className="button--clean"
+                to={ [
+                  '',
+                  'pages',
+                  page + 1
+                ].join('/') }>
+                  Older <i className="fa fa-fw fa-angle-double-right"></i> 
+              </Link>
             : null
         }
       </div>
-    </div>    
+    </div>
   )
 }
 

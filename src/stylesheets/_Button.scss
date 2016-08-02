@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+
+.button {
+  background: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: .2rem;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+  height: 26px;
+  margin: 12px;
+  transition: background .2s ease-in-out;
+
+  &--clean {
+    @extend .button;
+    border-color: #ececec;
+    background-color: #fff;
+    color: #666;
+
+    &:hover {
+      background: #f9f9f9;
+    }
+  }
+}
