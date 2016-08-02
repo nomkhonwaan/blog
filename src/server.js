@@ -30,17 +30,7 @@ export default (app) => {
 
   if ( ! mongoose.connection.readyState) {
     mongoose.Promise = global.Promise;
-    mongoose.connect(config.MONGODB_URI, {
-      db: {
-        native_parser: true
-      },
-      server: {
-        poolSize: 3
-      },
-      replset: {
-        rs_name: 'nomkhonwaan_com'
-      }
-    })
+    mongoose.connect(config.MONGODB_URI)
   }
 
   app.disable('x-powered-by')
@@ -144,7 +134,7 @@ export default (app) => {
       req.logger.error(err);
       console.error(err)
     }
-    
+
     res.send('An error has occurred')
   })
 
