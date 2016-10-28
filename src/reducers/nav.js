@@ -7,6 +7,10 @@ export const initialState = {
     href: '//www.nomkhonwaan.com',
     iconClass: 'fa fa-fw fa-home'
   }, {
+    title: 'Medium',
+    href: 'https://medium.com/@nomkhonwaan',
+    iconClass: 'fa fa-fw fa-medium'
+  }, {
     title: 'GitHub',
     href: '//github.com/nomkhonwaan',
     iconClass: 'fa fa-fw fa-github'
