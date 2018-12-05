@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import { App } from './components'
-import { Login, Posts, Single } from './containers'
+import { Login, Posts, Single, NotFound } from './containers'
 import { changePage, changePost } from './actions/PostsActions'
 
 export default ({ dispatch }) => {
@@ -26,6 +26,7 @@ export default ({ dispatch }) => {
         }
       } />
       <Route path="/login" component={ Login } />
+      <Route path="*" component={ NotFound } />
     </Route>
   )
 }

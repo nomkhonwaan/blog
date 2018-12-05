@@ -1,9 +1,10 @@
 @charset 'UTF-8';
 
+.page-not-found,
 .error {
   color: $theme-color;
   font-family: 'Prompt', sans-serif;
-  font-size: 16rem;
+  font-size: 1.6rem;
   margin: 24px auto;
   text-align: center;
 
