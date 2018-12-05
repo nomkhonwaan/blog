@@ -1,13 +1,14 @@
-FROM node:5.12.0-slim
+FROM node:8-alpine
 
-WORKDIR /home
-ADD ./.babelrc /home/.babelrc
-ADD ./src /home/src
-ADD ./package.json /home/package.json
+WORKDIR /opt/app-root
+ADD . .
 
-RUN npm install --all --silent \
- && npm run build
+RUN apk add --no-cache curl g++ gcc git make python
 
-EXPOSE 8080
+RUN npm install --all && \
+    npm run build
 
-CMD [ "npm", "start" ]
+RUN apk del --purge curl g++ gcc git make python
+
+ENTRYPOINT [ "/usr/local/bin/npm" ]
+CMD [ "start" ]
