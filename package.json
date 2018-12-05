@@ -63,7 +63,7 @@
     "marked": "^0.3.5",
     "moment": "^2.13.0",
     "mongoosastic": "^4.0.2",
-    "mongoose": "^4.4.19",
+    "mongoose": "^5.3.14",
     "msgpack5": "^3.4.0",
     "normalize.css": "^4.1.1",
     "querystring": "^0.2.0",
