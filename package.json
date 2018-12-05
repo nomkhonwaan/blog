@@ -62,6 +62,7 @@
     "isomorphic-fetch": "^2.2.1",
     "marked": "^0.3.5",
     "moment": "^2.13.0",
+    "mongodb": "^3.1.10",
     "mongoosastic": "^4.0.2",
     "mongoose": "^5.3.14",
     "msgpack5": "^3.4.0",

@@ -1,6 +1,13 @@
-import fs from 'fs'
-import Grid from 'gridfs-stream'
-import mongoose from 'mongoose'
+/**
+ * External Dependencies
+ */
+const Grid = require('gridfs-stream');
+const fs = require('fs');
+const mongoose = require('mongoose');
+
+// Replace Cursor.nextObject because it was removed from node-mongodb-native library
+// https://github.com/aheckmann/gridfs-stream/issues/125
+eval(`Grid.prototype.findOne = ${Grid.prototype.findOne.toString().replace('nextObject', 'next')}`);
 
 // --
 
